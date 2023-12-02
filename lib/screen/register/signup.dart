@@ -45,7 +45,7 @@ class _SignupPageState extends State<SignupPage> {
               ),
               Center(
                 child: Text(
-                  'Iraq Auto',
+                  'BluePay',
                   style: TextStyle(
                     color: foregroundColor,
                     fontFamily: 'title',
@@ -212,3 +212,21 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 }
+/*
+
+Email Validator
+
+                  validator: (value) {
+                    const pattern =
+                        r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)';
+                    final regExp = RegExp(pattern);
+                    if (value!.isEmpty) {
+                      return 'Enter an email';
+                    } else if (!regExp.hasMatch(value)) {
+                      return 'Enter a valid email';
+                    } else {
+                      return null;
+                    }
+                  },
+
+*/

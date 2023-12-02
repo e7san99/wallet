@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wallet/components/reusable/shimmer.dart';
 import 'package:wallet/components/theme/theme.dart';
+import 'package:wallet/screen/gridView/add_balance.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,7 +12,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<String> titles = [
-    'ADD MONEY',
+    'ADD BALANCE',
     'SEND',
     'WITHDRAW',
     'PAYMENT',
@@ -74,6 +75,21 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+
+    List<void Function()?> onTap = [
+      () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const AddBalancePage(),
+          ),
+        );
+      },
+      () {},
+      () {},
+      () {},
+    ];
+    
     return Scaffold(
       //backgroundColor: Colors.grey[800],
       appBar: AppBar(
@@ -94,7 +110,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             walletContainer(),
-            gridView(),
+            gridView(onTap: onTap),
             textTransaction(),
             userTransaction(),
           ],
@@ -183,7 +199,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  GridView gridView() {
+  GridView gridView({required List<Function()?> onTap}) {
     return GridView.builder(
       shrinkWrap: true,
       itemCount: 4,
@@ -196,9 +212,7 @@ class _HomePageState extends State<HomePage> {
       ),
       itemBuilder: (context, index) {
         return GestureDetector(
-          onTap: () {
-            print(titles[index]);
-          },
+          onTap: onTap[index],
           child: Container(
             height: 100,
             decoration: BoxDecoration(

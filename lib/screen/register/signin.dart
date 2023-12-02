@@ -45,7 +45,7 @@ class _SigninPageState extends State<SigninPage> {
             ),
             Center(
               child: Text(
-                'Iraq Auto',
+                'BluePay',
                 style: TextStyle(
                   color: foregroundColor,
                   fontFamily: 'title',

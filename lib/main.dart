@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:wallet/screen/gridView/add_balance.dart';
 import 'package:wallet/screen/home.dart';
-import 'package:wallet/screen/register/signin.dart';
-import 'package:wallet/screen/register/signup.dart';
 
 void main() {
   runApp(const MyApp());

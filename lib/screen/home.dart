@@ -94,9 +94,7 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             walletContainer(),
-            divider,
             gridView(),
-            divider,
             textTransaction(),
             userTransaction(),
           ],
@@ -107,7 +105,7 @@ class _HomePageState extends State<HomePage> {
 
   Padding walletContainer() {
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.fromLTRB(10, 10, 10, 25),
       child: Container(
         padding: const EdgeInsets.all(10),
         height: 150,
@@ -189,7 +187,7 @@ class _HomePageState extends State<HomePage> {
     return GridView.builder(
       shrinkWrap: true,
       itemCount: 4,
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.fromLTRB(10, 10, 10, 25),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 10,

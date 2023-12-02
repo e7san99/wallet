@@ -71,6 +71,7 @@ class _HomePageState extends State<HomePage> {
       endIndent: 10,
     ),
   );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,214 +93,221 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                height: 150,
-                decoration: BoxDecoration(
-                  color: backgroundColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+            walletContainer(),
+            divider,
+            gridView(),
+            divider,
+            textTransaction(),
+            userTransaction(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Padding walletContainer() {
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: Container(
+        padding: const EdgeInsets.all(10),
+        height: 150,
+        decoration: BoxDecoration(
+          color: backgroundColor,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  // mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          // mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            CircleAvatar(
-                              backgroundColor: foregroundColor,
-                              radius: 25,
-                              child: const Icon(
-                                Icons.person_outline_outlined,
-                                size: 50,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              'Ehsan Ahmed',
-                              style: TextStyle(
-                                fontSize: 20,
-                                letterSpacing: 1.3,
-                                fontWeight: FontWeight.w600,
-                                color: foregroundColor,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Text(
-                              'Balance: ',
-                              style: TextStyle(
-                                color: Colors.white70,
-                                fontSize: 16,
-                              ),
-                            ),
-                            RichText(
-                              text: TextSpan(
-                                text: '25,000',
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w600,
-                                  height: 0.9,
-                                ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                      text: ' IQD',
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          color: foregroundColor)),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+                    CircleAvatar(
+                      backgroundColor: foregroundColor,
+                      radius: 25,
+                      child: const Icon(
+                        Icons.person_outline_outlined,
+                        size: 50,
+                      ),
                     ),
-                    // DecoratedBox(
-                    //   decoration: const BoxDecoration(color: Colors.blueGrey),
-                    //   child: TextButton.icon(
-                    //       onPressed: () {},
-                    //       icon: const Icon(
-                    //         Icons.add,
-                    //         color: Colors.black,
-                    //       ),
-                    //       label: const Text(
-                    //         'Add Money',
-                    //         style: TextStyle(color: Colors.black),
-                    //       )),
-                    // ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      'Ehsan Ahmed',
+                      style: TextStyle(
+                        fontSize: 20,
+                        letterSpacing: 1.3,
+                        fontWeight: FontWeight.w600,
+                        color: foregroundColor,
+                      ),
+                    ),
                   ],
                 ),
-              ),
-            ),
-            divider,
-            GridView.builder(
-              shrinkWrap: true,
-              itemCount: 4,
-              padding: const EdgeInsets.all(10),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                mainAxisExtent: 100,
-              ),
-              itemBuilder: (context, index) {
-                return Container(
-                  height: 100,
-                  decoration: BoxDecoration(
-                    color: backgroundColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        titles[index],
-                        style: TextStyle(
-                          color: foregroundColor,
-                          fontWeight: FontWeight.w500,
-                        ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Balance: ',
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 16,
                       ),
-                      Image.asset(
-                        height: 50,
-                        fit: BoxFit.fill,
-                        'assets/img/${iconImages[index]}',
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-            divider,
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                const Text(
-                  'Transactions',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                ),
-                GestureDetector(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 5.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          'VIEW ALL',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: backgroundColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Icon(
-                          Icons.arrow_forward_ios,
-                          size: 15,
-                          color: backgroundColor,
-                        )
-                      ],
                     ),
-                  ),
+                    RichText(
+                      text: TextSpan(
+                        text: '25,000',
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                          height: 0.9,
+                        ),
+                        children: <TextSpan>[
+                          TextSpan(
+                              text: ' IQD',
+                              style: TextStyle(
+                                  fontSize: 10, color: foregroundColor)),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 120,
-              child: ListView.separated(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  //return const ShimmerWidget();
-                  return GestureDetector(
-                    onTap: () {
-                      print(names[index]);
-                    },
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: CircleAvatar(
-                            radius: 30,
-                            child: Image.asset(
-                              // height: 20,
-                              fit: BoxFit.contain,
-                              'assets/img/${avatars[index]}',
-                            ),
-                          ),
-                        ),
-                        Text(
-                          names[index],
-                          style: const TextStyle(
-                              color: Colors.black, fontWeight: FontWeight.w600),
-                        ),
-                        iconAvatars[index],
-                      ],
-                    ),
-                  );
-                },
-                separatorBuilder: (context, index) => const Divider(),
-                itemCount: avatars.length,
-              ),
-            ),
           ],
         ),
+      ),
+    );
+  }
+
+  GridView gridView() {
+    return GridView.builder(
+      shrinkWrap: true,
+      itemCount: 4,
+      padding: const EdgeInsets.all(10),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        mainAxisExtent: 100,
+      ),
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () {
+            print(titles[index]);
+          },
+          child: Container(
+            height: 100,
+            decoration: BoxDecoration(
+              color: backgroundColor,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  titles[index],
+                  style: TextStyle(
+                    color: foregroundColor,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Image.asset(
+                  height: 50,
+                  fit: BoxFit.fill,
+                  'assets/img/${iconImages[index]}',
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Padding textTransaction() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          const Text(
+            'Transactions',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+          GestureDetector(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 5.0),
+              child: Row(
+                children: [
+                  Text(
+                    'VIEW ALL',
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: backgroundColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    size: 15,
+                    color: backgroundColor,
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  SizedBox userTransaction() {
+    return SizedBox(
+      height: 120,
+      child: ListView.separated(
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          //return const ShimmerWidget();
+          return GestureDetector(
+            onTap: () {
+              print(names[index]);
+            },
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircleAvatar(
+                    radius: 30,
+                    child: Image.asset(
+                      // height: 20,
+                      fit: BoxFit.contain,
+                      'assets/img/${avatars[index]}',
+                    ),
+                  ),
+                ),
+                Text(
+                  names[index],
+                  style: const TextStyle(
+                      color: Colors.black, fontWeight: FontWeight.w600),
+                ),
+                iconAvatars[index],
+              ],
+            ),
+          );
+        },
+        separatorBuilder: (context, index) => const Divider(),
+        itemCount: avatars.length,
       ),
     );
   }

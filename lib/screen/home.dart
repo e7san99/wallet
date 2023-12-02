@@ -59,9 +59,9 @@ class _HomePageState extends State<HomePage> {
       color: backgroundColor,
       boxShadow: List.filled(
         10,
-        const BoxShadow(
+        BoxShadow(
           blurRadius: 0.4,
-          color: Color.fromRGBO(3, 63, 116, 1),
+          color: const Color.fromRGBO(3, 63, 116, 1).withOpacity(0.8),
         ),
       ),
     ),
@@ -206,7 +206,10 @@ class _HomePageState extends State<HomePage> {
                     children: [
                       Text(
                         titles[index],
-                        style: TextStyle(color: foregroundColor),
+                        style: TextStyle(
+                          color: foregroundColor,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                       Image.asset(
                         height: 50,
@@ -224,31 +227,41 @@ class _HomePageState extends State<HomePage> {
               children: [
                 const Text(
                   'Transactions',
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
                 GestureDetector(
-                  child: Row(
-                    children: [
-                      Text(
-                        'VIEW ALL',
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: backgroundColor,
-                          fontWeight: FontWeight.bold,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 5.0),
+                    child: Row(
+                      children: [
+                        Text(
+                          'VIEW ALL',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: backgroundColor,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        size: 15,
-                        color: backgroundColor,
-                      )
-                    ],
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          size: 15,
+                          color: backgroundColor,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],
             ),
+            const SizedBox(
+              height: 10,
+            ),
             SizedBox(
-              height: 160,
+              height: 120,
               child: ListView.separated(
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
@@ -271,7 +284,11 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                         ),
-                        Text(names[index]),
+                        Text(
+                          names[index],
+                          style: const TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.w600),
+                        ),
                         iconAvatars[index],
                       ],
                     ),

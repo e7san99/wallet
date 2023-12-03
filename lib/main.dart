@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wallet/screen/gridView/send_balance.dart';
-import 'package:wallet/screen/page/home/home_page.dart';
+import 'package:wallet/feature/home/view/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +13,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'BluePay',
-      home: SendBalancePage(),
+      home: HomePage(),
     );
   }
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wallet/components/theme/theme.dart';
-import 'package:wallet/screen/gridView/add_balance.dart';
-import 'export.dart';
+import 'package:wallet/feature/home/widget/export.dart';
+import 'package:wallet/feature/home/widget/gridView/add_balance.dart';
+import 'package:wallet/feature/home/widget/gridView/send_balance.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -53,25 +54,6 @@ class _HomePageState extends State<HomePage> {
       color: Colors.red,
     ),
   ];
-  Container divider = Container(
-    margin: const EdgeInsets.all(10),
-    height: 2,
-    decoration: BoxDecoration(
-      color: backgroundColor,
-      boxShadow: List.filled(
-        10,
-        BoxShadow(
-          blurRadius: 0.4,
-          color: const Color.fromRGBO(3, 63, 116, 1).withOpacity(0.8),
-        ),
-      ),
-    ),
-    child: Divider(
-      color: backgroundColor,
-      indent: 10,
-      endIndent: 10,
-    ),
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -84,9 +66,40 @@ class _HomePageState extends State<HomePage> {
           ),
         );
       },
-      () {},
-      () {},
-      () {},
+      () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const SendBalancePage(),
+          ),
+        );
+      },
+      () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.amber,
+            content: Text(
+              'Not Available',
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+          ),
+        );
+      },
+      () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.amber,
+            content: Text(
+              'Not Available',
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+          ),
+        );
+      },
     ];
 
     return Scaffold(

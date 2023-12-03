@@ -5,7 +5,7 @@ import 'package:wallet/components/reusable/button.dart';
 import 'package:wallet/components/reusable/password.dart';
 import 'package:wallet/components/reusable/textfield.dart';
 import 'package:wallet/components/theme/theme.dart';
-import 'package:wallet/screen/register/signup.dart';
+import 'package:wallet/feature/register/signup.dart';
 
 class SigninPage extends StatefulWidget {
   const SigninPage({super.key});

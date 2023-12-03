@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:wallet/components/reusable/already_had_account.dart';
 import 'package:wallet/components/reusable/button.dart';
 import 'package:wallet/components/reusable/password.dart';
+import 'package:wallet/components/reusable/phone_format.dart';
 import 'package:wallet/components/reusable/textfield.dart';
 import 'package:wallet/components/theme/theme.dart';
 
@@ -103,9 +104,9 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                           OwnTextFormField(
                             label: 'Phone',
-                            keyboardType: TextInputType.number,
-                            isNumber: const <TextInputFormatter>[
-                              /////////////////////////////////////////// <<del    phoneNumberFormatter
+                            keyboardType: TextInputType.phone,
+                            isNumber: <TextInputFormatter>[
+                              phoneNumberFormatter
                             ],
                             icon: Icons.phone_outlined,
                             onSaved: (value) {

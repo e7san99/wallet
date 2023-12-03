@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wallet/components/reusable/button.dart';
+import 'package:wallet/components/reusable/phone_format.dart';
 import 'package:wallet/components/reusable/textfield.dart';
 import 'package:wallet/components/theme/theme.dart';
 
@@ -14,7 +15,7 @@ class SendBalancePage extends StatefulWidget {
 class _SendBalancePageState extends State<SendBalancePage> {
   final formKey = GlobalKey<FormState>();
   String? balance;
-  String? email;
+  String? phone;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,20 +79,18 @@ class _SendBalancePageState extends State<SendBalancePage> {
               height: 10,
             ),
             OwnTextFormField(
-              label: 'Email',
-              keyboardType: TextInputType.emailAddress,
-              isNumber: <TextInputFormatter>[
-                FilteringTextInputFormatter.singleLineFormatter,
-              ],
-              icon: Icons.email_outlined,
+              label: 'Phone',
+              keyboardType: TextInputType.phone,
+              isNumber: <TextInputFormatter>[phoneNumberFormatter],
+              icon: Icons.phone_outlined,
               onSaved: (value) {
                 setState(() {
-                  email = value;
+                  phone = value;
                 });
               },
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Enter an email';
+                  return 'Enter a phone';
                 }
                 return null;
               },

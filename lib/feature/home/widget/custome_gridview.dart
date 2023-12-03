@@ -17,7 +17,7 @@ class CustomeGridview extends StatelessWidget {
   Widget build(BuildContext context) {
     return GridView.builder(
       shrinkWrap: true,
-      itemCount: 4,
+      itemCount: titles.length,
       padding: const EdgeInsets.fromLTRB(10, 10, 10, 25),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,

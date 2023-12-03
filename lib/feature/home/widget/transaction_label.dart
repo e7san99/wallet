@@ -10,7 +10,7 @@ class TransactionLabels extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: const EdgeInsets.only(bottom: 8.0, top: 30),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

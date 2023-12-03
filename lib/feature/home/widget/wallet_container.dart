@@ -9,7 +9,7 @@ class WalletContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(10, 10, 10, 25),
+      padding: const EdgeInsets.fromLTRB(10, 20, 10, 30),
       child: Container(
         padding: const EdgeInsets.all(10),
         height: 150,

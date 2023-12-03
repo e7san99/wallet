@@ -60,7 +60,7 @@ class _AddBalancePageState extends State<AddBalancePage> {
               isNumber: <TextInputFormatter>[
                 FilteringTextInputFormatter.digitsOnly,
               ],
-              icon: Icons.monetization_on_outlined,
+              icon: Icons.attach_money,
               onSaved: (value) {
                 setState(() {
                   balance = value;
@@ -78,7 +78,7 @@ class _AddBalancePageState extends State<AddBalancePage> {
             ),
             OwnButton(
               textButton: Text(
-                'Add',
+                'ADD',
                 style: TextStyle(
                   color: foregroundColor,
                   fontSize: 20,

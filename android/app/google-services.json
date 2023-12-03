@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "895658009924",
+    "project_id": "bluepay-d2fcf",
+    "storage_bucket": "bluepay-d2fcf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895658009924:android:1ea040f01e41949f142311",
+        "android_client_info": {
+          "package_name": "com.example.wallet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtlGqFedF7m533gAc3ZV4b1aRXj22LudQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

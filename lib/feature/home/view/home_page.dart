@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wallet/components/theme/theme.dart';
 import 'package:wallet/feature/home/widget/export.dart';
-import 'package:wallet/feature/home/widget/gridView/add_balance.dart';
-import 'package:wallet/feature/home/widget/gridView/send_balance.dart';
+import 'package:wallet/feature/home/view/add_balance.dart';
+import 'package:wallet/feature/home/view/send_balance.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -36,6 +36,7 @@ class _HomePageState extends State<HomePage> {
     'name 3',
     'name 4',
   ];
+  
   List<Icon> iconAvatars = [
     const Icon(
       Icons.keyboard_double_arrow_up,

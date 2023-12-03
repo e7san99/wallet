@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wallet/components/theme/theme.dart';
+import 'package:wallet/feature/home/view/view_all.dart';
 
 class TransactionLabels extends StatelessWidget {
   const TransactionLabels({
@@ -22,6 +23,14 @@ class TransactionLabels extends StatelessWidget {
             ),
           ),
           GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ViewAll(),
+                ),
+              );
+            },
             child: Padding(
               padding: const EdgeInsets.only(top: 5.0),
               child: Row(

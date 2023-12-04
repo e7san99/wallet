@@ -12,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final formKey = GlobalKey<FormState>();
   List<String> titles = [
     'ADD BALANCE',
     'SEND',
@@ -36,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     'name 3',
     'name 4',
   ];
-  
+
   List<Icon> iconAvatars = [
     const Icon(
       Icons.keyboard_double_arrow_up,
@@ -103,37 +104,49 @@ class _HomePageState extends State<HomePage> {
       },
     ];
 
-    return Scaffold(
-      appBar: AppBar(
-        leading: Icon(
-          Icons.power_settings_new,
-          color: foregroundColor,
-        ),
-        title: const Text('BluePay'),
-        centerTitle: true,
-        elevation: 0,
-        actions: const [
-          Padding(
-            padding: EdgeInsets.only(right: 10.0),
-            child: Icon(Icons.wallet),
-          )
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            const WalletContainer(),
-            CustomeGridview(
-              titles: titles,
-              iconImages: iconImages,
-              onTap: onTap,
+    return Form(
+      key: formKey,
+      child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              // final valid = formKey.currentState!.validate();
+              // if (valid) {
+              //   formKey.currentState!.save();
+                Navigator.pop(context);
+              // }
+            },
+            icon: Icon(
+              Icons.power_settings_new,
+              color: foregroundColor,
             ),
-            const TransactionLabels(),
-            TransactionAvatars(
-                names: names, avatars: avatars, iconAvatars: iconAvatars),
+          ),
+          title: const Text('BluePay'),
+          centerTitle: true,
+          elevation: 0,
+          actions: const [
+            Padding(
+              padding: EdgeInsets.only(right: 10.0),
+              child: Icon(Icons.wallet),
+            )
           ],
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              const WalletContainer(),
+              CustomeGridview(
+                titles: titles,
+                iconImages: iconImages,
+                onTap: onTap,
+              ),
+              const TransactionLabels(),
+              TransactionAvatars(
+                  names: names, avatars: avatars, iconAvatars: iconAvatars),
+            ],
+          ),
         ),
       ),
     );

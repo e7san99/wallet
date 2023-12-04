@@ -6,6 +6,7 @@ import 'package:wallet/components/reusable/password.dart';
 import 'package:wallet/components/reusable/phone_format.dart';
 import 'package:wallet/components/reusable/textfield.dart';
 import 'package:wallet/components/theme/theme.dart';
+import 'package:wallet/feature/register/view/signin.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -180,12 +181,12 @@ class _SignupPageState extends State<SignupPage> {
                             title: 'Already have an account? ',
                             buttonTitle: 'Sign in',
                             onTap: () {
-                              // Navigator.pushAndRemoveUntil(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //       builder: (context) => const SignInPage(),
-                              //     ),
-                              //     (route) => false);
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SigninPage(),
+                                  ),
+                                  (route) => false);
                             },
                           )
                         ],

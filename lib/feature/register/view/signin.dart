@@ -5,7 +5,8 @@ import 'package:wallet/components/reusable/button.dart';
 import 'package:wallet/components/reusable/password.dart';
 import 'package:wallet/components/reusable/textfield.dart';
 import 'package:wallet/components/theme/theme.dart';
-import 'package:wallet/feature/register/signup.dart';
+import 'package:wallet/feature/home/view/home_page.dart';
+import 'package:wallet/feature/register/view/signup.dart';
 
 class SigninPage extends StatefulWidget {
   const SigninPage({super.key});
@@ -136,7 +137,19 @@ class _SigninPageState extends State<SigninPage> {
                                 letterSpacing: 1.2,
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              final valid = formKey.currentState!.validate();
+                              if (valid) {
+                                formKey.currentState!.save();
+                                Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const HomePage(),
+                                ),
+                              );
+                              }
+                              
+                            },
                             backgroundColor: backgroundColor,
                             foregroundColor: foregroundColor,
                           ),

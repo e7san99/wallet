@@ -1,20 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:wallet/feature/home/model/wallet.dart';
-
 class MyUser {
   String? uid;
   String? username;
   String? phone;
   String? email;
-  Wallet? wallet;
   MyUser({
-    required this.uid,
+    this.uid,
     required this.username,
     required this.phone,
     required this.email,
-    required this.wallet,
   });
 
   MyUser copyWith({
@@ -22,14 +18,12 @@ class MyUser {
     String? username,
     String? phone,
     String? email,
-    Wallet? wallet,
   }) {
     return MyUser(
       uid: uid ?? this.uid,
       username: username ?? this.username,
       phone: phone ?? this.phone,
       email: email ?? this.email,
-      wallet: wallet ?? this.wallet,
     );
   }
 
@@ -39,7 +33,6 @@ class MyUser {
       'username': username,
       'phone': phone,
       'email': email,
-      'wallet': wallet?.toMap(),
     };
   }
 
@@ -49,7 +42,6 @@ class MyUser {
       username: map['username'] != null ? map['username'] as String : null,
       phone: map['phone'] != null ? map['phone'] as String : null,
       email: map['email'] != null ? map['email'] as String : null,
-      wallet: map['wallet'] != null ? Wallet.fromMap(map['wallet'] as Map<String,dynamic>) : null,
     );
   }
 
@@ -60,7 +52,7 @@ class MyUser {
 
   @override
   String toString() {
-    return 'MyUser(uid: $uid, username: $username, phone: $phone, email: $email, wallet: $wallet)';
+    return 'MyUser(uid: $uid, username: $username, phone: $phone, email: $email)';
   }
 
   @override
@@ -71,8 +63,7 @@ class MyUser {
       other.uid == uid &&
       other.username == username &&
       other.phone == phone &&
-      other.email == email &&
-      other.wallet == wallet;
+      other.email == email;
   }
 
   @override
@@ -80,7 +71,6 @@ class MyUser {
     return uid.hashCode ^
       username.hashCode ^
       phone.hashCode ^
-      email.hashCode ^
-      wallet.hashCode;
+      email.hashCode;
   }
 }

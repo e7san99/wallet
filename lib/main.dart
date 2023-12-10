@@ -9,6 +9,7 @@ import 'package:wallet/feature/register/cubit/cubit/user_cubit.dart';
 import 'package:wallet/feature/register/repository/auth_implement.dart';
 import 'package:wallet/feature/register/view/signin.dart';
 import 'package:wallet/feature/register/view/signup.dart';
+import 'package:wallet/feature/register/view/start_page.dart';
 import 'package:wallet/firebase_options.dart';
 
 Future<void> main() async {
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
       child: const MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'BluePay',
-          home: SignupPage()),
+          home: AuthPage()),
     );
   }
 }

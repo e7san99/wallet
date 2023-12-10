@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class MyUser {
   String? uid;
   String? username;
@@ -73,4 +75,15 @@ class MyUser {
       phone.hashCode ^
       email.hashCode;
   }
+
+  //   factory MyUser.fromSnapshot(
+  //     DocumentSnapshot<Map<String, dynamic>> document) {
+  //   final data = document.data()!;
+  //   return MyUser(
+  //     uid: document.id,
+  //     username: data['username'],
+  //     phone: data['phone'],
+  //     email: data['email'],
+  //   );
+  // }
 }

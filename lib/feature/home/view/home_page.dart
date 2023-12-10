@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallet/components/theme/theme.dart';
 import 'package:wallet/feature/home/widget/export.dart';
 import 'package:wallet/feature/home/view/add_balance.dart';
 import 'package:wallet/feature/home/view/send_balance.dart';
+import 'package:wallet/feature/register/cubit/cubit/user_cubit.dart';
+import 'package:wallet/feature/register/view/signin.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -108,18 +111,23 @@ class _HomePageState extends State<HomePage> {
       key: formKey,
       child: Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            onPressed: () {
-              // final valid = formKey.currentState!.validate();
-              // if (valid) {
-              //   formKey.currentState!.save();
-                Navigator.pop(context);
-              // }
+          leading: BlocSelector<UserCubit, UserState, bool>(
+            selector: (state) {
+              return state.isLoading;
             },
-            icon: Icon(
-              Icons.power_settings_new,
-              color: foregroundColor,
-            ),
+            builder: (context, state) {
+              return IconButton(
+                onPressed: state
+                    ? null
+                    : () async{
+                        await context.read<UserCubit>().logout();
+                      },
+                icon: Icon(
+                  Icons.power_settings_new,
+                  color: foregroundColor,
+                ),
+              );
+            },
           ),
           title: const Text('BluePay'),
           centerTitle: true,

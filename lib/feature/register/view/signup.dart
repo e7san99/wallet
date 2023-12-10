@@ -8,6 +8,7 @@ import 'package:wallet/components/reusable/phone_format.dart';
 import 'package:wallet/components/reusable/textfield.dart';
 import 'package:wallet/components/theme/theme.dart';
 import 'package:wallet/feature/home/model/wallet.dart';
+import 'package:wallet/feature/home/view/home_page.dart';
 import 'package:wallet/feature/register/cubit/cubit/user_cubit.dart';
 import 'package:wallet/feature/register/model/user.dart';
 import 'package:wallet/feature/register/view/signin.dart';
@@ -32,16 +33,23 @@ class _SignupPageState extends State<SignupPage> {
       key: formKey,
       child: BlocListener<UserCubit, UserState>(
         listener: (context, state) {
-          //           if (state.isSuccess) {
+          if (state.myUser != null) {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const HomePage(),
+              ),
+            );
+          }
+          // if (state.isSuccess) {
           //   ScaffoldMessenger.of(context).showSnackBar(
           //     const SnackBar(content: Text('register is success')),
           //   );
-          // } else
-          if (state.error != null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.error!)),
-            );
-          }
+          // } else if (state.error != null) {
+          //   ScaffoldMessenger.of(context).showSnackBar(
+          //     SnackBar(content: Text(state.error!)),
+          //   );
+          // }
         },
         child: Scaffold(
           appBar: AppBar(

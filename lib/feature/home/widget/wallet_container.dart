@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallet/components/theme/theme.dart';
+import 'package:wallet/feature/register/cubit/cubit/user_cubit.dart';
 
 class WalletContainer extends StatelessWidget {
   const WalletContainer({
@@ -8,6 +10,7 @@ class WalletContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final username = context.read<UserCubit>().state.myUser?.username;
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 20, 10, 30),
       child: Container(
@@ -39,7 +42,7 @@ class WalletContainer extends StatelessWidget {
                       width: 10,
                     ),
                     Text(
-                      'Ehsan Ahmed',
+                     'Ehsan Ahmed',//'${context.read<UserCubit>().state.myUser?.username}',
                       style: TextStyle(
                         fontSize: 20,
                         letterSpacing: 1.3,

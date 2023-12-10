@@ -23,15 +23,33 @@ class AuthImplement extends AuthRepository {
     return null;
   }
 
+  // Future<List<MyUser>> getCustomerList() async {
+  //   final query = await _db.collection('Userr').get();
+
+  //   final queryMap = query.docs.map((e) => MyUser.fromSnapshot(e)).toList();
+
+  //   return queryMap;
+  // }
+
   @override
   Future<User?> signin(String email, String password) async {
     try {
-      UserCredential userCredential = await firebaseAuth
-          .signInWithEmailAndPassword(email: email, password: password);
-      return userCredential.user;
+      await firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+    } catch (e) {
+      return null;
+    }
+    return firebaseAuth.currentUser;
+  }
+
+  @override
+  Future<void> logout() async {
+    try {
+      await firebaseAuth.signOut();
     } catch (e) {
       print('something is wrong');
     }
-    return null;
   }
 }

@@ -3,14 +3,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallet/components/theme/theme.dart';
 import 'package:wallet/feature/register/cubit/cubit/user_cubit.dart';
 
-class WalletContainer extends StatelessWidget {
+class WalletContainer extends StatefulWidget {
   const WalletContainer({
     super.key,
   });
 
   @override
+  State<WalletContainer> createState() => _WalletContainerState();
+}
+
+class _WalletContainerState extends State<WalletContainer> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserCubit>().getUserData();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final username = context.read<UserCubit>().state.myUser?.username;
     return Padding(
       padding: const EdgeInsets.fromLTRB(10, 20, 10, 30),
       child: Container(
@@ -41,14 +51,21 @@ class WalletContainer extends StatelessWidget {
                     const SizedBox(
                       width: 10,
                     ),
-                    Text(
-                     'Ehsan Ahmed',//'${context.read<UserCubit>().state.myUser?.username}',
-                      style: TextStyle(
-                        fontSize: 20,
-                        letterSpacing: 1.3,
-                        fontWeight: FontWeight.w600,
-                        color: foregroundColor,
-                      ),
+                    BlocSelector<UserCubit, UserState, String?>(
+                      selector: (state) {
+                        return state.myUser?.username;
+                      },
+                      builder: (context, username) {
+                        return Text(
+                          '$username',
+                          style: TextStyle(
+                            fontSize: 20,
+                            letterSpacing: 1.3,
+                            fontWeight: FontWeight.w600,
+                            color: foregroundColor,
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),

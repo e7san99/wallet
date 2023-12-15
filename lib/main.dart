@@ -34,9 +34,10 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: const MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'BluePay',
-          home: AuthPage()),
+        debugShowCheckedModeBanner: false,
+        title: 'BluePay',
+        home: StartPage(),
+      ),
     );
   }
 }

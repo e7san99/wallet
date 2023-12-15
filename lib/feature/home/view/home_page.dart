@@ -107,53 +107,66 @@ class _HomePageState extends State<HomePage> {
       },
     ];
 
-    return Form(
-      key: formKey,
-      child: Scaffold(
-        appBar: AppBar(
-          leading: BlocSelector<UserCubit, UserState, bool>(
-            selector: (state) {
-              return state.isLoading;
-            },
-            builder: (context, state) {
-              return IconButton(
-                onPressed: state
-                    ? null
-                    : () async{
-                        await context.read<UserCubit>().logout();
-                      },
-                icon: Icon(
-                  Icons.power_settings_new,
-                  color: foregroundColor,
-                ),
-              );
-            },
-          ),
-          title: const Text('BluePay'),
-          centerTitle: true,
-          elevation: 0,
-          actions: const [
-            Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              child: Icon(Icons.wallet),
-            )
-          ],
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const WalletContainer(),
-              CustomeGridview(
-                titles: titles,
-                iconImages: iconImages,
-                onTap: onTap,
-              ),
-              const TransactionLabels(),
-              TransactionAvatars(
-                  names: names, avatars: avatars, iconAvatars: iconAvatars),
+    return BlocListener<UserCubit, UserState>(
+      listenWhen: (previous, current) => previous.myUser != current.myUser,
+      listener: (context, state) {
+        if (state.myUser == null) {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SigninPage(),
+            ),
+          );
+        }
+      },
+      child: Form(
+        key: formKey,
+        child: Scaffold(
+          appBar: AppBar(
+            leading: BlocSelector<UserCubit, UserState, bool>(
+              selector: (state) {
+                return state.isLoading;
+              },
+              builder: (context, state) {
+                return IconButton(
+                  onPressed: state
+                      ? null
+                      : () async {
+                          await context.read<UserCubit>().logout();
+                        },
+                  icon: Icon(
+                    Icons.power_settings_new,
+                    color: foregroundColor,
+                  ),
+                );
+              },
+            ),
+            title: const Text('BluePay'),
+            centerTitle: true,
+            elevation: 0,
+            actions: const [
+              Padding(
+                padding: EdgeInsets.only(right: 10.0),
+                child: Icon(Icons.wallet),
+              )
             ],
+          ),
+          body: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const WalletContainer(),
+                CustomeGridview(
+                  titles: titles,
+                  iconImages: iconImages,
+                  onTap: onTap,
+                ),
+                const TransactionLabels(),
+                TransactionAvatars(
+                    names: names, avatars: avatars, iconAvatars: iconAvatars),
+              ],
+            ),
           ),
         ),
       ),

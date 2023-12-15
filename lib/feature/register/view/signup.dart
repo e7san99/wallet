@@ -7,7 +7,6 @@ import 'package:wallet/components/reusable/password.dart';
 import 'package:wallet/components/reusable/phone_format.dart';
 import 'package:wallet/components/reusable/textfield.dart';
 import 'package:wallet/components/theme/theme.dart';
-import 'package:wallet/feature/home/model/wallet.dart';
 import 'package:wallet/feature/home/view/home_page.dart';
 import 'package:wallet/feature/register/cubit/cubit/user_cubit.dart';
 import 'package:wallet/feature/register/model/user.dart';
@@ -29,28 +28,26 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      child: BlocListener<UserCubit, UserState>(
-        listener: (context, state) {
-          if (state.myUser != null) {
-            Navigator.push(
+    return BlocListener<UserCubit, UserState>(
+      listenWhen: (previous, current) {
+        return previous.myUser != current.myUser;
+      },
+      listener: (context, state) {
+        if (state.myUser != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Success'),
+            ),
+          );
+          Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => const HomePage(),
-              ),
-            );
-          }
-          // if (state.isSuccess) {
-          //   ScaffoldMessenger.of(context).showSnackBar(
-          //     const SnackBar(content: Text('register is success')),
-          //   );
-          // } else if (state.error != null) {
-          //   ScaffoldMessenger.of(context).showSnackBar(
-          //     SnackBar(content: Text(state.error!)),
-          //   );
-          // }
-        },
+              ));
+        }
+      },
+      child: Form(
+        key: formKey,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: backgroundColor,
@@ -117,9 +114,7 @@ class _SignupPageState extends State<SignupPage> {
                               ],
                               icon: Icons.person_outline,
                               onSaved: (value) {
-                                setState(() {
-                                  username = value;
-                                });
+                                username = value;
                               },
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -136,9 +131,7 @@ class _SignupPageState extends State<SignupPage> {
                               ],
                               icon: Icons.phone_outlined,
                               onSaved: (value) {
-                                setState(() {
-                                  phone = value;
-                                });
+                                phone = value;
                               },
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -155,9 +148,7 @@ class _SignupPageState extends State<SignupPage> {
                               ],
                               icon: Icons.email_outlined,
                               onSaved: (value) {
-                                setState(() {
-                                  email = value;
-                                });
+                                email = value;
                               },
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -170,9 +161,7 @@ class _SignupPageState extends State<SignupPage> {
                               icon: const Icon(Icons.visibility_off_outlined),
                               onPressedIcon: () {},
                               onSaved: (value) {
-                                setState(() {
-                                  password = value;
-                                });
+                                password = value;
                               },
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -204,12 +193,7 @@ class _SignupPageState extends State<SignupPage> {
                                               formKey.currentState!.validate();
                                           if (valid) {
                                             formKey.currentState!.save();
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              const SnackBar(
-                                                content: Text('Success'),
-                                              ),
-                                            );
+
                                             await context
                                                 .read<UserCubit>()
                                                 .signup(
@@ -220,6 +204,7 @@ class _SignupPageState extends State<SignupPage> {
                                                     email: email,
                                                   ),
                                                 );
+                                            // ignore: use_build_context_synchronously
                                           }
                                         },
                                   backgroundColor: backgroundColor,

@@ -7,10 +7,12 @@ abstract class AuthRepository {
     String password,
   );
 
-  Future<User?> signin(
+  Future<MyUser?> signin(
     String email,
     String password,
   );
 
   Future<void> logout();
+
+  Future<MyUser?> getMyUser(String? uid);
 }

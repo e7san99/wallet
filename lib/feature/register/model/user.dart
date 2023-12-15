@@ -10,9 +10,9 @@ class MyUser {
   String? email;
   MyUser({
     this.uid,
-    required this.username,
-    required this.phone,
-    required this.email,
+     this.username,
+     this.phone,
+     this.email,
   });
 
   MyUser copyWith({
@@ -76,14 +76,15 @@ class MyUser {
       email.hashCode;
   }
 
-  //   factory MyUser.fromSnapshot(
-  //     DocumentSnapshot<Map<String, dynamic>> document) {
-  //   final data = document.data()!;
-  //   return MyUser(
-  //     uid: document.id,
-  //     username: data['username'],
-  //     phone: data['phone'],
-  //     email: data['email'],
-  //   );
-  // }
+    factory MyUser.fromSnapshot(
+      DocumentSnapshot<Map<String, dynamic>> document) {
+    final data = document.data()!;
+    return MyUser(
+      uid: document.id,
+      username: data['username'],
+      phone: data['phone'],
+      email: data['email'],
+    );
+  }
+  
 }

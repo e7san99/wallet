@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +10,7 @@ import 'package:wallet/components/reusable/textfield.dart';
 import 'package:wallet/components/theme/theme.dart';
 import 'package:wallet/feature/home/view/home_page.dart';
 import 'package:wallet/feature/register/cubit/cubit/user_cubit.dart';
+import 'package:wallet/feature/register/model/user.dart';
 import 'package:wallet/feature/register/view/signup.dart';
 
 class SigninPage extends StatefulWidget {
@@ -24,19 +27,26 @@ class _SigninPageState extends State<SigninPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      child: BlocListener<UserCubit, UserState>(
-        listener: (context, state) {
-          if (state.myUser != null) {
-            Navigator.push(
+    return BlocListener<UserCubit, UserState>(
+      listenWhen: (previous, current) {
+        return previous.myUser != current.myUser;
+      },
+      listener: (context, state) {
+        if (state.myUser != null) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Login in'),
+            ),
+          );
+          Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => const HomePage(),
-              ),
-            );
-          }
-        },
+              ));
+        }
+      },
+      child: Form(
+        key: formKey,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: backgroundColor,
@@ -166,23 +176,20 @@ class _SigninPageState extends State<SigninPage> {
                                               formKey.currentState!.validate();
                                           if (valid) {
                                             formKey.currentState!.save();
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              const SnackBar(
-                                                content: Text('Login in'),
-                                              ),
-                                            );
-                                            // Navigator.push(
-                                            //   context,
-                                            //   MaterialPageRoute(
-                                            //     builder: (context) =>
-                                            //         const HomePage(),
-                                            //   ),
-                                            // );
+
                                             await context
                                                 .read<UserCubit>()
                                                 .signin(email!, password!);
-                                            
+                                            // if (user == null) {
+                                            //   ScaffoldMessenger.of(context)
+                                            //       .showSnackBar(
+                                            //     const SnackBar(
+                                            //       content: Text('Login in'),
+                                            //     ),
+                                            //   );
+                                            //   return;
+                                            // }
+                                            //lse
                                           }
                                         },
                                   backgroundColor: backgroundColor,
@@ -231,7 +238,7 @@ class _SigninPageState extends State<SigninPage> {
                               title: 'Don\'t have an account? ',
                               buttonTitle: 'Sign up',
                               onTap: () {
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => const SignupPage(),

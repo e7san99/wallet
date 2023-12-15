@@ -15,33 +15,30 @@ class AuthImplement extends AuthRepository {
               email: myUser.email!, password: password);
       myUser = myUser.copyWith(uid: userCredential.user!.uid);
       await _db.collection('Userr').add(myUser.toMap());
-
+      
       return myUser;
     } catch (e) {
-      print('something is wrong');
+      print(' ==== something is wrong in create User: $e ===');
     }
     return null;
   }
 
-  // Future<List<MyUser>> getCustomerList() async {
-  //   final query = await _db.collection('Userr').get();
-
-  //   final queryMap = query.docs.map((e) => MyUser.fromSnapshot(e)).toList();
-
-  //   return queryMap;
-  // }
-
   @override
-  Future<User?> signin(String email, String password) async {
+  Future<MyUser?> signin(String email, String password) async {
     try {
-      await firebaseAuth.signInWithEmailAndPassword(
+      final user = await firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+      final data = await _db
+          .collection('Userr')
+          .where('uid', isEqualTo: user.user?.uid)
+          .get();
+
+      return MyUser.fromSnapshot(data.docs.first);
     } catch (e) {
       return null;
     }
-    return firebaseAuth.currentUser;
   }
 
   @override
@@ -49,7 +46,19 @@ class AuthImplement extends AuthRepository {
     try {
       await firebaseAuth.signOut();
     } catch (e) {
-      print('something is wrong');
+      print(' ==== something is wrong in logout : $e ===');
     }
+  }
+
+  @override
+  Future<MyUser?> getMyUser(String? uid) async {
+    try {
+      final query =
+          await _db.collection('Userr').where('uid', isEqualTo: uid).get();
+      return MyUser.fromSnapshot(query.docs.first);
+    } catch (e) {
+      print(' ==== something is wrong in  getUser : $e ===');
+    }
+    return null;
   }
 }

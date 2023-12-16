@@ -1,5 +1,4 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
+import 'package:wallet/feature/register/cubit/cubit.dart';
 
 part 'password_state.dart';
 

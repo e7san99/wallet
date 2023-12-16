@@ -1,17 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wallet/components/reusable/already_had_account.dart';
-import 'package:wallet/components/reusable/button.dart';
-import 'package:wallet/components/reusable/password.dart';
-import 'package:wallet/components/reusable/phone_format.dart';
-import 'package:wallet/components/reusable/textfield.dart';
-import 'package:wallet/components/theme/theme.dart';
-import 'package:wallet/feature/home/view/home_page.dart';
-import 'package:wallet/feature/register/cubit/password/password_cubit.dart';
-import 'package:wallet/feature/register/cubit/user/user_cubit.dart';
-import 'package:wallet/feature/register/model/user.dart';
-import 'package:wallet/feature/register/view/signin.dart';
+
+import 'package:wallet/feature/register/view/view.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});

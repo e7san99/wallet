@@ -1,8 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:wallet/feature/register/model/user.dart';
-import 'package:wallet/feature/register/repository/auth_repository.dart';
+import 'package:wallet/feature/register/cubit/cubit.dart';
 
 part 'user_state.dart';
 

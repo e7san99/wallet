@@ -1,5 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:wallet/feature/register/model/user.dart';
+import 'package:wallet/feature/register/repository/repository.dart';
 
 abstract class AuthRepository {
   Future<MyUser?> createUser(

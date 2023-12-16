@@ -24,11 +24,7 @@
 //   }
 // }
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:wallet/feature/home/view/home_page.dart';
-import 'package:wallet/feature/register/view/signin.dart';
-import 'package:wallet/feature/register/view/signup.dart';
+import 'package:wallet/feature/register/view/view.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({super.key});

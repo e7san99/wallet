@@ -7,7 +7,7 @@ import 'package:wallet/feature/register/repository/auth_repository.dart';
 part 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
-  UserCubit(this.authRepository) : super(UserState());
+  UserCubit(this.authRepository) : super(const UserState());
 
   AuthRepository authRepository;
   // MyUser? myUser;
@@ -51,7 +51,7 @@ class UserCubit extends Cubit<UserState> {
 
   Future<void> logout() async {
     await authRepository.logout();
-    emit(UserState());
+    emit(const UserState());
   }
 
   Future<void> getUserData() async {

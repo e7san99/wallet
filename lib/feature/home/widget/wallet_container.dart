@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:wallet/components/theme/theme.dart';
-import 'package:wallet/feature/register/cubit/cubit/user_cubit.dart';
+import 'package:wallet/feature/register/cubit/user/user_cubit.dart';
 
 class WalletContainer extends StatefulWidget {
   const WalletContainer({

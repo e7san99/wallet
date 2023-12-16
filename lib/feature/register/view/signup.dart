@@ -8,7 +8,8 @@ import 'package:wallet/components/reusable/phone_format.dart';
 import 'package:wallet/components/reusable/textfield.dart';
 import 'package:wallet/components/theme/theme.dart';
 import 'package:wallet/feature/home/view/home_page.dart';
-import 'package:wallet/feature/register/cubit/cubit/user_cubit.dart';
+import 'package:wallet/feature/register/cubit/password/password_cubit.dart';
+import 'package:wallet/feature/register/cubit/user/user_cubit.dart';
 import 'package:wallet/feature/register/model/user.dart';
 import 'package:wallet/feature/register/view/signin.dart';
 
@@ -168,19 +169,34 @@ class _SignupPageState extends State<SignupPage> {
                                 }
                               },
                             ),
-                            OwnPasswordFormField(
-                              icon: const Icon(Icons.visibility_off_outlined),
-                              onPressedIcon: () {},
-                              onSaved: (value) {
-                                password = value;
+                            BlocSelector<PasswordCubit, PasswordState, bool>(
+                              selector: (state) {
+                                return state.isVisible;
                               },
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return 'Pnter a password';
-                                }
-                                return null;
+                              builder: (context, isVisible) {
+                                return OwnPasswordFormField(
+                                  icon: Icon(
+                                    !isVisible
+                                        ? Icons.visibility_off_outlined
+                                        : Icons.visibility,
+                                  ),
+                                  onPressedIcon: () {
+                                    context
+                                        .read<PasswordCubit>()
+                                        .passwordVisible();
+                                  },
+                                  onSaved: (value) {
+                                    password = value;
+                                  },
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return 'Pnter a password';
+                                    }
+                                    return null;
+                                  },
+                                  obscureText: !isVisible,
+                                );
                               },
-                              obscureText: true,
                             ),
                             BlocSelector<UserCubit, UserState, bool>(
                               selector: (state) {

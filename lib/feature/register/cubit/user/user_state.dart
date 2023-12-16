@@ -3,10 +3,10 @@ part of 'user_cubit.dart';
 class UserState extends Equatable {
   final bool isLoading;
   final bool isSuccess;
-  MyUser? myUser;
+  final MyUser? myUser;
   final String? error;
 
-  UserState({
+  const UserState({
     this.isLoading = false,
     this.isSuccess = false,
     this.myUser,

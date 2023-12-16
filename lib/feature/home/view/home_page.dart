@@ -4,7 +4,7 @@ import 'package:wallet/components/theme/theme.dart';
 import 'package:wallet/feature/home/widget/export.dart';
 import 'package:wallet/feature/home/view/add_balance.dart';
 import 'package:wallet/feature/home/view/send_balance.dart';
-import 'package:wallet/feature/register/cubit/cubit/user_cubit.dart';
+import 'package:wallet/feature/register/cubit/user/user_cubit.dart';
 import 'package:wallet/feature/register/view/signin.dart';
 
 class HomePage extends StatefulWidget {

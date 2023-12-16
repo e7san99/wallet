@@ -32,6 +32,14 @@ class _SigninPageState extends State<SigninPage> {
         return previous.myUser != current.myUser;
       },
       listener: (context, state) {
+        // if (state.myUser == null){
+        //       ScaffoldMessenger.of(context).showSnackBar(
+        //     const SnackBar(
+        //       content: Text('this email not registered'),
+        //     ),
+        //   );
+        // }
+        // else
         if (state.myUser != null) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -49,6 +57,7 @@ class _SigninPageState extends State<SigninPage> {
         key: formKey,
         child: Scaffold(
           appBar: AppBar(
+            leading: const SizedBox(),
             backgroundColor: backgroundColor,
             elevation: 0,
           ),
@@ -112,15 +121,19 @@ class _SigninPageState extends State<SigninPage> {
                               ],
                               icon: Icons.email_outlined,
                               onSaved: (value) {
-                                setState(() {
-                                  email = value;
-                                });
+                                email = value;
                               },
                               validator: (value) {
+                                const pattern =
+                                    r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)';
+                                final regExp = RegExp(pattern);
                                 if (value!.isEmpty) {
                                   return 'Enter an email';
+                                } else if (!regExp.hasMatch(value)) {
+                                  return 'Enter a valid email';
+                                } else {
+                                  return null;
                                 }
-                                return null;
                               },
                             ),
                             OwnPasswordFormField(
@@ -129,9 +142,7 @@ class _SigninPageState extends State<SigninPage> {
                               ),
                               onPressedIcon: () {},
                               onSaved: (value) {
-                                setState(() {
-                                  password = value;
-                                });
+                                password = value;
                               },
                               validator: (value) {
                                 if (value!.isEmpty) {
@@ -177,19 +188,23 @@ class _SigninPageState extends State<SigninPage> {
                                           if (valid) {
                                             formKey.currentState!.save();
 
-                                            await context
+                                            final user = await context
                                                 .read<UserCubit>()
                                                 .signin(email!, password!);
-                                            // if (user == null) {
-                                            //   ScaffoldMessenger.of(context)
-                                            //       .showSnackBar(
-                                            //     const SnackBar(
-                                            //       content: Text('Login in'),
-                                            //     ),
-                                            //   );
-                                            //   return;
-                                            // }
-                                            //lse
+                                            if (user == null) {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(
+                                                SnackBar(
+                                                  backgroundColor: Colors.red,
+                                                  content: Text(
+                                                    'email or password is wrong',
+                                                    style: TextStyle(
+                                                      color: foregroundColor,
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            }
                                           }
                                         },
                                   backgroundColor: backgroundColor,
@@ -238,7 +253,7 @@ class _SigninPageState extends State<SigninPage> {
                               title: 'Don\'t have an account? ',
                               buttonTitle: 'Sign up',
                               onTap: () {
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => const SignupPage(),

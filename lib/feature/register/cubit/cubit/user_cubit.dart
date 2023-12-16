@@ -31,12 +31,11 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-  Future<void> signin(String email, String password) async {
+  Future<MyUser?> signin(String email, String password) async {
     emit(state.copyWith(isLoading: true));
     final user = await authRepository.signin(email, password);
 
     if (user != null) {
-    
       emit(
         state.copyWith(
           isLoading: false,
@@ -47,12 +46,12 @@ class UserCubit extends Cubit<UserState> {
     } else {
       emit(state.copyWith(isLoading: false, error: 'User is null'));
     }
+    return user;
   }
 
   Future<void> logout() async {
     await authRepository.logout();
     emit(UserState());
-   
   }
 
   Future<void> getUserData() async {
@@ -62,11 +61,7 @@ class UserCubit extends Cubit<UserState> {
           .getMyUser(FirebaseAuth.instance.currentUser?.uid);
 
       if (user != null) {
-        emit(state.copyWith(
-          isLoading: false,
-          isSuccess: true,
-          myUser: user
-        ));
+        emit(state.copyWith(isLoading: false, isSuccess: true, myUser: user));
       } else {
         emit(state.copyWith(error: 'User is null'));
       }

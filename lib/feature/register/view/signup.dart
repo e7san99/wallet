@@ -50,6 +50,11 @@ class _SignupPageState extends State<SignupPage> {
         key: formKey,
         child: Scaffold(
           appBar: AppBar(
+            leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(Icons.arrow_back)),
             backgroundColor: backgroundColor,
             elevation: 0,
             iconTheme: IconThemeData(color: foregroundColor),
@@ -151,10 +156,16 @@ class _SignupPageState extends State<SignupPage> {
                                 email = value;
                               },
                               validator: (value) {
+                                const pattern =
+                                    r'(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)';
+                                final regExp = RegExp(pattern);
                                 if (value!.isEmpty) {
                                   return 'Enter an email';
+                                } else if (!regExp.hasMatch(value)) {
+                                  return 'Enter a valid email';
+                                } else {
+                                  return null;
                                 }
-                                return null;
                               },
                             ),
                             OwnPasswordFormField(

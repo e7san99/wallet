@@ -61,7 +61,7 @@ class _StartPageState extends State<StartPage> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const SignupPage(),
+          builder: (context) => const SigninPage(),
         ),
       );
     }

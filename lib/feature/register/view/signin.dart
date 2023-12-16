@@ -146,9 +146,12 @@ class _SigninPageState extends State<SigninPage> {
                               },
                               validator: (value) {
                                 if (value!.isEmpty) {
-                                  return 'Pnter a password';
+                                  return 'Enter a Password';
+                                } else if (value.length < 6) {
+                                  return 'more than 6 characters';
+                                } else {
+                                  return null;
                                 }
-                                return null;
                               },
                               obscureText: true,
                             ),
@@ -197,7 +200,7 @@ class _SigninPageState extends State<SigninPage> {
                                                 SnackBar(
                                                   backgroundColor: Colors.red,
                                                   content: Text(
-                                                    'email or password is wrong',
+                                                    'email or password is incorrect',
                                                     style: TextStyle(
                                                       color: foregroundColor,
                                                     ),

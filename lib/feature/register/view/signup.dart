@@ -1,4 +1,3 @@
-
 import 'package:wallet/feature/register/view/view.dart';
 
 class SignupPage extends StatefulWidget {
@@ -157,7 +156,8 @@ class _SignupPageState extends State<SignupPage> {
                                 }
                               },
                             ),
-                            BlocSelector<PasswordCubit, PasswordState, bool>(
+                            BlocSelector<PasswordVisibleCubit, PasswordState,
+                                bool>(
                               selector: (state) {
                                 return state.isVisible;
                               },
@@ -170,7 +170,7 @@ class _SignupPageState extends State<SignupPage> {
                                   ),
                                   onPressedIcon: () {
                                     context
-                                        .read<PasswordCubit>()
+                                        .read<PasswordVisibleCubit>()
                                         .passwordVisible();
                                   },
                                   onSaved: (value) {

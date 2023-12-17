@@ -1,3 +1,4 @@
+import 'package:wallet/feature/register/view/forgot.dart';
 import 'package:wallet/feature/register/view/view.dart';
 
 class SigninPage extends StatefulWidget {
@@ -19,14 +20,6 @@ class _SigninPageState extends State<SigninPage> {
         return previous.myUser != current.myUser;
       },
       listener: (context, state) {
-        // if (state.myUser == null){
-        //       ScaffoldMessenger.of(context).showSnackBar(
-        //     const SnackBar(
-        //       content: Text('this email not registered'),
-        //     ),
-        //   );
-        // }
-        // else
         if (state.myUser != null) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -123,7 +116,8 @@ class _SigninPageState extends State<SigninPage> {
                                 }
                               },
                             ),
-                            BlocSelector<PasswordCubit, PasswordState, bool>(
+                            BlocSelector<PasswordVisibleCubit, PasswordState,
+                                bool>(
                               selector: (state) {
                                 return state.isVisible;
                               },
@@ -136,7 +130,7 @@ class _SigninPageState extends State<SigninPage> {
                                   ),
                                   onPressedIcon: () {
                                     context
-                                        .read<PasswordCubit>()
+                                        .read<PasswordVisibleCubit>()
                                         .passwordVisible();
                                   },
                                   onSaved: (value) {
@@ -158,7 +152,14 @@ class _SigninPageState extends State<SigninPage> {
                             Align(
                               alignment: Alignment.topRight * 0.7,
                               child: TextButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const ForgotPage(),
+                                    ),
+                                  );
+                                },
                                 child: const Text(
                                   'Forgot password?',
                                   style: TextStyle(

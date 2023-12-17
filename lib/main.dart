@@ -1,4 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:wallet/feature/register/cubit/forgot/cubit/forgot_cubit.dart';
+import 'package:wallet/feature/register/repository/forgot/forgot_implement.dart';
+import 'package:wallet/feature/register/view/forgot.dart';
 import 'package:wallet/firebase_options.dart';
 import 'package:wallet/feature/register/register.dart';
 
@@ -23,7 +26,12 @@ class MyApp extends StatelessWidget {
           ),
         ),
         BlocProvider(
-          create: (context) => PasswordCubit(),
+          create: (context) => PasswordVisibleCubit(),
+        ),
+        BlocProvider(
+          create: (context) => ForgotCubit(
+            ForgotImplement(),
+          ),
         ),
       ],
       child: const MaterialApp(

@@ -111,7 +111,7 @@ class _ViewAllState extends State<ViewAll> {
                     'assets/img/${avatars[index]}',
                   ),
                 ),
-                title: Text('${names[index]}'),
+                title: Text(names[index]),
                 trailing: iconAvatars[index],
                 subtitle: const Text('20,000'),
               );

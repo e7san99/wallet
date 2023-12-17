@@ -12,14 +12,14 @@ class OwnTextFormField extends StatelessWidget {
   final void Function(String?)? onSaved;
   final String? Function(String?)? validator;
   const OwnTextFormField({
-    Key? key,
+    super.key,
     required this.label,
     required this.keyboardType,
     required this.isNumber,
     required this.icon,
     required this.onSaved,
     required this.validator,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

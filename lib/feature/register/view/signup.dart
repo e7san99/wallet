@@ -38,11 +38,7 @@ class _SignupPageState extends State<SignupPage> {
         key: formKey,
         child: Scaffold(
           appBar: AppBar(
-            leading: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_back)),
+            leading: const SizedBox(),
             backgroundColor: backgroundColor,
             elevation: 0,
             iconTheme: IconThemeData(color: foregroundColor),
@@ -176,11 +172,14 @@ class _SignupPageState extends State<SignupPage> {
                                   onSaved: (value) {
                                     password = value;
                                   },
-                                  validator: (value) {
+                                   validator: (value) {
                                     if (value!.isEmpty) {
-                                      return 'Pnter a password';
+                                      return 'Enter a Password';
+                                    } else if (value.length < 6) {
+                                      return 'more than 6 characters';
+                                    } else {
+                                      return null;
                                     }
-                                    return null;
                                   },
                                   obscureText: !isVisible,
                                 );
@@ -208,7 +207,6 @@ class _SignupPageState extends State<SignupPage> {
                                               formKey.currentState!.validate();
                                           if (valid) {
                                             formKey.currentState!.save();
-
                                             await context
                                                 .read<UserCubit>()
                                                 .signup(
@@ -219,7 +217,6 @@ class _SignupPageState extends State<SignupPage> {
                                                     email: email,
                                                   ),
                                                 );
-                                            // ignore: use_build_context_synchronously
                                           }
                                         },
                                   backgroundColor: backgroundColor,

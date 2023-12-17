@@ -192,10 +192,14 @@ class _SigninPageState extends State<SigninPage> {
                                           if (valid) {
                                             formKey.currentState!.save();
 
-                                            final user = await context
+                                            final user =
+                                             await context
                                                 .read<UserCubit>()
                                                 .signin(email!, password!);
                                             if (user == null) {
+                                              if (!mounted) {
+                                                return;
+                                              }
                                               ScaffoldMessenger.of(context)
                                                   .showSnackBar(
                                                 SnackBar(
@@ -257,7 +261,7 @@ class _SigninPageState extends State<SigninPage> {
                               title: 'Don\'t have an account? ',
                               buttonTitle: 'Sign up',
                               onTap: () {
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => const SignupPage(),

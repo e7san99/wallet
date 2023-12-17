@@ -8,14 +8,14 @@ class OwnPasswordFormField extends StatefulWidget {
   final String? Function(String?)? validator;
   final bool obscureText;
   const OwnPasswordFormField({
-    Key? key,
+    super.key,
 
     required this.icon,
     required this.onPressedIcon,
     required this.onSaved,
     required this.validator,
     required this.obscureText,
-  }) : super(key: key);
+  });
 
   @override
   State<OwnPasswordFormField> createState() => _OwnPasswordFormFieldState();

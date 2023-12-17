@@ -1,4 +1,3 @@
-import 'package:wallet/feature/register/view/forgot.dart';
 import 'package:wallet/feature/register/view/view.dart';
 
 class SigninPage extends StatefulWidget {
@@ -156,7 +155,8 @@ class _SigninPageState extends State<SigninPage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const ForgotPage(),
+                                      builder: (context) =>
+                                          const ForgotAccount(),
                                     ),
                                   );
                                 },

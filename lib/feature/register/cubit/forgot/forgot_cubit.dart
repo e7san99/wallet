@@ -1,5 +1,4 @@
 import 'package:wallet/feature/register/cubit/cubit.dart';
-import 'package:wallet/feature/register/repository/repository.dart';
 part 'forgot_state.dart';
 
 class ForgotCubit extends Cubit<ForgotState> {

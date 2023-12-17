@@ -1,17 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:wallet/feature/register/cubit/forgot/cubit/forgot_cubit.dart';
-import 'package:wallet/feature/register/repository/forgot/forgot_implement.dart';
-import 'package:wallet/feature/register/view/forgot.dart';
-import 'package:wallet/firebase_options.dart';
-import 'package:wallet/feature/register/register.dart';
-
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(const MyApp());
-}
+import 'package:wallet/main/main_export.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -1,14 +1,13 @@
-import 'package:wallet/feature/register/cubit/forgot/cubit/forgot_cubit.dart';
 import 'package:wallet/feature/register/view/view.dart';
 
-class ForgotPage extends StatefulWidget {
-  const ForgotPage({super.key});
+class ForgotAccount extends StatefulWidget {
+  const ForgotAccount({super.key});
 
   @override
-  State<ForgotPage> createState() => _ForgotPageState();
+  State<ForgotAccount> createState() => _ForgotAccountState();
 }
 
-class _ForgotPageState extends State<ForgotPage> {
+class _ForgotAccountState extends State<ForgotAccount> {
   final formKey = GlobalKey<FormState>();
   String? email;
 
@@ -119,12 +118,12 @@ class _ForgotPageState extends State<ForgotPage> {
                                 ),
                                 onPressed: state
                                     ? null
-                                    : (){
+                                    : () {
                                         final valid =
                                             formKey.currentState!.validate();
                                         if (valid) {
                                           formKey.currentState!.save();
-                                         context
+                                          context
                                               .read<ForgotCubit>()
                                               .forgotAccount(email!);
                                         }

@@ -10,6 +10,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+    @override
+  void initState() {
+    super.initState();
+    context.read<UserCubit>().getUserData();
+    context.read<UserCubit>().getListOfUserData();
+  }
   final formKey = GlobalKey<FormState>();
   List<String> titles = [
     'ADD BALANCE',

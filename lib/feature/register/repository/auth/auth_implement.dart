@@ -58,4 +58,17 @@ class AuthImplement extends AuthRepository {
     }
     return null;
   }
+
+  @override
+  Future<List<MyUser?>?> getListOfMyUser() async {
+    try {
+      final query = await _db.collection('Userr').get();
+      List<MyUser> listOfMyUser =
+          query.docs.map((e) => MyUser.fromSnapshot(e)).toList();
+      return listOfMyUser;
+    } catch (e) {
+      print(' === something went wrong on getListOfMyUser : $e ==== ');
+    }
+    return null;
+  }
 }

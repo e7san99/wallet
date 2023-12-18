@@ -1,5 +1,3 @@
-import 'package:wallet/feature/home/cubit/user/cubit/get_users_cubit.dart';
-import 'package:wallet/feature/home/repository/get_users/get_users_implement.dart';
 import 'package:wallet/main/main_export.dart';
 
 class MyApp extends StatelessWidget {
@@ -9,9 +7,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        // BlocProvider(
-        //   create: (context) => GetUsersCubit(GetUsersImplement()),
-        // ),
         BlocProvider(
           create: (context) => UserCubit(AuthImplement()),
         ),

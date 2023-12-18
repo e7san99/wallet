@@ -10,11 +10,7 @@ class WalletContainer extends StatefulWidget {
 }
 
 class _WalletContainerState extends State<WalletContainer> {
-  @override
-  void initState() {
-    super.initState();
-    context.read<UserCubit>().getUserData();
-  }
+
 
   @override
   Widget build(BuildContext context) {

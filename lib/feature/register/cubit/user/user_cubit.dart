@@ -65,4 +65,21 @@ class UserCubit extends Cubit<UserState> {
       emit(state.copyWith(error: 'Something went wrong'));
     }
   }
+
+  Future<void> getListOfUserData() async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      final listOfUsers = await authRepository
+          .getListOfMyUser();
+
+      if (listOfUsers != null) {
+        emit(state.copyWith(isLoading: false, isSuccess: true, listOfmyUser: listOfUsers));
+      } else {
+        emit(state.copyWith(error: 'User is null'));
+      }
+    } catch (e) {
+      print('Error fetching user data: $e');
+      emit(state.copyWith(error: 'Something went wrong'));
+    }
+  }
 }

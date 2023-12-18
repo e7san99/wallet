@@ -6,7 +6,6 @@ class UserCubit extends Cubit<UserState> {
   UserCubit(this.authRepository) : super(const UserState());
 
   AuthRepository authRepository;
-  // MyUser? myUser;
 
   Future<void> signup(
     String password,

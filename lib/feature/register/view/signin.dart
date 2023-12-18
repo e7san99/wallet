@@ -22,7 +22,7 @@ class _SigninPageState extends State<SigninPage> {
         if (state.myUser != null) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('Login in'),
+              content: Text('Login'),
             ),
           );
           Navigator.pushReplacement(

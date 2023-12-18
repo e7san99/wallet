@@ -2,7 +2,7 @@ export 'package:flutter/material.dart';
 
 export 'signin.dart';
 export 'signup.dart';
-export 'start_page.dart';
+export '../../../main/start_page.dart';
 
 
 export 'package:flutter/services.dart';

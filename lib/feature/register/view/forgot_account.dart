@@ -122,7 +122,7 @@ class _ForgotAccountState extends State<ForgotAccount> {
                                 ),
                                 onPressed: state
                                     ? null
-                                    : () async{
+                                    : () async {
                                         final valid =
                                             formKey.currentState!.validate();
                                         if (valid) {
@@ -131,11 +131,12 @@ class _ForgotAccountState extends State<ForgotAccount> {
                                             await context
                                                 .read<ForgotCubit>()
                                                 .forgotAccount(email!);
-                                                
+
                                             ScaffoldMessenger.of(context)
                                                 .showSnackBar(
                                               const SnackBar(
-                                                content: Text('check your email'),
+                                                content:
+                                                    Text('check your email'),
                                               ),
                                             );
                                           } catch (e) {
@@ -146,8 +147,6 @@ class _ForgotAccountState extends State<ForgotAccount> {
                                               ),
                                             );
                                           }
-                                          
-                                            
 
 //                                             showTopSnackBar(
 //                                                 Overlay.of(context),
@@ -156,7 +155,6 @@ class _ForgotAccountState extends State<ForgotAccount> {
 // We sent you a verification email''',
 //                                                 ),
 //                                               );
-                                        
                                         }
                                       },
                                 backgroundColor: backgroundColor,

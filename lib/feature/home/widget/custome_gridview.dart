@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:wallet/components/theme/theme.dart';
+import 'package:wallet/feature/home/widget/widget.dart';
 
 class CustomeGridview extends StatelessWidget {
   const CustomeGridview({

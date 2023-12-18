@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:wallet/feature/home/widget/widget.dart';
 
 class TransactionAvatars extends StatelessWidget {
   const TransactionAvatars({

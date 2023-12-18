@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:wallet/components/theme/theme.dart';
-import 'package:wallet/feature/home/view/view_all.dart';
+import 'package:wallet/feature/home/view/view.dart';
 
 class TransactionLabels extends StatelessWidget {
   const TransactionLabels({

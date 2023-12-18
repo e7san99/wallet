@@ -1,11 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:wallet/components/theme/theme.dart';
-import 'package:wallet/feature/home/widget/export.dart';
-import 'package:wallet/feature/home/view/add_balance.dart';
-import 'package:wallet/feature/home/view/send_balance.dart';
-import 'package:wallet/feature/register/cubit/user/user_cubit.dart';
-import 'package:wallet/feature/register/view/signin.dart';
+import 'package:wallet/feature/home/widget/widget.dart';
+import 'package:wallet/feature/home/view/view.dart';
+import 'package:wallet/feature/register/register.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

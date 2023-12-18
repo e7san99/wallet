@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:wallet/components/reusable/button.dart';
-import 'package:wallet/components/reusable/textfield.dart';
-import 'package:wallet/components/theme/theme.dart';
+import 'package:wallet/feature/home/view/view.dart';
 
 class AddBalancePage extends StatefulWidget {
   const AddBalancePage({super.key});

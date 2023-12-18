@@ -1,3 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:wallet/feature/register/view/view.dart';
 
 class ForgotAccount extends StatefulWidget {
@@ -118,14 +122,41 @@ class _ForgotAccountState extends State<ForgotAccount> {
                                 ),
                                 onPressed: state
                                     ? null
-                                    : () {
+                                    : () async{
                                         final valid =
                                             formKey.currentState!.validate();
                                         if (valid) {
                                           formKey.currentState!.save();
-                                          context
-                                              .read<ForgotCubit>()
-                                              .forgotAccount(email!);
+                                          try {
+                                            await context
+                                                .read<ForgotCubit>()
+                                                .forgotAccount(email!);
+                                                
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                content: Text('check your email'),
+                                              ),
+                                            );
+                                          } catch (e) {
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(
+                                              const SnackBar(
+                                                content: Text('maynera bra'),
+                                              ),
+                                            );
+                                          }
+                                          
+                                            
+
+//                                             showTopSnackBar(
+//                                                 Overlay.of(context),
+//                                                 const CustomSnackBar.success(
+//                                                   message: '''Check Your inbox
+// We sent you a verification email''',
+//                                                 ),
+//                                               );
+                                        
                                         }
                                       },
                                 backgroundColor: backgroundColor,

@@ -192,8 +192,7 @@ class _SigninPageState extends State<SigninPage> {
                                           if (valid) {
                                             formKey.currentState!.save();
 
-                                            final user =
-                                             await context
+                                            final user = await context
                                                 .read<UserCubit>()
                                                 .signin(email!, password!);
                                             if (user == null) {
@@ -233,19 +232,35 @@ class _SigninPageState extends State<SigninPage> {
                             Container(
                               decoration: BoxDecoration(
                                   color: backgroundColor,
-                                  borderRadius: BorderRadius.circular(25)),
+                                  borderRadius: BorderRadius.circular(10)),
                               width: MediaQuery.of(context).size.width * 0.8,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  // Image.asset(
-                                  //   height: 30,
-                                  //   'assets/images/g.png',
-                                  //   //color: foregroundColor,
-                                  //   scale: 1,
-                                  // ),
+                                  Image.asset(
+                                    height: 30,
+                                    'assets/img/g.png',
+                                    color: foregroundColor,
+                                    scale: 1,
+                                  ),
                                   TextButton(
-                                      onPressed: () {},
+                                      style: const ButtonStyle(
+                                          padding: MaterialStatePropertyAll(
+                                              EdgeInsets.all(12))),
+                                      onPressed: () {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            backgroundColor: Colors.amber,
+                                            content: Text(
+                                              'Not Available :)',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      },
                                       child: Text(
                                         'Sign in with Google',
                                         style: TextStyle(

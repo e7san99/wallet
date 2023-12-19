@@ -46,7 +46,9 @@ class UserCubit extends Cubit<UserState> {
 
   Future<void> logout() async {
     await authRepository.logout();
-    emit(const UserState());
+    emit(
+      const UserState(),
+    );
   }
 
   Future<void> getUserData() async {
@@ -69,11 +71,11 @@ class UserCubit extends Cubit<UserState> {
   Future<void> getListOfUserData() async {
     emit(state.copyWith(isLoading: true));
     try {
-      final listOfUsers = await authRepository
-          .getListOfMyUser();
+      final listOfUsers = await authRepository.getListOfMyUser();
 
       if (listOfUsers != null) {
-        emit(state.copyWith(isLoading: false, isSuccess: true, listOfmyUser: listOfUsers));
+        emit(state.copyWith(
+            isLoading: false, isSuccess: true, listOfmyUser: listOfUsers));
       } else {
         emit(state.copyWith(error: 'User is null'));
       }

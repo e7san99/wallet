@@ -11,7 +11,6 @@ class WalletContainer extends StatefulWidget {
 
 class _WalletContainerState extends State<WalletContainer> {
 
-
   @override
   Widget build(BuildContext context) {
     return Padding(

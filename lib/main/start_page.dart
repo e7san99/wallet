@@ -43,9 +43,8 @@ class _StartPageState extends State<StartPage> {
 
   Future _redirect() async {
     await Future.delayed(const Duration(seconds: 2));
-    // if (!mounted) return;
-    // final user = firebaseAuth.currentUser;
-    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+    if (!mounted) return;
+    final user = firebaseAuth.currentUser;
   if (user == null) {
     Navigator.push(
         context,
@@ -61,7 +60,7 @@ class _StartPageState extends State<StartPage> {
         ),
       );
   }
-});
+
 
     // if (user != null) {
     //   Navigator.push(

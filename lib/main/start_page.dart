@@ -43,24 +43,42 @@ class _StartPageState extends State<StartPage> {
 
   Future _redirect() async {
     await Future.delayed(const Duration(seconds: 2));
-    if (!mounted) return;
-    final user = firebaseAuth.currentUser;
-    if (user != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomePage(),
-        ),
-      );
-    }
-    {
-      Navigator.push(
+    // if (!mounted) return;
+    // final user = firebaseAuth.currentUser;
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+  if (user == null) {
+    Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => const SigninPage(),
         ),
       );
-    }
+  } else {
+   Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const HomePage(),
+        ),
+      );
+  }
+});
+
+    // if (user != null) {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => const HomePage(),
+    //     ),
+    //   );
+    // }
+    // {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(
+    //       builder: (context) => const SigninPage(),
+    //     ),
+    //   );
+    // }
   }
 
   @override

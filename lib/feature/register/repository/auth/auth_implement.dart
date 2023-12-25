@@ -1,8 +1,11 @@
+import 'package:wallet/feature/home/home.dart';
 import 'package:wallet/feature/register/repository/repository.dart';
 
 class AuthImplement extends AuthRepository {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _db = FirebaseFirestore.instance;
+  // Wallet wallet;
+  AuthImplement();
 
   @override
   Future<MyUser?> createUser(MyUser myUser, String password) async {
@@ -11,7 +14,12 @@ class AuthImplement extends AuthRepository {
           await firebaseAuth.createUserWithEmailAndPassword(
               email: myUser.email!, password: password);
       myUser = myUser.copyWith(uid: userCredential.user!.uid);
+      
       await _db.collection('Userr').add(myUser.toMap());
+      await _db.collection('Balance').add({
+        'uid': myUser.uid,
+        'balance' : '0',
+      });
 
       return myUser;
     } catch (e) {

@@ -217,6 +217,7 @@ class _SignupPageState extends State<SignupPage> {
                                                     email: email,
                                                   ),
                                                 );
+                                                HapticFeedback.heavyImpact();
                                           }
                                         },
                                   backgroundColor: backgroundColor,

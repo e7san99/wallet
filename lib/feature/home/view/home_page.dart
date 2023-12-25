@@ -1,3 +1,4 @@
+import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/widget/widget.dart';
 import 'package:wallet/feature/home/view/view.dart';
 import 'package:wallet/feature/register/register.dart';
@@ -10,12 +11,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-    @override
+  @override
   void initState() {
     super.initState();
     context.read<UserCubit>().getUserData();
     context.read<UserCubit>().getListOfUserData();
+    context.read<WalletCubit>().getWallet();
   }
+
   final formKey = GlobalKey<FormState>();
   List<String> titles = [
     'ADD BALANCE',

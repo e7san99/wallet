@@ -1,4 +1,8 @@
+import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
+import 'package:wallet/feature/home/home.dart';
 import 'package:wallet/feature/home/view/view.dart';
+import 'package:wallet/feature/register/view/view.dart';
+import 'package:wallet/main/main_export.dart';
 
 class AddBalancePage extends StatefulWidget {
   const AddBalancePage({super.key});
@@ -24,7 +28,8 @@ class _AddBalancePageState extends State<AddBalancePage> {
           children: [
             RichText(
               text: TextSpan(
-                text: '25,000', //provider!.balance.toString()
+                text:
+                    '0,00', //'${context.watch<WalletCubit>().state.wallet?.balance ?? 0}', //provider!.balance.toString()
                 style: TextStyle(
                   color: backgroundColor,
                   fontSize: 43,
@@ -50,41 +55,58 @@ class _AddBalancePageState extends State<AddBalancePage> {
                 height: 1,
               ),
             ),
-            OwnTextFormField(
-              label: 'balance',
-              keyboardType: TextInputType.phone,
-              isNumber: <TextInputFormatter>[
-                FilteringTextInputFormatter.digitsOnly,
-              ],
-              icon: Icons.attach_money,
-              onSaved: (value) {
-                setState(() {
+            Form(
+              key: formKey,
+              child: OwnTextFormField(
+                label: 'balance',
+                keyboardType: TextInputType.phone,
+                isNumber: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly,
+                ],
+                icon: Icons.attach_money,
+                onSaved: (value) {
                   balance = value;
-                });
-              },
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Enter a balance';
-                }
-                return null;
-              },
+                },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Enter a balance';
+                  }
+                  return null;
+                },
+              ),
             ),
             const SizedBox(
               height: 10,
             ),
-            OwnButton(
-              textButton: Text(
-                'ADD',
-                style: TextStyle(
-                  color: foregroundColor,
-                  fontSize: 20,
-                  fontFamily: 'lato',
-                  letterSpacing: 1.2,
-                ),
-              ),
-              onPressed: () {},
-              backgroundColor: backgroundColor,
-              foregroundColor: foregroundColor,
+            BlocSelector<WalletCubit, WalletState, bool>(
+              selector: (state) {
+                return state.isLoading;
+              },
+              builder: (context, state) {
+                return OwnButton(
+                  textButton: Text(
+                    'ADD',
+                    style: TextStyle(
+                      color: foregroundColor,
+                      fontSize: 20,
+                      fontFamily: 'lato',
+                      letterSpacing: 1.2,
+                    ),
+                  ),
+                  onPressed: state
+                      ? null
+                      : () {
+                          if (!formKey.currentState!.validate()) return;
+                          formKey.currentState!.save();
+                          context
+                              .read<WalletCubit>()
+                              .addBalance(num.parse(balance!));
+                          print("balance: ${num.parse(balance!)}");
+                        },
+                  backgroundColor: backgroundColor,
+                  foregroundColor: foregroundColor,
+                );
+              },
             ),
           ],
         ),

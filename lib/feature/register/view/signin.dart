@@ -25,6 +25,7 @@ class _SigninPageState extends State<SigninPage> {
               content: Text('Login'),
             ),
           );
+          
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -195,6 +196,7 @@ class _SigninPageState extends State<SigninPage> {
                                             final user = await context
                                                 .read<UserCubit>()
                                                 .signin(email!, password!);
+                                                HapticFeedback.heavyImpact();
                                             if (user == null) {
                                               if (!mounted) {
                                                 return;

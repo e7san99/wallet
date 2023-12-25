@@ -1,3 +1,4 @@
+import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/widget/widget.dart';
 
 class WalletContainer extends StatefulWidget {
@@ -10,7 +11,6 @@ class WalletContainer extends StatefulWidget {
 }
 
 class _WalletContainerState extends State<WalletContainer> {
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -72,22 +72,29 @@ class _WalletContainerState extends State<WalletContainer> {
                         fontSize: 16,
                       ),
                     ),
-                    RichText(
-                      text: TextSpan(
-                        text: '25,000',
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 25,
-                          fontWeight: FontWeight.w600,
-                          height: 0.9,
-                        ),
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: ' IQD',
-                              style: TextStyle(
-                                  fontSize: 10, color: foregroundColor)),
-                        ],
-                      ),
+                    BlocSelector<WalletCubit, WalletState, num?>(
+                      selector: (state) {
+                        return state.wallet?.balance;
+                      },
+                      builder: (context, balance) {
+                        return RichText(
+                          text: TextSpan(
+                            text: balance?.toString() ?? '0',
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w600,
+                              height: 0.9,
+                            ),
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: ' IQD',
+                                  style: TextStyle(
+                                      fontSize: 10, color: foregroundColor)),
+                            ],
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),

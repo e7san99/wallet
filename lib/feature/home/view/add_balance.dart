@@ -26,22 +26,30 @@ class _AddBalancePageState extends State<AddBalancePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            RichText(
-              text: TextSpan(
-                text:
-                    '0,00', //'${context.watch<WalletCubit>().state.wallet?.balance ?? 0}', //provider!.balance.toString()
-                style: TextStyle(
-                  color: backgroundColor,
-                  fontSize: 43,
-                  fontWeight: FontWeight.w600,
-                  height: 0.9,
-                ),
-                children: <TextSpan>[
-                  TextSpan(
-                      text: ' IQD',
-                      style: TextStyle(fontSize: 20, color: backgroundColor)),
-                ],
-              ),
+            BlocSelector<WalletCubit, WalletState, num?>(
+              selector: (state) {
+                return state.wallet?.balance;
+              },
+              builder: (context, balance) {
+                return RichText(
+                  text: TextSpan(
+                    text: balance?.toString() ??
+                        '0,00', //'${context.watch<WalletCubit>().state.wallet?.balance ?? 0}', //provider!.balance.toString()
+                    style: TextStyle(
+                      color: backgroundColor,
+                      fontSize: 43,
+                      fontWeight: FontWeight.w600,
+                      height: 0.9,
+                    ),
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: ' IQD',
+                          style:
+                              TextStyle(fontSize: 20, color: backgroundColor)),
+                    ],
+                  ),
+                );
+              },
             ),
             const SizedBox(
               height: 8,
@@ -100,7 +108,7 @@ class _AddBalancePageState extends State<AddBalancePage> {
                           formKey.currentState!.save();
                           context
                               .read<WalletCubit>()
-                              .addBalance(num.parse(balance!));
+                              .updateBalance(num.parse(balance!));
                           print("balance: ${num.parse(balance!)}");
                         },
                   backgroundColor: backgroundColor,

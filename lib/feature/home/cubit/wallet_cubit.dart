@@ -20,8 +20,9 @@ class WalletCubit extends Cubit<WalletState> {
     }
   }
 
-  Future<void> addBalance(num balance) async {
+  Future<void> updateBalance(num balance) async {
     emit(state.copyWith(isLoading: true));
+    balance += state.wallet!.balance?? 0;
     final success = await walletRepository.updateBalance(balance);
     if (success) {
       getWallet();

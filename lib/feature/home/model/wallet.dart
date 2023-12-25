@@ -46,10 +46,8 @@ class Wallet {
   @override
   bool operator ==(covariant Wallet other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.uid == uid &&
-      other.balance == balance;
+
+    return other.uid == uid && other.balance == balance;
   }
 
   @override
@@ -58,8 +56,8 @@ class Wallet {
   factory Wallet.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
     return Wallet(
-       uid: document.id,
-      balance: data['balance'],
+      uid: document.id,
+      balance: data['balance'] as num,
     );
   }
 }

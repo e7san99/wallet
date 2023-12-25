@@ -79,7 +79,7 @@ class _WalletContainerState extends State<WalletContainer> {
                       builder: (context, balance) {
                         return RichText(
                           text: TextSpan(
-                            text: balance?.toString() ?? '0',
+                            text: balance?.toString() ?? '0,00',
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 25,

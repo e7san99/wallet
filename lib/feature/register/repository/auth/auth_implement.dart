@@ -14,11 +14,11 @@ class AuthImplement extends AuthRepository {
           await firebaseAuth.createUserWithEmailAndPassword(
               email: myUser.email!, password: password);
       myUser = myUser.copyWith(uid: userCredential.user!.uid);
-      
+
       await _db.collection('Userr').add(myUser.toMap());
       await _db.collection('Balance').add({
         'uid': myUser.uid,
-        'balance' : '0',
+        'balance': 0,
       });
 
       return myUser;

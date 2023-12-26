@@ -16,7 +16,7 @@ class WalletCubit extends Cubit<WalletState> {
     if (wallet != null) {
       emit(state.copyWith(wallet: wallet, isLoading: false));
     } else {
-      emit(state.copyWith(isLoading: false, error: 'I cry'));
+      emit(state.copyWith(isLoading: false, error: '=== get balance is null ==='));
     }
   }
 
@@ -27,7 +27,7 @@ class WalletCubit extends Cubit<WalletState> {
     if (success) {
       getWallet();
     } else {
-      emit(state.copyWith(isLoading: false, error: '=== wallet is null ==='));
+      emit(state.copyWith(isLoading: false, error: '=== update balance is null ==='));
     }
   }
 }

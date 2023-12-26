@@ -8,13 +8,12 @@ class WalletImplement extends WalletRepository {
   @override
   Future<bool> updateBalance(num balance) async {
     final uid = firebaseAuth.currentUser!.uid;
-
+    
     try {
       final query = await firebaseFirestore
           .collection('Balance')
           .where('uid', isEqualTo: uid)
           .get();
-
       await firebaseFirestore
           .collection('Balance')
           .doc(query.docs.first.id)

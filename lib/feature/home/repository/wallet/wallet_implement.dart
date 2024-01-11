@@ -28,16 +28,32 @@ class WalletImplement extends WalletRepository {
     }
   }
 
-  @override
-  Future<Wallet?> getWallet() async {
-    final uid = firebaseAuth.currentUser!.uid;
-    final query = await firebaseFirestore
-        .collection('Balance')
-        .where('uid', isEqualTo: uid)
-        .get();
+@override
+Stream<Wallet?> getWallet() {
+  final uid = firebaseAuth.currentUser!.uid;
+  return firebaseFirestore
+      .collection('Balance')
+      .where('uid', isEqualTo: uid)
+      .snapshots()
+      .map((querySnapshot) {
+    if (querySnapshot.docs.isNotEmpty) {
+      return Wallet.fromSnapshot(querySnapshot.docs.first);
+    } else {
+      return null;
+    }
+  });
+}
 
-    return Wallet.fromSnapshot(query.docs.first);
-  }
+  // @override
+  // Future<Wallet?> getWallet() async {
+  //   final uid = firebaseAuth.currentUser!.uid;
+  //   final query = await firebaseFirestore
+  //       .collection('Balance')
+  //       .where('uid', isEqualTo: uid)
+  //       .get();
+
+  //   return Wallet.fromSnapshot(query.docs.first);
+  // }
 
   @override
   Future<bool> sendBalance(String phone, num balance) async {

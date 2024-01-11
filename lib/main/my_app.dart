@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
           create: (context) => ForgotCubit(ForgotImplement()),
         ),
         BlocProvider(
-          create: (context) => WalletCubit(WalletImplement()),
+          create: (context) => WalletCubit(WalletImplement(), AuthImplement()),
         ),
       ],
       child: const MaterialApp(

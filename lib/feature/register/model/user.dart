@@ -76,7 +76,7 @@ class MyUser {
   factory MyUser.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
     final data = document.data()!;
     return MyUser(
-      uid: document.id,
+      uid: data['uid'],
       username: data['username'],
       phone: data['phone'],
       email: data['email'],

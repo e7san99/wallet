@@ -77,9 +77,7 @@ class _SendBalancePageState extends State<SendBalancePage> {
                   ],
                   icon: Icons.attach_money,
                   onSaved: (value) {
-                    setState(() {
-                      balance = value;
-                    });
+                    balance = value;
                   },
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -97,9 +95,7 @@ class _SendBalancePageState extends State<SendBalancePage> {
                   isNumber: <TextInputFormatter>[phoneNumberFormatter],
                   icon: Icons.phone_outlined,
                   onSaved: (value) {
-                    setState(() {
-                      phone = value;
-                    });
+                    phone = value;
                   },
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -135,6 +131,20 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                     num.parse(balance!),
                                     phone ?? '000',
                                   );
+                              bool success = await context
+                                  .read<WalletCubit>()
+                                  .checkPhoneNumber(phone ?? '00');
+                              if (!mounted) {
+                                return;
+                              }
+                              if (!success) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content:
+                                        Text('This number ( $phone ) not exist'),
+                                  ),
+                                );
+                              }
                               print(
                                 "balance: ${num.parse(balance!)}",
                               );

@@ -18,6 +18,7 @@ class WalletCubit extends Cubit<WalletState> {
     emit(state.copyWith(isLoading: true));
 
     walletStreamSubscription?.cancel();
+
     walletStreamSubscription = walletRepository.getWallet().listen((wallet) {
       if (wallet != null) {
         emit(state.copyWith(wallet: wallet, isLoading: false));
@@ -27,19 +28,6 @@ class WalletCubit extends Cubit<WalletState> {
       }
     });
   }
-
-  // Future<void> getWallet() async {
-  //   emit(state.copyWith(isLoading: true));
-
-  //   final wallet = await walletRepository.getWallet();
-
-  //   if (wallet != null) {
-  //     emit(state.copyWith(wallet: wallet, isLoading: false));
-  //   } else {
-  //     emit(state.copyWith(
-  //         isLoading: false, error: '=== get balance is null ==='));
-  //   }
-  // }
 
   Future<void> updateBalance(num balance) async {
     emit(state.copyWith(isLoading: true));
@@ -70,6 +58,23 @@ class WalletCubit extends Cubit<WalletState> {
         state.copyWith(
             isLoading: false, error: '=== update balance is null ==='),
       );
+    }
+  }
+
+  Future<bool> checkPhoneNumber(String phone) async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      final success = await walletRepository.checkPhoneNumber(phone);
+      if (success) {
+        emit(state.copyWith(isLoading: false));
+        return true; // Phone number found
+      } else {
+        emit(state.copyWith(isLoading: false, error: 'idk idk idk'));
+        return false; // Phone number not found
+      }
+    } catch (e) {
+      emit(state.copyWith(isLoading: false, error: 'idk idk idk $e ======'));
+      return false;
     }
   }
 }

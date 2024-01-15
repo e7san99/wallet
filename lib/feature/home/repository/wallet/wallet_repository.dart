@@ -5,4 +5,5 @@ abstract class WalletRepository {
   Stream<Wallet?>  getWallet();
   // Future<Wallet?> getWallet();
   Future<bool> sendBalance(String phone, num balance);
+  Future<bool> checkPhoneNumber(String phone);
 }

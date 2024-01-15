@@ -5,7 +5,7 @@ import 'package:wallet/feature/register/view/view.dart';
 class WalletImplement extends WalletRepository {
   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  
+
   @override
   Future<bool> updateBalance(num balance) async {
     final uid = firebaseAuth.currentUser!.uid;
@@ -28,21 +28,21 @@ class WalletImplement extends WalletRepository {
     }
   }
 
-@override
-Stream<Wallet?> getWallet() {
-  final uid = firebaseAuth.currentUser!.uid;
-  return firebaseFirestore
-      .collection('Balance')
-      .where('uid', isEqualTo: uid)
-      .snapshots()
-      .map((querySnapshot) {
-    if (querySnapshot.docs.isNotEmpty) {
-      return Wallet.fromSnapshot(querySnapshot.docs.first);
-    } else {
-      return null;
-    }
-  });
-}
+  @override
+  Stream<Wallet?> getWallet() {
+    final uid = firebaseAuth.currentUser!.uid;
+    return firebaseFirestore
+        .collection('Balance')
+        .where('uid', isEqualTo: uid)
+        .snapshots()
+        .map((querySnapshot) {
+      if (querySnapshot.docs.isNotEmpty) {
+        return Wallet.fromSnapshot(querySnapshot.docs.first);
+      } else {
+        return null;
+      }
+    });
+  }
 
   // @override
   // Future<Wallet?> getWallet() async {
@@ -63,7 +63,11 @@ Stream<Wallet?> getWallet() {
           .where('phone', isEqualTo: phone)
           .get();
 
-     var user = MyUser.fromSnapshot(query.docs.first);
+      // if (query.docs.isEmpty) {
+      //   return false; // Indicate phone number not found
+      // }
+
+      var user = MyUser.fromSnapshot(query.docs.first);
 
       final wallet = await firebaseFirestore
           .collection('Balance')
@@ -82,6 +86,24 @@ Stream<Wallet?> getWallet() {
       return true;
     } catch (e) {
       print('===tomething is wrong in send balance:  $e ===');
+      return false;
+    }
+  }
+
+  @override
+  Future<bool> checkPhoneNumber(String phone) async {
+    try {
+      final query = await firebaseFirestore
+          .collection('Userr')
+          .where('phone', isEqualTo: phone)
+          .get();
+      if (query.docs.isNotEmpty) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print('Error checking phone number: $e');
       return false;
     }
   }

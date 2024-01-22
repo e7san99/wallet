@@ -44,29 +44,23 @@ class WalletImplement extends WalletRepository {
     });
   }
 
-  // @override
-  // Future<Wallet?> getWallet() async {
-  //   final uid = firebaseAuth.currentUser!.uid;
-  //   final query = await firebaseFirestore
-  //       .collection('Balance')
-  //       .where('uid', isEqualTo: uid)
-  //       .get();
-
-  //   return Wallet.fromSnapshot(query.docs.first);
-  // }
-
   @override
-  Future<bool> sendBalance(String phone, num balance) async {
+  Future<bool> sendBalance(
+      String phone, String cuurentUsername, num balance) async {
+    final currentUid = firebaseAuth.currentUser?.uid;
     try {
+      ////////// current
+      await firebaseFirestore
+          .collection('Userr')
+          .where('username', isEqualTo: cuurentUsername)
+          .get();
+
       final query = await firebaseFirestore
           .collection('Userr')
           .where('phone', isEqualTo: phone)
           .get();
 
-      // if (query.docs.isEmpty) {
-      //   return false; // Indicate phone number not found
-      // }
-
+      //second device user
       var user = MyUser.fromSnapshot(query.docs.first);
 
       final wallet = await firebaseFirestore
@@ -74,8 +68,20 @@ class WalletImplement extends WalletRepository {
           .where('uid', isEqualTo: user.uid)
           .get();
 
-      var bal = Wallet.fromSnapshot(wallet.docs.first);
-      balance += bal.balance ?? 0;
+      var sendBalance = Wallet.fromSnapshot(wallet.docs.first);
+
+      //transaction
+      await firebaseFirestore.collection('Transaction').doc().set({
+        'currentUid': currentUid,
+        'secondUid': user.uid,
+        'currentUsername': cuurentUsername,
+        'secondUsername': user.username,
+        'balance': balance,
+        // 'dateTime': DateTime.now(),
+      });
+      //////////////////
+
+      balance += sendBalance.balance ?? 0;
 
       await firebaseFirestore
           .collection('Balance')
@@ -83,6 +89,7 @@ class WalletImplement extends WalletRepository {
           .update({
         'balance': balance,
       });
+
       return true;
     } catch (e) {
       print('===tomething is wrong in send balance:  $e ===');
@@ -107,4 +114,25 @@ class WalletImplement extends WalletRepository {
       return false;
     }
   }
+
+  @override
+Future<List<TransactionModel>?> getTransactions() async {
+  final currentUid = firebaseAuth.currentUser?.uid;
+
+  final query1 = await firebaseFirestore
+      .collection('Transaction')
+      .where('currentUid', isEqualTo: currentUid)
+      .get();
+
+  final query2 = await firebaseFirestore
+      .collection('Transaction')
+      .where('secondUid', isEqualTo: currentUid)
+      .get();
+
+  List<TransactionModel> listOfTransaction = [...query1.docs, ...query2.docs]
+      .map((doc) => TransactionModel.fromSnapshot(doc))
+      .toList();
+
+  return listOfTransaction;
+}
 }

@@ -1,4 +1,5 @@
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
+import 'package:wallet/feature/home/home.dart';
 import 'package:wallet/feature/home/widget/widget.dart';
 import 'package:wallet/feature/home/view/view.dart';
 import 'package:wallet/feature/register/register.dart';
@@ -17,6 +18,7 @@ class _HomePageState extends State<HomePage> {
     context.read<UserCubit>().getUserData();
     context.read<UserCubit>().getListOfUserData();
     context.read<WalletCubit>().getWallet();
+    context.read<WalletCubit>().getTransaction();
   }
 
   final formKey = GlobalKey<FormState>();
@@ -167,8 +169,15 @@ class _HomePageState extends State<HomePage> {
                   onTap: onTap,
                 ),
                 const TransactionLabels(),
-                TransactionAvatars(
-                    names: names, avatars: avatars, iconAvatars: iconAvatars),
+                //  BlocSelector<WalletCubit, WalletState, List<TransactionModel>?>(
+                //   selector: (state) {
+                //     return state.transactionModel?.;
+                //   },
+                //   builder: (context, state) {
+                //     return Text(state??'current');
+                //   },
+                // ),
+                TransactionAvatars(avatars: avatars, iconAvatars: iconAvatars),
               ],
             ),
           ),

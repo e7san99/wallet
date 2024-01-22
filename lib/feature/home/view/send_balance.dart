@@ -112,45 +112,56 @@ class _SendBalancePageState extends State<SendBalancePage> {
                     return state.isLoading;
                   },
                   builder: (context, isLoading) {
-                    return OwnButton(
-                      textButton: Text(
-                        'SEND',
-                        style: TextStyle(
-                          color: foregroundColor,
-                          fontSize: 20,
-                          fontFamily: 'lato',
-                          letterSpacing: 1.2,
-                        ),
-                      ),
-                      onPressed: isLoading
-                          ? null
-                          : () async {
-                              if (!formKey.currentState!.validate()) return;
-                              formKey.currentState!.save();
-                              context.read<WalletCubit>().sendBalance(
-                                    num.parse(balance!),
-                                    phone ?? '000',
-                                  );
-                              bool success = await context
-                                  .read<WalletCubit>()
-                                  .checkPhoneNumber(phone ?? '00');
-                              if (!mounted) {
-                                return;
-                              }
-                              if (!success) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content:
-                                        Text('This number ( $phone ) not exist'),
-                                  ),
-                                );
-                              }
-                              print(
-                                "balance: ${num.parse(balance!)}",
-                              );
-                            },
-                      backgroundColor: backgroundColor,
-                      foregroundColor: foregroundColor,
+                    return BlocSelector<UserCubit, UserState, String?>(
+                      selector: (state) {
+                        return state.myUser?.username;
+                      },
+                      builder: (context, state) {
+                        return OwnButton(
+                                          textButton: Text(
+                                            'SEND',
+                                            style: TextStyle(
+                                              color: foregroundColor,
+                                              fontSize: 20,
+                                              fontFamily: 'lato',
+                                              letterSpacing: 1.2,
+                                            ),
+                                          ),
+                                          onPressed: isLoading
+                                              ? null
+                                              : () async {
+                                                  if (!formKey.currentState!.validate()) return;
+                                                  formKey.currentState!.save();
+                                                  context.read<WalletCubit>().sendBalance(
+                                                        state??'currentUsername',
+                                                        num.parse(balance!),
+                                                        phone ?? '000',
+                                                        
+                                                      );
+                                                      
+                                                  bool success = await context
+                                                      .read<WalletCubit>()
+                                                      .checkPhoneNumber(phone ?? '00');
+
+                                                  if (!mounted) {
+                                                    return;
+                                                  }
+                                                  if (!success) {
+                                                    ScaffoldMessenger.of(context).showSnackBar(
+                                                      SnackBar(
+                                                        content:
+                                                            Text('This number ( $phone ) not exist'),
+                                                      ),
+                                                    );
+                                                  }
+                                                  print(
+                                                    "balance: ${num.parse(balance!)}",
+                                                  );
+                                                },
+                                          backgroundColor: backgroundColor,
+                                          foregroundColor: foregroundColor,
+                                        );
+                      },
                     );
                   },
                 ),

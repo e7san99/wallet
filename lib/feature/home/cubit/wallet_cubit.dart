@@ -43,12 +43,14 @@ class WalletCubit extends Cubit<WalletState> {
     }
   }
 
-  Future<void> sendBalance(num balance, String phone) async {
+  Future<void> sendBalance(
+      String currentUsername, num balance, String phone) async {
     emit(state.copyWith(isLoading: true));
     var sendBalance = state.wallet!.balance ?? 0;
     sendBalance = sendBalance - balance;
 
-    final suc = await walletRepository.sendBalance(phone, balance);
+    final suc =
+        await walletRepository.sendBalance(phone, currentUsername, balance);
 
     if (suc) {
       // No need to call getWallet() here, as the stream will automatically update the balance
@@ -75,6 +77,36 @@ class WalletCubit extends Cubit<WalletState> {
     } catch (e) {
       emit(state.copyWith(isLoading: false, error: 'idk idk idk $e ======'));
       return false;
+    }
+  }
+
+  Future<void> getTransaction() async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      final transaction = await walletRepository.getTransactions();
+      if (transaction != null) {
+        emit(
+          state.copyWith(
+            isLoading: false,
+            transactionModel: transaction,
+          ),
+        );
+      } else {
+        emit(
+          state.copyWith(
+            isLoading: false,
+            error: 'something is wrong in getTransaction cubit',
+          ),
+        );
+      }
+    } catch (e) {
+      print('wrong in getTransactions: $e');
+      emit(
+        state.copyWith(
+          isLoading: false,
+          error: 'something is wrong in getTransaction cubit',
+        ),
+      );
     }
   }
 }

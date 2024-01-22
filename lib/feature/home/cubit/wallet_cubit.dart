@@ -10,6 +10,7 @@ class WalletCubit extends Cubit<WalletState> {
   WalletRepository walletRepository;
   AuthRepository authRepository;
   StreamSubscription<Wallet?>? walletStreamSubscription;
+  StreamSubscription<List<TransactionModel>?>? transactionStreamSubscription;
 
   WalletCubit(this.walletRepository, this.authRepository)
       : super(const WalletState());
@@ -80,38 +81,33 @@ class WalletCubit extends Cubit<WalletState> {
     }
   }
 
-  Future<void> getTransaction() async {
+Future<void> getTransaction() async {
     emit(state.copyWith(isLoading: true));
-    try {
-      final transaction = await walletRepository.getTransactions(
-        state.transactionModel
-            .map((e) => e.secondUsername.toString())
-            .toString(),
-            state.transactionModel.map((e) => e.balance).toString()
-      );
-      if (transaction != null) {
+    transactionStreamSubscription?.cancel();
+    transactionStreamSubscription =
+        walletRepository.getTransactions().listen((List<TransactionModel>? transactions) {
+      if (transactions != null) {
         emit(
           state.copyWith(
             isLoading: false,
-            transactionModel: transaction,
+            transactionModel: transactions,
           ),
         );
       } else {
         emit(
           state.copyWith(
             isLoading: false,
-            error: 'something is wrong in getTransaction cubit',
+            error: 'Something went wrong in getTransaction Cubit',
           ),
         );
       }
-    } catch (e) {
-      print('wrong in getTransactions: $e');
+    }, onError: (dynamic error) {
       emit(
         state.copyWith(
           isLoading: false,
-          error: 'something is wrong in getTransaction cubit',
+          error: 'Error in stream: $error',
         ),
       );
-    }
+    });
   }
 }

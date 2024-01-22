@@ -116,28 +116,59 @@ class WalletImplement extends WalletRepository {
   }
 
   @override
-Future<List<TransactionModel>?> getTransactions(String secondUsername, String balance) async {
+Stream<List<TransactionModel>?> getTransactions() {
   final currentUid = firebaseAuth.currentUser?.uid;
 
-  final query1 = await firebaseFirestore
-      .collection('Transaction')
-      .where('currentUid', isEqualTo: currentUid)
-      .get();
+  return firebaseFirestore
+        .collection('Transaction')
+        .where('currentUid', isEqualTo: currentUid)
+        .snapshots()
+        .map((querySnapshot) {
+      if (querySnapshot.docs.isNotEmpty) {
+       // Convert the list of documents to a list of TransactionModel objects
+        List<TransactionModel> transactions = querySnapshot.docs.map((doc) {
+          return TransactionModel.fromSnapshot(doc);
+        }).toList();
 
-  final query2 = await firebaseFirestore
-      .collection('Transaction')
-      .where('secondUsername', isEqualTo: secondUsername)
-      .get();
+        return transactions;
+      } else {
+        return null;
+      }
+    });
 
-  final query3 = await firebaseFirestore
-      .collection('Transaction')
-      .where('balance', isEqualTo: balance)
-      .get();
+  // final query1 = await firebaseFirestore
+  //     .collection('Transaction')
+  //     .where('currentUid', isEqualTo: currentUid)
+  //     .get();
 
-  List<TransactionModel> listOfTransaction = [...query1.docs, ...query2.docs, ...query3.docs]
-      .map((doc) => TransactionModel.fromSnapshot(doc))
-      .toList();
+  // final query2 = await firebaseFirestore
+  //     .collection('Transaction')
+  //     .where('secondUsername', isEqualTo: secondUsername)
+  //     .get();
 
-  return listOfTransaction;
+  // final query3 = await firebaseFirestore
+  //     .collection('Transaction')
+  //     .where('balance', isEqualTo: balance)
+  //     .get();
+
+  // List<TransactionModel> listOfTransaction = [...query1.docs, ...query2.docs, ...query3.docs]
+  //     .map((doc) => TransactionModel.fromSnapshot(doc))
+  //     .toList();
+
+  // return listOfTransaction;
 }
 }
+/*
+    final uid = firebaseAuth.currentUser!.uid;
+    return firebaseFirestore
+        .collection('Balance')
+        .where('uid', isEqualTo: uid)
+        .snapshots()
+        .map((querySnapshot) {
+      if (querySnapshot.docs.isNotEmpty) {
+        return Wallet.fromSnapshot(querySnapshot.docs.first);
+      } else {
+        return null;
+      }
+    });
+*/

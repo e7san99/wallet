@@ -87,6 +87,7 @@ class WalletCubit extends Cubit<WalletState> {
         state.transactionModel
             .map((e) => e.secondUsername.toString())
             .toString(),
+            state.transactionModel.map((e) => e.balance).toString()
       );
       if (transaction != null) {
         emit(

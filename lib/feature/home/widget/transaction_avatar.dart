@@ -31,7 +31,7 @@ class TransactionAvatars extends StatelessWidget {
                 //return const ShimmerWidget();
                 return GestureDetector(
                   onTap: () {
-                    print(list[index].currentUid ?? 'dyar nya');
+                    print(list[index].secondUsername ?? 'dyar nya');
                   },
                   child: Column(
                     children: [
@@ -47,7 +47,7 @@ class TransactionAvatars extends StatelessWidget {
                       //   ),
                       // ),
                       Text(
-                        list[index].currentUid ?? 'current uid',
+                        list[index].secondUsername ?? 'current uid',
                         style: const TextStyle(
                             color: Colors.black, fontWeight: FontWeight.w600),
                       ),

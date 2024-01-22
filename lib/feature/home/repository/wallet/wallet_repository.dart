@@ -6,5 +6,5 @@ abstract class WalletRepository {
   Stream<Wallet?> getWallet();
   Future<bool> sendBalance(String phone, String cuurentUsername ,num balance);
   Future<bool> checkPhoneNumber(String phone);
-  Future<List<TransactionModel>?> getTransactions();
+  Future<List<TransactionModel>?> getTransactions(String secondUsername);
 }

@@ -83,7 +83,11 @@ class WalletCubit extends Cubit<WalletState> {
   Future<void> getTransaction() async {
     emit(state.copyWith(isLoading: true));
     try {
-      final transaction = await walletRepository.getTransactions();
+      final transaction = await walletRepository.getTransactions(
+        state.transactionModel
+            .map((e) => e.secondUsername.toString())
+            .toString(),
+      );
       if (transaction != null) {
         emit(
           state.copyWith(

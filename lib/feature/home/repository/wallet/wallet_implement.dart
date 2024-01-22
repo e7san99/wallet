@@ -116,7 +116,7 @@ class WalletImplement extends WalletRepository {
   }
 
   @override
-Future<List<TransactionModel>?> getTransactions() async {
+Future<List<TransactionModel>?> getTransactions(String secondUsername) async {
   final currentUid = firebaseAuth.currentUser?.uid;
 
   final query1 = await firebaseFirestore
@@ -126,7 +126,7 @@ Future<List<TransactionModel>?> getTransactions() async {
 
   final query2 = await firebaseFirestore
       .collection('Transaction')
-      .where('secondUid', isEqualTo: currentUid)
+      .where('secondUsername', isEqualTo: secondUsername)
       .get();
 
   List<TransactionModel> listOfTransaction = [...query1.docs, ...query2.docs]

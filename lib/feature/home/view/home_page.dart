@@ -1,7 +1,5 @@
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/home.dart';
-import 'package:wallet/feature/home/widget/widget.dart';
-import 'package:wallet/feature/home/view/view.dart';
 import 'package:wallet/feature/register/register.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,6 +17,7 @@ class _HomePageState extends State<HomePage> {
     context.read<UserCubit>().getListOfUserData();
     context.read<WalletCubit>().getWallet();
     context.read<WalletCubit>().getTransaction();
+    // context.read<WalletCubit>().getTransaction2();
   }
 
   final formKey = GlobalKey<FormState>();

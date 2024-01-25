@@ -39,6 +39,7 @@ class TransactionAvatars extends StatelessWidget {
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
+
                 bool sentToCurrentDevice = list[index].secondUid == FirebaseAuth.instance.currentUser?.uid;
                 Color balanceColor = sentToCurrentDevice ? Colors.green : Colors.red ;
 
@@ -57,7 +58,7 @@ class TransactionAvatars extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        list[index].secondUsername ?? 'default username',
+                        '${sentToCurrentDevice? list[index].currentUsername : list[index].secondUsername}',
                         style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w600,

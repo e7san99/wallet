@@ -115,67 +115,30 @@ class WalletImplement extends WalletRepository {
     }
   }
 
-@override
-Stream<List<TransactionModel>?> getTransactions() {
-  final currentUid = firebaseAuth.currentUser?.uid;
+  @override
+  Stream<List<TransactionModel>?> getTransactions() {
+    final currentUid = firebaseAuth.currentUser?.uid;
 
-  return firebaseFirestore
-      .collection('Transaction')
-      .snapshots()
-      .map((querySnapshot) {
-        if (querySnapshot.docs.isNotEmpty) {
-          List<TransactionModel> transactions = querySnapshot.docs
-              .where((doc) => doc['secondUid'] == currentUid || doc['currentUid'] == currentUid)
-              .map((doc) => TransactionModel.fromSnapshot(doc))
-              .toList();
-
-          if (transactions.isNotEmpty) {
-            return transactions;
-          } else {
-            return null;
-          }
-        } else {
-          return null;
-        }
-      });
-}
-
-
-//   @override
-//   Stream<List<TransactionModel>?> getTransactions2() {
-// final currentUid = firebaseAuth.currentUser?.uid;
-
-//   return firebaseFirestore
-//       .collection('Transaction')
-//       .where('secondUid', isEqualTo: currentUid)
-//       .snapshots()
-//       .map((querySnapshot) {
-//     if (querySnapshot.docs.isNotEmpty) {
-//       // Convert the list of documents to a list of TransactionModel objects
-//       List<TransactionModel> transactions = querySnapshot.docs.map((doc) {
-//         return TransactionModel.fromSnapshot(doc);
-//       }).toList();
-
-//       return transactions;
-//     } else {
-//       return null;
-//     }
-//   });
-//   }
- // in this code i wanna write another condition like this 
- // .where('secondUid',equal to: currentUid) but firebase not support multiple condition
-}
-/*
-    final uid = firebaseAuth.currentUser!.uid;
     return firebaseFirestore
-        .collection('Balance')
-        .where('uid', isEqualTo: uid)
+        .collection('Transaction')
         .snapshots()
         .map((querySnapshot) {
       if (querySnapshot.docs.isNotEmpty) {
-        return Wallet.fromSnapshot(querySnapshot.docs.first);
+        List<TransactionModel> transactions = querySnapshot.docs
+            .where((doc) =>
+                doc['secondUid'] == currentUid ||
+                doc['currentUid'] == currentUid)
+            .map((doc) => TransactionModel.fromSnapshot(doc))
+            .toList();
+
+        if (transactions.isNotEmpty) {
+          return transactions;
+        } else {
+          return null;
+        }
       } else {
         return null;
       }
     });
-*/
+  }
+}

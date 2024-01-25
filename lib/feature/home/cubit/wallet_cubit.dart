@@ -111,33 +111,4 @@ Future<void> getTransaction() async {
       );
     });
   }
-// Future<void> getTransaction2() async {
-//     emit(state.copyWith(isLoading: true));
-//     transactionStreamSubscription?.cancel();
-//     transactionStreamSubscription =
-//         walletRepository.getTransactions2().listen((List<TransactionModel>? transactions) {
-//       if (transactions != null) {
-//         emit(
-//           state.copyWith(
-//             isLoading: false,
-//             transactionModel: transactions,
-//           ),
-//         );
-//       } else {
-//         emit(
-//           state.copyWith(
-//             isLoading: false,
-//             error: 'Something went wrong in getTransaction Cubit',
-//           ),
-//         );
-//       }
-//     }, onError: (dynamic error) {
-//       emit(
-//         state.copyWith(
-//           isLoading: false,
-//           error: 'Error in stream: $error',
-//         ),
-//       );
-//     });
-//   }
 }

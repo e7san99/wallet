@@ -1,13 +1,14 @@
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/home.dart';
 import 'package:wallet/feature/home/widget/widget.dart';
+import 'package:wallet/feature/register/cubit/cubit.dart';
 
 class TransactionAvatars extends StatelessWidget {
   const TransactionAvatars({
-    super.key,
+    Key? key,
     required this.avatars,
     required this.iconAvatars,
-  });
+  }) : super(key: key);
 
   final List<String> avatars;
   final List<Icon> iconAvatars;
@@ -20,7 +21,7 @@ class TransactionAvatars extends StatelessWidget {
         builder: (context, state) {
           final list = state.transactionModel;
           if (state.isLoading) {
-            return const Text('is Loading runing');
+            return const Text('is Loading running');
           } else if (state.transactionModel.isEmpty) {
             return SizedBox(
               height: 100,
@@ -33,16 +34,17 @@ class TransactionAvatars extends StatelessWidget {
                 itemCount: 5,
               ),
             );
-            //return const Text('transaction is empty');
           } else {
             return ListView.separated(
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                //return const ShimmerWidget();
+                bool sentToCurrentDevice = list[index].secondUid == FirebaseAuth.instance.currentUser?.uid;
+                Color balanceColor = sentToCurrentDevice ? Colors.green : Colors.red ;
+
                 return GestureDetector(
                   onTap: () {
-                    print(list[index].secondUsername ?? 'dyar nya');
+                    print(list[index].secondUsername ?? 'default username');
                   },
                   child: Column(
                     children: [
@@ -50,20 +52,17 @@ class TransactionAvatars extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: CircleAvatar(
                           radius: 30,
+                          backgroundColor: balanceColor,
                           child: Text(list[index].balance.toString()),
-                          // child: Image.asset(
-                          //   // height: 20,
-                          //   fit: BoxFit.contain,
-                          //   'assets/img/${avatars[index]}',
-                          // ),
                         ),
                       ),
                       Text(
-                        list[index].secondUsername ?? 'current uid',
+                        list[index].secondUsername ?? 'default username',
                         style: const TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.w600),
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                      //iconAvatars[index],
                     ],
                   ),
                 );

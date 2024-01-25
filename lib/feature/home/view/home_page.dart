@@ -17,7 +17,6 @@ class _HomePageState extends State<HomePage> {
     context.read<UserCubit>().getListOfUserData();
     context.read<WalletCubit>().getWallet();
     context.read<WalletCubit>().getTransaction();
-    // context.read<WalletCubit>().getTransaction2();
   }
 
   final formKey = GlobalKey<FormState>();

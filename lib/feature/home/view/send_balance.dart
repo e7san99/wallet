@@ -118,49 +118,71 @@ class _SendBalancePageState extends State<SendBalancePage> {
                       },
                       builder: (context, state) {
                         return OwnButton(
-                                          textButton: Text(
-                                            'SEND',
-                                            style: TextStyle(
-                                              color: foregroundColor,
-                                              fontSize: 20,
-                                              fontFamily: 'lato',
-                                              letterSpacing: 1.2,
-                                            ),
-                                          ),
-                                          onPressed: isLoading
-                                              ? null
-                                              : () async {
-                                                  if (!formKey.currentState!.validate()) return;
-                                                  formKey.currentState!.save();
-                                                  context.read<WalletCubit>().sendBalance(
-                                                        state??'currentUsername',
-                                                        num.parse(balance!),
-                                                        phone ?? '000',
-                                                        
-                                                      );
-                                                      
-                                                  bool success = await context
-                                                      .read<WalletCubit>()
-                                                      .checkPhoneNumber(phone ?? '00');
+                          textButton: Text(
+                            'SEND',
+                            style: TextStyle(
+                              color: foregroundColor,
+                              fontSize: 20,
+                              fontFamily: 'lato',
+                              letterSpacing: 1.2,
+                            ),
+                          ),
+                          onPressed: isLoading
+                              ? null
+                              : () async {
+                                
+                                  
+                                  
+                                  formKey.currentState!.save();
 
-                                                  if (!mounted) {
-                                                    return;
-                                                  }
-                                                  if (!success) {
-                                                    ScaffoldMessenger.of(context).showSnackBar(
-                                                      SnackBar(
-                                                        content:
-                                                            Text('This number ( $phone ) not exist'),
-                                                      ),
-                                                    );
-                                                  }
-                                                  print(
-                                                    "balance: ${num.parse(balance!)}",
-                                                  );
-                                                },
-                                          backgroundColor: backgroundColor,
-                                          foregroundColor: foregroundColor,
-                                        );
+                                  if (!formKey.currentState!.validate()) return;
+                                  if (context
+                                          .read<WalletCubit>()
+                                          .state
+                                          .wallet!
+                                          .balance! <
+                                      num.parse(balance!)) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        backgroundColor: Colors.red,
+                                        content: Text(
+                                            'Your balance is less than send balance'),
+                                      ),
+                                    );
+                                    return;
+                                  }
+
+                                  context.read<WalletCubit>().sendBalance(
+                                        state ?? 'currentUsername',
+                                        num.parse(balance!),
+                                        phone ?? '000',
+                                      );
+
+                                  bool success = await context
+                                      .read<WalletCubit>()
+                                      .checkPhoneNumber(phone ?? '00');
+
+                                  formKey.currentState!.reset();
+
+                                  if (!mounted) {
+                                    return;
+                                  }
+                                  
+                                  if (!success) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                            'This number ( $phone ) not exist'),
+                                      ),
+                                    );
+                                  }
+                                  print(
+                                    "balance: ${num.parse(balance!)}",
+                                  );
+                                },
+                          backgroundColor: backgroundColor,
+                          foregroundColor: foregroundColor,
+                        );
                       },
                     );
                   },

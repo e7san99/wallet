@@ -1,3 +1,4 @@
+import 'package:wallet/feature/home/view/transactions.dart';
 import 'package:wallet/feature/home/view/view.dart';
 
 class TransactionLabels extends StatelessWidget {
@@ -25,7 +26,7 @@ class TransactionLabels extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ViewAll(),
+                  builder: (context) => const TransactionsView(),
                 ),
               );
             },

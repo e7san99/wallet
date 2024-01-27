@@ -21,7 +21,17 @@ class TransactionAvatars extends StatelessWidget {
         builder: (context, state) {
           final list = state.transactionModel;
           if (state.isLoading) {
-            return const Text('is Loading running');
+            return SizedBox(
+              height: 100,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemBuilder: (context, index) {
+                  return const ShimmerWidget();
+                },
+                separatorBuilder: (context, index) => const Divider(),
+                itemCount: 5,
+              ),
+            );
           } else if (state.transactionModel.isEmpty) {
             return SizedBox(
               height: 100,

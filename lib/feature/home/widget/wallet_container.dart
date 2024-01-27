@@ -1,5 +1,6 @@
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/widget/widget.dart';
+import 'package:intl/intl.dart';
 
 class WalletContainer extends StatefulWidget {
   const WalletContainer({
@@ -77,9 +78,12 @@ class _WalletContainerState extends State<WalletContainer> {
                         return state.wallet?.balance;
                       },
                       builder: (context, balance) {
+                        var number = balance ?? 0;
+                        final usCurrency = NumberFormat('#,##0', 'en_US');
+
                         return RichText(
                           text: TextSpan(
-                            text: balance?.toString() ?? '0,00',
+                            text: usCurrency.format(number),
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 25,

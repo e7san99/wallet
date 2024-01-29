@@ -1,3 +1,6 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:wallet/feature/register/view/view.dart';
 
 class SigninPage extends StatefulWidget {
@@ -20,11 +23,11 @@ class _SigninPageState extends State<SigninPage> {
       },
       listener: (context, state) {
         if (state.myUser != null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Login'),
-            ),
-          );
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(
+          //     content: Text('Login'),
+          //   ),
+          // );
 
           Navigator.pushReplacement(
               context,
@@ -222,8 +225,8 @@ class _SigninPageState extends State<SigninPage> {
 
                                               // Close the loading dialog
                                               if (!mounted) {
-                                                  return;
-                                                }
+                                                return;
+                                              }
                                               Navigator.pop(context);
 
                                               HapticFeedback.heavyImpact();
@@ -232,18 +235,14 @@ class _SigninPageState extends State<SigninPage> {
                                                 if (!mounted) {
                                                   return;
                                                 }
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  SnackBar(
-                                                    backgroundColor: Colors.red,
-                                                    content: Text(
-                                                      'email or password is incorrect',
-                                                      style: TextStyle(
-                                                        color: foregroundColor,
-                                                      ),
-                                                    ),
+                                                showTopSnackBar(
+                                                  Overlay.of(context),
+                                                  const CustomSnackBar.error(
+                                                    message:
+                                                        "Email or Password is incorrect",
                                                   ),
                                                 );
+                                                return;
                                               }
                                             }
                                           },

@@ -82,15 +82,27 @@ class _TransactionsViewState extends State<TransactionsView> {
                     ),
                   );
                 } else if (state.transactionModel.isEmpty) {
-                  return SizedBox(
-                    height: 100,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return const ShimmerWidget();
-                      },
-                      separatorBuilder: (context, index) => const Divider(),
-                      itemCount: 5,
+                  return Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                       Text(
+                          'You don\'t have any transactions',
+                          style: TextStyle(
+                              fontFamily: 'handlee',
+                              color: backgroundColor,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Image.asset(
+                          'assets/img/empty.png',
+                          height: 100,
+                          width: 100,
+                        ),
+                      ],
                     ),
                   );
                 } else {

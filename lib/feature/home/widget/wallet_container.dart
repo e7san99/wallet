@@ -1,4 +1,5 @@
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
+import 'package:wallet/feature/home/widget/shimmer_username.dart';
 import 'package:wallet/feature/home/widget/widget.dart';
 import 'package:intl/intl.dart';
 
@@ -49,15 +50,19 @@ class _WalletContainerState extends State<WalletContainer> {
                         return state.myUser?.username;
                       },
                       builder: (context, username) {
-                        return Text(
-                          '$username',
-                          style: TextStyle(
-                            fontSize: 20,
-                            letterSpacing: 1.3,
-                            fontWeight: FontWeight.w600,
-                            color: foregroundColor,
-                          ),
-                        );
+                        if (username == null) {
+                          return const ShimmerUsername();
+                        } else {
+                          return Text(
+                            username,
+                            style: TextStyle(
+                              fontSize: 20,
+                              letterSpacing: 1.3,
+                              fontWeight: FontWeight.w600,
+                              color: foregroundColor,
+                            ),
+                          );
+                        }
                       },
                     ),
                   ],

@@ -1,3 +1,4 @@
+import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/register/view/view.dart';
 
 class SignupPage extends StatefulWidget {
@@ -213,6 +214,25 @@ class _SignupPageState extends State<SignupPage> {
                                                 .validate();
                                             if (valid) {
                                               formKey.currentState!.save();
+
+                                              // Check if the phone number is unique before proceeding
+                                              bool isUnique = await context
+                                                  .read<WalletCubit>()
+                                                  .checkPhoneNumber(phone!);
+                                              if (!mounted) {
+                                                return;
+                                              }
+                                              if (isUnique) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  const SnackBar(
+                                                    content: Text(
+                                                        'Phone number is already in use.'),
+                                                  ),
+                                                );
+                                                return;
+                                              }
+
                                               // Show the loading dialog only if the login is successful
                                               showDialog(
                                                 context: context,
@@ -240,10 +260,10 @@ class _SignupPageState extends State<SignupPage> {
                                                       email: email,
                                                     ),
                                                   );
-                                                  // Close the loading dialog
+                                              // Close the loading dialog
                                               if (!mounted) {
-                                                  return;
-                                                }
+                                                return;
+                                              }
                                               Navigator.pop(context);
 
                                               HapticFeedback.heavyImpact();

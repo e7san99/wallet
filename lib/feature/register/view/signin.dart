@@ -198,10 +198,36 @@ class _SigninPageState extends State<SigninPage> {
                                             if (valid) {
                                               formKey.currentState!.save();
 
+                                              // Show the loading dialog only if the login is successful
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return const AlertDialog(
+                                                    content: Row(
+                                                      children: [
+                                                        CircularProgressIndicator(),
+                                                        SizedBox(width: 20),
+                                                        Text('Logging in...'),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                                barrierDismissible: false,
+                                              );
+
                                               final user = await context
                                                   .read<UserCubit>()
                                                   .signin(email!, password!);
+
+                                              // Close the loading dialog
+                                              if (!mounted) {
+                                                  return;
+                                                }
+                                              Navigator.pop(context);
+
                                               HapticFeedback.heavyImpact();
+
                                               if (user == null) {
                                                 if (!mounted) {
                                                   return;

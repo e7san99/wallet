@@ -213,6 +213,23 @@ class _SignupPageState extends State<SignupPage> {
                                                 .validate();
                                             if (valid) {
                                               formKey.currentState!.save();
+                                              // Show the loading dialog only if the login is successful
+                                              showDialog(
+                                                context: context,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return const AlertDialog(
+                                                    content: Row(
+                                                      children: [
+                                                        CircularProgressIndicator(),
+                                                        SizedBox(width: 20),
+                                                        Text('Logging in...'),
+                                                      ],
+                                                    ),
+                                                  );
+                                                },
+                                                barrierDismissible: false,
+                                              );
                                               await context
                                                   .read<UserCubit>()
                                                   .signup(
@@ -223,6 +240,12 @@ class _SignupPageState extends State<SignupPage> {
                                                       email: email,
                                                     ),
                                                   );
+                                                  // Close the loading dialog
+                                              if (!mounted) {
+                                                  return;
+                                                }
+                                              Navigator.pop(context);
+
                                               HapticFeedback.heavyImpact();
                                             }
                                           },

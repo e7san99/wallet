@@ -207,7 +207,6 @@ class _SigninPageState extends State<SigninPage> {
                                               formKey.currentState!.save();
 
                                               // Show the loading dialog only if the login is successful
-
                                               showDialog(
                                                 context: context,
                                                 builder:

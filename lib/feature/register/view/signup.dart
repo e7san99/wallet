@@ -1,3 +1,7 @@
+import 'dart:ui';
+
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/register/view/view.dart';
 
@@ -23,11 +27,11 @@ class _SignupPageState extends State<SignupPage> {
       },
       listener: (context, state) {
         if (state.myUser != null) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Success'),
-            ),
-          );
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //   const SnackBar(
+          //     content: Text('Success'),
+          //   ),
+          // );
           Navigator.pushReplacement(
               context,
               MaterialPageRoute(
@@ -234,17 +238,59 @@ class _SignupPageState extends State<SignupPage> {
                                               }
 
                                               // Show the loading dialog only if the login is successful
+                                              // Show the loading dialog only if the login is successful
                                               showDialog(
                                                 context: context,
                                                 builder:
                                                     (BuildContext context) {
-                                                  return const AlertDialog(
-                                                    content: Row(
-                                                      children: [
-                                                        CircularProgressIndicator(),
-                                                        SizedBox(width: 20),
-                                                        Text('Logging in...'),
-                                                      ],
+                                                  return AlertDialog(
+                                                    content: Container(
+                                                      width:
+                                                          10, // Set your desired width
+                                                      height:
+                                                          40, // Set your desired height
+                                                      decoration:
+                                                          const BoxDecoration(
+                                                        color:
+                                                            Colors.transparent,
+                                                      ),
+                                                      child: BackdropFilter(
+                                                        filter:
+                                                            ImageFilter.blur(
+                                                                sigmaX: 1,
+                                                                sigmaY: 1),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            LoadingAnimationWidget
+                                                                .dotsTriangle(
+                                                              color:
+                                                                  backgroundColor,
+                                                              size: 50,
+                                                            ),
+                                                            const SizedBox(
+                                                                width: 20),
+                                                            DefaultTextStyle(
+                                                              style: TextStyle(
+                                                                fontSize: 18.0,
+                                                                fontFamily:
+                                                                    'Agne',
+                                                                color:
+                                                                    backgroundColor,
+                                                              ),
+                                                              child:
+                                                                  AnimatedTextKit(
+                                                                animatedTexts: [
+                                                                  TypewriterAnimatedText(
+                                                                      'Loading...'),
+                                                                ],
+                                                              ),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ),
                                                     ),
                                                   );
                                                 },

@@ -1,6 +1,10 @@
+// import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:ui';
+
 import 'package:loading_animation_widget/loading_animation_widget.dart';
- import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
+
 import 'package:wallet/feature/register/view/view.dart';
 
 class SigninPage extends StatefulWidget {
@@ -202,30 +206,54 @@ class _SigninPageState extends State<SigninPage> {
                                               formKey.currentState!.save();
 
                                               // Show the loading dialog only if the login is successful
+
                                               showDialog(
                                                 context: context,
                                                 builder:
                                                     (BuildContext context) {
                                                   return AlertDialog(
-                                                    content: Row(
-                                                      children: [
-                                                        LoadingAnimationWidget
-                                                            .dotsTriangle(
-                                                          color:
-                                                              backgroundColor,
-                                                          size: 50,
+                                                    content: Container(
+                                                      width:
+                                                          10, // Set your desired width
+                                                      height:
+                                                          40, // Set your desired height
+                                                      decoration:
+                                                          const BoxDecoration(
+                                                        color:
+                                                            Colors.transparent,
+                                                      ),
+                                                      child: BackdropFilter(
+                                                        filter:
+                                                            ImageFilter.blur(
+                                                                sigmaX: 1,
+                                                                sigmaY: 1),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            LoadingAnimationWidget
+                                                                .dotsTriangle(
+                                                              color:
+                                                                  backgroundColor,
+                                                              size: 50,
+                                                            ),
+                                                            const SizedBox(
+                                                                width: 20),
+                                                            Text(
+                                                              'Loading...',
+                                                              style: TextStyle(
+                                                                  color:
+                                                                      backgroundColor),
+                                                            ),
+                                                          ],
                                                         ),
-                                                        const SizedBox(
-                                                            width: 20),
-                                                        const Text(
-                                                            'Loading...'),
-                                                      ],
+                                                      ),
                                                     ),
                                                   );
                                                 },
                                                 barrierDismissible: false,
                                               );
-
                                               final user = await context
                                                   .read<UserCubit>()
                                                   .signin(email!, password!);

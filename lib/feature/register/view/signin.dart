@@ -286,59 +286,59 @@ class _SigninPageState extends State<SigninPage> {
                                   );
                                 },
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 15.0, bottom: 15),
-                                child: Text(
-                                  '━━━━━━━━━━━━━ OR ━━━━━━━━━━━━━',
-                                  style: TextStyle(
-                                    color: backgroundColor,
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                decoration: BoxDecoration(
-                                    color: backgroundColor,
-                                    borderRadius: BorderRadius.circular(10)),
-                                width: MediaQuery.of(context).size.width * 0.8,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                      height: 30,
-                                      'assets/img/g.png',
-                                      color: foregroundColor,
-                                      scale: 1,
-                                    ),
-                                    TextButton(
-                                        style: const ButtonStyle(
-                                            padding: MaterialStatePropertyAll(
-                                                EdgeInsets.all(12))),
-                                        onPressed: () {
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                              backgroundColor: Colors.amber,
-                                              content: Text(
-                                                'Not Available :)',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        child: Text(
-                                          'Sign in with Google',
-                                          style: TextStyle(
-                                            color: foregroundColor,
-                                            fontSize: 18,
-                                            fontFamily: 'lato',
-                                          ),
-                                        )),
-                                  ],
-                                ),
-                              ),
+                              // Padding(
+                              //   padding: const EdgeInsets.only(
+                              //       top: 15.0, bottom: 15),
+                              //   child: Text(
+                              //     '━━━━━━━━━━━━━ OR ━━━━━━━━━━━━━',
+                              //     style: TextStyle(
+                              //       color: backgroundColor,
+                              //     ),
+                              //   ),
+                              // ),
+                              // Container(
+                              //   decoration: BoxDecoration(
+                              //       color: backgroundColor,
+                              //       borderRadius: BorderRadius.circular(10)),
+                              //   width: MediaQuery.of(context).size.width * 0.8,
+                              //   child: Row(
+                              //     mainAxisAlignment: MainAxisAlignment.center,
+                              //     children: [
+                              //       Image.asset(
+                              //         height: 30,
+                              //         'assets/img/g.png',
+                              //         color: foregroundColor,
+                              //         scale: 1,
+                              //       ),
+                              //       TextButton(
+                              //           style: const ButtonStyle(
+                              //               padding: MaterialStatePropertyAll(
+                              //                   EdgeInsets.all(12))),
+                              //           onPressed: () {
+                              //             ScaffoldMessenger.of(context)
+                              //                 .showSnackBar(
+                              //               const SnackBar(
+                              //                 backgroundColor: Colors.amber,
+                              //                 content: Text(
+                              //                   'Not Available :)',
+                              //                   style: TextStyle(
+                              //                     color: Colors.black,
+                              //                   ),
+                              //                 ),
+                              //               ),
+                              //             );
+                              //           },
+                              //           child: Text(
+                              //             'Sign in with Google',
+                              //             style: TextStyle(
+                              //               color: foregroundColor,
+                              //               fontSize: 18,
+                              //               fontFamily: 'lato',
+                              //             ),
+                              //           )),
+                              //     ],
+                              //   ),
+                              // ),
                               AleardyHadAccount(
                                 title: 'Don\'t have an account? ',
                                 buttonTitle: 'Sign up',

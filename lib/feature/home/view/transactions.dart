@@ -73,7 +73,7 @@ class _TransactionsViewState extends State<TransactionsView> {
                   return SizedBox(
                     height: 100,
                     child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
+                      scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
                         return const ShimmerWidget();
                       },
@@ -86,8 +86,9 @@ class _TransactionsViewState extends State<TransactionsView> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
+                        const SizedBox(height: 200,),
                        Text(
-                          'You don\'t have any transactions',
+                          'You do not have any transactions',
                           style: TextStyle(
                               fontFamily: 'handlee',
                               color: backgroundColor,

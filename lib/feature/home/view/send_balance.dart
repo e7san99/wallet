@@ -1,4 +1,7 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/view/view.dart';
 import 'package:wallet/feature/register/cubit/cubit.dart';
@@ -130,9 +133,6 @@ class _SendBalancePageState extends State<SendBalancePage> {
                           onPressed: isLoading
                               ? null
                               : () async {
-                                
-                                  
-                                  
                                   formKey.currentState!.save();
 
                                   if (!formKey.currentState!.validate()) return;
@@ -152,33 +152,46 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                     return;
                                   }
 
-                                  context.read<WalletCubit>().sendBalance(
-                                        state ?? 'currentUsername',
-                                        num.parse(balance!),
-                                        phone ?? '000',
-                                      );
-
                                   bool success = await context
                                       .read<WalletCubit>()
                                       .checkPhoneNumber(phone ?? '00');
-
-                                  formKey.currentState!.reset();
-
                                   if (!mounted) {
                                     return;
                                   }
-                                  
                                   if (!success) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                            'This number ( $phone ) not exist'),
+                                    AwesomeDialog(
+                                      context: context,
+                                      animType: AnimType.scale,
+                                      dialogType: DialogType.warning,
+                                      dialogBackgroundColor: Colors.yellow,
+                                      isDense: true,
+                                      body: Center(
+                                        child: Text(
+                                          "This number ( $phone ) not exist",
+                                          style: const TextStyle(
+                                              fontStyle: FontStyle.italic),
+                                        ),
                                       ),
+                                      btnOkOnPress: () {},
+                                    ).show();
+                                    // showTopSnackBar(
+                                    //   Overlay.of(context),
+                                    //   CustomSnackBar.error(
+                                    //     message:
+                                    //         "This number ( $phone ) not exist",
+                                    //   ),
+                                    // );
+                                  } else {
+                                    context.read<WalletCubit>().sendBalance(
+                                          state ?? 'currentUsername',
+                                          num.parse(balance!),
+                                          phone ?? '000',
+                                        );
+                                    formKey.currentState!.reset();
+                                    print(
+                                      "balance: ${num.parse(balance!)}",
                                     );
                                   }
-                                  print(
-                                    "balance: ${num.parse(balance!)}",
-                                  );
                                 },
                           backgroundColor: backgroundColor,
                           foregroundColor: foregroundColor,

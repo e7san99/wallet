@@ -1,5 +1,5 @@
-import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:wallet/feature/register/view/view.dart';
 
@@ -206,12 +206,19 @@ class _SigninPageState extends State<SigninPage> {
                                                 context: context,
                                                 builder:
                                                     (BuildContext context) {
-                                                  return const AlertDialog(
+                                                  return AlertDialog(
                                                     content: Row(
                                                       children: [
-                                                        CircularProgressIndicator(),
-                                                        SizedBox(width: 20),
-                                                        Text('Logging in...'),
+                                                        LoadingAnimationWidget
+                                                            .dotsTriangle(
+                                                          color:
+                                                              backgroundColor,
+                                                          size: 50,
+                                                        ),
+                                                        const SizedBox(
+                                                            width: 20),
+                                                        const Text(
+                                                            'Loading...'),
                                                       ],
                                                     ),
                                                   );

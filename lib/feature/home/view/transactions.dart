@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:slide_switcher/slide_switcher.dart';
 import 'package:wallet/components/components.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
+import 'package:wallet/feature/home/repository/util/extention.dart';
 
 class TransactionsView extends StatefulWidget {
   const TransactionsView({super.key});
@@ -112,8 +112,8 @@ class _TransactionsViewState extends State<TransactionsView> {
                       itemCount: list.length,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        var number = list[index].balance ?? 0;
-                        final usCurrency = NumberFormat('#,##0', 'en_US');
+                        var balance = list[index].balance;
+                        // final usCurrency = NumberFormat('#,##0', 'en_US');
                         bool sentToCurrentDevice = list[index].secondUid ==
                             FirebaseAuth.instance.currentUser?.uid;
                         Color balanceColor =
@@ -137,7 +137,7 @@ class _TransactionsViewState extends State<TransactionsView> {
                               ),
                               trailing: Text.rich(
                                 TextSpan(
-                                  text: '- ${usCurrency.format(number)}',
+                                  text: '- ${balance.currencyFormat()}',
                                   style: TextStyle(
                                       color: balanceColor, fontSize: 15),
                                   children: const <TextSpan>[
@@ -170,7 +170,7 @@ class _TransactionsViewState extends State<TransactionsView> {
                               ),
                               trailing: Text.rich(
                                 TextSpan(
-                                  text: '+ ${usCurrency.format(number)}',
+                                  text: '+ ${balance.currencyFormat()}',
                                   style: TextStyle(
                                       color: balanceColor, fontSize: 15),
                                   children: const <TextSpan>[

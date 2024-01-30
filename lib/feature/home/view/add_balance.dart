@@ -1,5 +1,6 @@
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/home.dart';
+import 'package:wallet/feature/home/repository/util/extention.dart';
 import 'package:wallet/feature/home/view/view.dart';
 import 'package:wallet/feature/register/view/view.dart';
 import 'package:wallet/main/main_export.dart';
@@ -37,8 +38,7 @@ class _AddBalancePageState extends State<AddBalancePage> {
                 builder: (context, balance) {
                   return RichText(
                     text: TextSpan(
-                      text: balance?.toString() ??
-                          '0,00', //'${context.watch<WalletCubit>().state.wallet?.balance ?? 0}', //provider!.balance.toString()
+                      text: balance?.currencyFormat(),
                       style: TextStyle(
                         color: backgroundColor,
                         fontSize: 43,

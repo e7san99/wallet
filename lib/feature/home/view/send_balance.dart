@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
+import 'package:wallet/feature/home/repository/util/extention.dart';
 import 'package:wallet/feature/home/view/view.dart';
 import 'package:wallet/feature/register/cubit/cubit.dart';
 
@@ -42,8 +43,7 @@ class _SendBalancePageState extends State<SendBalancePage> {
                   builder: (context, balance) {
                     return RichText(
                       text: TextSpan(
-                        text: balance?.toString() ??
-                            '0,00', //provider!.balance.toString()
+                        text: balance?.currencyFormat(),
                         style: TextStyle(
                           color: backgroundColor,
                           fontSize: 43,

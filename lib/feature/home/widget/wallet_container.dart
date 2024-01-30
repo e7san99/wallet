@@ -1,7 +1,7 @@
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
-import 'package:wallet/feature/home/widget/shimmer_username.dart';
+import 'package:wallet/feature/home/repository/util/extention.dart';
+import 'package:wallet/feature/home/repository/util/shimmer_username.dart';
 import 'package:wallet/feature/home/widget/widget.dart';
-import 'package:intl/intl.dart';
 
 class WalletContainer extends StatefulWidget {
   const WalletContainer({
@@ -82,13 +82,11 @@ class _WalletContainerState extends State<WalletContainer> {
                       selector: (state) {
                         return state.wallet?.balance;
                       },
+                      
                       builder: (context, balance) {
-                        var number = balance ?? 0;
-                        final usCurrency = NumberFormat('#,##0', 'en_US');
-
                         return RichText(
                           text: TextSpan(
-                            text: usCurrency.format(number),
+                            text:balance?.currencyFormat(),
                             style: const TextStyle(
                               color: Colors.white,
                               fontSize: 25,

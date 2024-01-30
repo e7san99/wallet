@@ -6,6 +6,7 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import 'package:wallet/feature/register/view/view.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class SigninPage extends StatefulWidget {
   const SigninPage({super.key});
@@ -240,12 +241,22 @@ class _SigninPageState extends State<SigninPage> {
                                                             ),
                                                             const SizedBox(
                                                                 width: 20),
-                                                            Text(
-                                                              'Loading...',
+                                                            DefaultTextStyle(
                                                               style: TextStyle(
-                                                                  color:
-                                                                      backgroundColor),
-                                                            ),
+                                                                fontSize: 18.0,
+                                                                fontFamily:
+                                                                    'Agne',
+                                                                color:
+                                                                    backgroundColor,
+                                                              ),
+                                                              child:
+                                                                  AnimatedTextKit(
+                                                                animatedTexts: [
+                                                                  TypewriterAnimatedText(
+                                                                      'Loading...'),
+                                                                ],
+                                                              ),
+                                                            )
                                                           ],
                                                         ),
                                                       ),

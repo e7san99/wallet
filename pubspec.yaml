@@ -48,6 +48,7 @@ dependencies:
   slide_switcher: ^1.1.2
   awesome_dialog: ^3.2.0
   loading_animation_widget: ^1.2.0+4
+  animated_text_kit: ^4.2.2
 
 dev_dependencies:
   flutter_test:

@@ -21,13 +21,35 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          useMaterial3: false,
-        ),
-        title: 'BluePay',
-        home: const StartPage(),
-      ),
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            useMaterial3: false,
+          ),
+          title: 'BluePay',
+          home: const StartPage(),
+          ),
     );
   }
 }
+
+// BlocConsumer<InternetBloc, InternetState>(
+//           builder: (context, state) {
+//             if (state is InternetNotConnectedState) {
+//               return Center(
+//                 child: Text(state.message),
+//               );
+//             } else if (state is InternetConnectedState) {
+//               return Center(child: Text(state.message));
+//             } else {
+//               return const SizedBox();
+//             }
+//           },
+//           listener: (BuildContext context, Object? state) {
+//             // if (state is InternetConnectedState) {
+//             //   Fluttertoast.showToast(msg: 'back to Online');
+//             // } else
+//             if (state is InternetNotConnectedState) {
+//               Fluttertoast.showToast(msg: 'Not Internet Connection');
+//             }
+//           },
+//         ));

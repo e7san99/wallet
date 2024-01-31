@@ -3,10 +3,8 @@ import 'dart:ui';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
-
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
-import 'package:wallet/feature/home/repository/util/extention.dart';
+import 'package:wallet/feature/home/util/extention.dart';
 import 'package:wallet/feature/home/view/view.dart';
 import 'package:wallet/feature/register/cubit/cubit.dart';
 

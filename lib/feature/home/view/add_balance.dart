@@ -1,8 +1,7 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/home.dart';
-import 'package:wallet/feature/home/repository/util/extention.dart';
-import 'package:wallet/feature/home/view/view.dart';
+import 'package:wallet/feature/home/util/extention.dart';
 import 'package:wallet/feature/register/view/view.dart';
 import 'package:wallet/main/main_export.dart';
 

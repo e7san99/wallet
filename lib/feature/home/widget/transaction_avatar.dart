@@ -1,7 +1,6 @@
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/home.dart';
-import 'package:wallet/feature/home/repository/util/extention.dart';
-import 'package:wallet/feature/home/widget/widget.dart';
+import 'package:wallet/feature/home/util/extention.dart';
 import 'package:wallet/feature/register/cubit/cubit.dart';
 
 class TransactionAvatars extends StatelessWidget {

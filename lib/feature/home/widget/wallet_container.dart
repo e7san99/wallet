@@ -1,6 +1,6 @@
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
-import 'package:wallet/feature/home/repository/util/extention.dart';
-import 'package:wallet/feature/home/repository/util/widget/shimmer_username.dart';
+import 'package:wallet/feature/home/util/extention.dart';
+import 'package:wallet/feature/home/util/widget/shimmer_username.dart';
 import 'package:wallet/feature/home/widget/widget.dart';
 
 class WalletContainer extends StatefulWidget {

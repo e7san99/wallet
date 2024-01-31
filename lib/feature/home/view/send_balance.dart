@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/repository/util/extention.dart';
@@ -217,18 +218,34 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                   if (!success) {
                                     AwesomeDialog(
                                       context: context,
-                                      animType: AnimType.scale,
                                       dialogType: DialogType.warning,
-                                      dialogBackgroundColor: Colors.yellow,
-                                      isDense: true,
-                                      body: Center(
-                                        child: Text(
-                                          "This number ( $phone ) not exist",
-                                          style: const TextStyle(
-                                              fontStyle: FontStyle.italic),
+                                      animType: AnimType.scale,
+                                      body: Text.rich(
+                                        TextSpan(
+                                          text: 'This phone number ',
+                                          style: DefaultTextStyle.of(context)
+                                              .style,
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                              text: '$phone',
+                                              style: const TextStyle(
+                                                  color: Colors.red,
+                                                  fontWeight: FontWeight
+                                                      .bold), // Change color as needed
+                                            ),
+                                            const TextSpan(
+                                                text: ' is not exist'),
+                                          ],
                                         ),
                                       ),
-                                      btnOkOnPress: () {},
+                                      // title: 'Balance sent successfully',
+                                      autoHide: const Duration(seconds: 3),
+                                      btnOkColor:
+                                          const Color.fromRGBO(254, 184, 0, 1),
+                                      btnOkText: 'Done',
+                                      btnOkOnPress: () {
+                                        return;
+                                      },
                                     ).show();
                                   } else {
                                     AwesomeDialog(

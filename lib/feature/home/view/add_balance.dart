@@ -84,6 +84,9 @@ class _AddBalancePageState extends State<AddBalancePage> {
                     if (value!.isEmpty) {
                       return 'Enter a balance';
                     }
+                    if (double.parse(value) <= 0) {
+                      return 'Enter a balance greater than 0';
+                    }
                     return null;
                   },
                 ),

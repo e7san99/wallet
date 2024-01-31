@@ -1,7 +1,9 @@
+import 'dart:ui';
+
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/repository/util/extention.dart';
 import 'package:wallet/feature/home/view/view.dart';
@@ -86,6 +88,9 @@ class _SendBalancePageState extends State<SendBalancePage> {
                     if (value!.isEmpty) {
                       return 'Enter a balance';
                     }
+                    if (double.parse(value) <= 0) {
+                      return 'Enter a balance greater than 0';
+                    }
                     return null;
                   },
                 ),
@@ -136,6 +141,52 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                   formKey.currentState!.save();
 
                                   if (!formKey.currentState!.validate()) return;
+                                  // Show the loading dialog only if the login is successful
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return AlertDialog(
+                                        content: Container(
+                                          width: 10, // Set your desired width
+                                          height: 40, // Set your desired height
+                                          decoration: const BoxDecoration(
+                                            color: Colors.transparent,
+                                          ),
+                                          child: BackdropFilter(
+                                            filter: ImageFilter.blur(
+                                                sigmaX: 1, sigmaY: 1),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                LoadingAnimationWidget
+                                                    .dotsTriangle(
+                                                  color: backgroundColor,
+                                                  size: 50,
+                                                ),
+                                                const SizedBox(width: 20),
+                                                DefaultTextStyle(
+                                                  style: TextStyle(
+                                                    fontSize: 18.0,
+                                                    fontFamily: 'Agne',
+                                                    color: backgroundColor,
+                                                  ),
+                                                  child: AnimatedTextKit(
+                                                    animatedTexts: [
+                                                      TypewriterAnimatedText(
+                                                        'Loading...',
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    barrierDismissible: false,
+                                  );
                                   if (context
                                           .read<WalletCubit>()
                                           .state
@@ -158,6 +209,9 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                   if (!mounted) {
                                     return;
                                   }
+                                  Navigator.pop(
+                                      context); // Close loading dialog
+
                                   if (!success) {
                                     AwesomeDialog(
                                       context: context,
@@ -233,7 +287,7 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                           context: context,
                                           dialogType: DialogType.success,
                                           animType: AnimType.scale,
-                                          title: 'Sent Successfully',
+                                          title: 'Balance sent successfully',
                                           autoHide: const Duration(seconds: 3),
                                           btnOkColor: Colors.green,
                                           btnOkText: 'Done',

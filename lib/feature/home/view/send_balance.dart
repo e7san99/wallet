@@ -187,6 +187,17 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                     },
                                     barrierDismissible: false,
                                   );
+
+                                  bool success = await context
+                                      .read<WalletCubit>()
+                                      .checkPhoneNumber(phone ?? '00');
+                                  if (!mounted) {
+                                    return;
+                                  }
+
+                                  Navigator.pop(
+                                      context); // Close loading dialog
+
                                   if (context
                                           .read<WalletCubit>()
                                           .state
@@ -202,15 +213,6 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                     );
                                     return;
                                   }
-
-                                  bool success = await context
-                                      .read<WalletCubit>()
-                                      .checkPhoneNumber(phone ?? '00');
-                                  if (!mounted) {
-                                    return;
-                                  }
-                                  Navigator.pop(
-                                      context); // Close loading dialog
 
                                   if (!success) {
                                     AwesomeDialog(

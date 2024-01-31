@@ -1,5 +1,6 @@
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/home.dart';
+import 'package:wallet/feature/home/repository/util/extention.dart';
 import 'package:wallet/feature/home/widget/widget.dart';
 import 'package:wallet/feature/register/cubit/cubit.dart';
 
@@ -44,43 +45,92 @@ class TransactionAvatars extends StatelessWidget {
               ),
             );
           } else {
-            return ListView.separated(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                bool sentToCurrentDevice = list[index].secondUid ==
-                    FirebaseAuth.instance.currentUser?.uid;
-                Color balanceColor =
-                    sentToCurrentDevice ? Colors.green : Colors.red;
+            return Expanded(
+              child: ListView.builder(
+                  padding: const EdgeInsets.all(30),
+                  itemCount: list.length,
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    var balance = list[index].balance;
+                    // final usCurrency = NumberFormat('#,##0', 'en_US');
+                    bool sentToCurrentDevice = list[index].secondUid ==
+                        FirebaseAuth.instance.currentUser?.uid;
+                    Color balanceColor =
+                        sentToCurrentDevice ? backgroundColor : Colors.red;
+                    // Check if the transaction is sent
 
-                return GestureDetector(
-                  onTap: () {
-                    print(list[index].secondUsername ?? 'default username');
-                  },
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CircleAvatar(
-                          radius: 30,
-                          backgroundColor: balanceColor,
-                          child: Text(list[index].balance.toString()),
+                    return Container(
+                      margin: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        color: Colors.blue[100]?.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: ListTile(
+                        leading: Icon(
+                          sentToCurrentDevice
+                              ? Icons.arrow_upward_rounded
+                              : Icons.arrow_downward_rounded,
+                          color: balanceColor,
+                        ),
+                        title: Text(
+                          '${list[index].secondUsername}',
+                          style: TextStyle(color: balanceColor),
+                        ),
+                        trailing: Text.rich(
+                          TextSpan(
+                            text:
+                                '${sentToCurrentDevice ? '+' : '-'} ${balance.currencyFormat()}',
+                            style: TextStyle(color: balanceColor, fontSize: 15),
+                            children: const <TextSpan>[
+                              TextSpan(
+                                text: ' IQD',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 12),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                      Text(
-                        '${sentToCurrentDevice ? list[index].currentUsername : list[index].secondUsername}',
-                        style: const TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-              separatorBuilder: (context, index) => const Divider(),
-              itemCount: list.length,
+                    );
+                  }),
             );
+            // ListView.separated(
+            //   shrinkWrap: true,
+            //   scrollDirection: Axis.horizontal,
+            //   itemBuilder: (context, index) {
+            //     bool sentToCurrentDevice = list[index].secondUid ==
+            //         FirebaseAuth.instance.currentUser?.uid;
+            //     Color balanceColor =
+            //         sentToCurrentDevice ? Colors.green : Colors.red;
+
+            //     return GestureDetector(
+            //       onTap: () {
+            //         print(list[index].secondUsername ?? 'default username');
+            //       },
+            //       child: Column(
+            //         children: [
+            //           Padding(
+            //             padding: const EdgeInsets.all(8.0),
+            //             child: CircleAvatar(
+            //               radius: 30,
+            //               backgroundColor: balanceColor,
+            //               child: Text(list[index].balance.toString()),
+            //             ),
+            //           ),
+            //           Text(
+            //             '${sentToCurrentDevice ? list[index].currentUsername : list[index].secondUsername}',
+            //             style: const TextStyle(
+            //               color: Colors.black,
+            //               fontWeight: FontWeight.w600,
+            //             ),
+            //           ),
+            //         ],
+            //       ),
+            //     );
+            //   },
+            //   separatorBuilder: (context, index) => const Divider(),
+            //   itemCount: list.length,
+            // );
           }
         },
       ),

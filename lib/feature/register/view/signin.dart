@@ -252,7 +252,8 @@ class _SigninPageState extends State<SigninPage> {
                                                                   AnimatedTextKit(
                                                                 animatedTexts: [
                                                                   TypewriterAnimatedText(
-                                                                      'Loading...'),
+                                                                    'Loading...',
+                                                                  ),
                                                                 ],
                                                               ),
                                                             )

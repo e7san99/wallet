@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/home.dart';
 import 'package:wallet/feature/home/repository/util/extention.dart';
@@ -110,10 +111,62 @@ class _AddBalancePageState extends State<AddBalancePage> {
                         : () {
                             if (!formKey.currentState!.validate()) return;
                             formKey.currentState!.save();
-                            context
-                                .read<WalletCubit>()
-                                .updateBalance(num.parse(balance!));
-                            print("balance: ${num.parse(balance!)}");
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.question,
+                              animType: AnimType.leftSlide,
+                              headerAnimationLoop: false,
+                              showCloseIcon: true,
+                              transitionAnimationDuration:
+                                  const Duration(milliseconds: 100),
+                              // descTextStyle: GoogleFonts.outfit(),
+                              title: 'Add Balance',
+                              body: Text.rich(
+                                TextSpan(
+                                  text: 'Are you sure to Add ',
+                                  style: DefaultTextStyle.of(context).style,
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text:
+                                          num.parse(balance!).currencyFormat(),
+                                      style: TextStyle(
+                                          color: backgroundColor,
+                                          fontWeight: FontWeight
+                                              .bold), // Change color as needed
+                                    ),
+                                    const TextSpan(text: ' to your Balance ?'),
+                                  ],
+                                ),
+                              ),
+                              btnCancelText: 'No',
+                              btnOkText: 'Yes',
+                              btnCancelColor: Colors.red[700],
+                              btnOkColor: Colors.green[700],
+
+                              btnCancelOnPress: () {
+                                return;
+                              },
+                              btnOkOnPress: () async {
+                                context
+                                    .read<WalletCubit>()
+                                    .updateBalance(num.parse(balance!));
+                                print("balance: ${num.parse(balance!)}");
+                                AwesomeDialog(
+                                  context: context,
+                                  dialogType: DialogType.success,
+                                  animType: AnimType.scale,
+                                  title: 'Successfully added',
+                                  autoHide: const Duration(seconds: 3),
+                                  btnOkColor: Colors.green,
+                                  btnOkText: 'Done',
+                                  btnOkOnPress: () {
+                                    return;
+                                  },
+                                ).show();
+
+                                formKey.currentState?.reset();
+                              },
+                            ).show();
                           },
                     backgroundColor: backgroundColor,
                     foregroundColor: foregroundColor,

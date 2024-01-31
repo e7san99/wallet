@@ -70,7 +70,7 @@ class TransactionAvatars extends StatelessWidget {
                         color: balanceColor,
                       ),
                       title: Text(
-                        '${list[index].secondUsername}',
+                        '${sentToCurrentDevice ? list[index].currentUsername :list[index].secondUsername}',
                         style: TextStyle(color: balanceColor),
                       ),
                       trailing: Text.rich(

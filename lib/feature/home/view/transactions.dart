@@ -5,6 +5,7 @@ import 'package:slide_switcher/slide_switcher.dart';
 import 'package:wallet/components/components.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/util/extention.dart';
+import 'package:wallet/feature/register/cubit/cubit.dart';
 
 class TransactionsView extends StatefulWidget {
   const TransactionsView({super.key});
@@ -86,8 +87,10 @@ class _TransactionsViewState extends State<TransactionsView> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        const SizedBox(height: 200,),
-                       Text(
+                        const SizedBox(
+                          height: 200,
+                        ),
+                        Text(
                           'You don\'t have any transactions',
                           style: TextStyle(
                               fontFamily: 'handlee',
@@ -136,6 +139,9 @@ class _TransactionsViewState extends State<TransactionsView> {
                                 '${list[index].secondUsername}',
                                 style: TextStyle(color: balanceColor),
                               ),
+                              // subtitle: Text(
+                              //   '${context.read<UserCubit>().state.listOfmyUser![index]?.phone}',
+                              // ),
                               trailing: Text.rich(
                                 TextSpan(
                                   text: '- ${balance.currencyFormat()}',

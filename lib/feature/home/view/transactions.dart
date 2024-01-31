@@ -88,7 +88,7 @@ class _TransactionsViewState extends State<TransactionsView> {
                       children: [
                         const SizedBox(height: 200,),
                        Text(
-                          'You do not have any transactions',
+                          'You don\'t have any transactions',
                           style: TextStyle(
                               fontFamily: 'handlee',
                               color: backgroundColor,

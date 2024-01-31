@@ -205,13 +205,23 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                           .wallet!
                                           .balance! <
                                       num.parse(balance!)) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        backgroundColor: Colors.red,
-                                        content: Text(
-                                            'Your balance is less than send balance'),
-                                      ),
-                                    );
+                                    AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.error,
+                                      animType: AnimType.scale,
+                                      title: 'You don\'t have enough balance',
+                                      headerAnimationLoop: false,
+
+                                      // title: 'Balance sent successfully',
+                                      // autoHide: const Duration(seconds: 3),
+                                      btnOkColor:
+                                          const Color.fromRGBO(217, 62, 71, 1),
+                                      btnOkText: 'Done',
+                                      btnOkOnPress: () {
+                                        return;
+                                      },
+                                    ).show();
+
                                     return;
                                   }
 

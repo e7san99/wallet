@@ -5,10 +5,10 @@ import 'package:wallet/feature/register/cubit/cubit.dart';
 
 class TransactionAvatars extends StatelessWidget {
   const TransactionAvatars({
-    Key? key,
+    super.key,
     required this.avatars,
     required this.iconAvatars,
-  }) : super(key: key);
+  });
 
   final List<String> avatars;
   final List<Icon> iconAvatars;
@@ -33,15 +33,14 @@ class TransactionAvatars extends StatelessWidget {
               ),
             );
           } else if (state.transactionModel.isEmpty) {
-            return SizedBox(
-              height: 100,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return const ShimmerWidget();
-                },
-                separatorBuilder: (context, index) => const Divider(),
-                itemCount: 5,
+            return Center(
+              child: Text(
+                'You don\'t have any transactions',
+                style: TextStyle(
+                    fontFamily: 'handlee',
+                    color: backgroundColor,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18),
               ),
             );
           } else {
@@ -49,9 +48,10 @@ class TransactionAvatars extends StatelessWidget {
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-
-                bool sentToCurrentDevice = list[index].secondUid == FirebaseAuth.instance.currentUser?.uid;
-                Color balanceColor = sentToCurrentDevice ? Colors.green : Colors.red ;
+                bool sentToCurrentDevice = list[index].secondUid ==
+                    FirebaseAuth.instance.currentUser?.uid;
+                Color balanceColor =
+                    sentToCurrentDevice ? Colors.green : Colors.red;
 
                 return GestureDetector(
                   onTap: () {
@@ -68,7 +68,7 @@ class TransactionAvatars extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${sentToCurrentDevice? list[index].currentUsername : list[index].secondUsername}',
+                        '${sentToCurrentDevice ? list[index].currentUsername : list[index].secondUsername}',
                         style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w600,

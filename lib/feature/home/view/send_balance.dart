@@ -174,23 +174,77 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                       ),
                                       btnOkOnPress: () {},
                                     ).show();
-                                    // showTopSnackBar(
-                                    //   Overlay.of(context),
-                                    //   CustomSnackBar.error(
-                                    //     message:
-                                    //         "This number ( $phone ) not exist",
-                                    //   ),
-                                    // );
                                   } else {
-                                    context.read<WalletCubit>().sendBalance(
-                                          state ?? 'currentUsername',
-                                          num.parse(balance!),
-                                          phone ?? '000',
+                                    AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.question,
+                                      animType: AnimType.leftSlide,
+                                      headerAnimationLoop: false,
+                                      showCloseIcon: true,
+                                      transitionAnimationDuration:
+                                          const Duration(milliseconds: 100),
+                                      // descTextStyle: GoogleFonts.outfit(),
+                                      title: 'Add Balance',
+                                      body: Text.rich(
+                                        TextSpan(
+                                          text: 'Are you sure to Send ',
+                                          style: DefaultTextStyle.of(context)
+                                              .style,
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                              text:
+                                                  '${num.parse(balance!).currencyFormat()} IQD',
+                                              style: const TextStyle(
+                                                  color: Colors.red,
+                                                  fontWeight: FontWeight
+                                                      .bold), // Change color as needed
+                                            ),
+                                            const TextSpan(
+                                                text:
+                                                    ' \nfor this phone number'),
+                                            TextSpan(
+                                              text: ' $phone ',
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            const TextSpan(text: '?'),
+                                          ],
+                                        ),
+                                      ),
+                                      btnCancelText: 'No',
+                                      btnOkText: 'Yes',
+                                      btnCancelColor: Colors.red[700],
+                                      btnOkColor: Colors.green[700],
+
+                                      btnCancelOnPress: () {
+                                        return;
+                                      },
+                                      btnOkOnPress: () async {
+                                        context.read<WalletCubit>().sendBalance(
+                                              state ?? 'currentUsername',
+                                              num.parse(balance!),
+                                              phone ?? '000',
+                                            );
+                                        print(
+                                          "balance: ${num.parse(balance!)}",
                                         );
-                                    formKey.currentState!.reset();
-                                    print(
-                                      "balance: ${num.parse(balance!)}",
-                                    );
+
+                                        AwesomeDialog(
+                                          context: context,
+                                          dialogType: DialogType.success,
+                                          animType: AnimType.scale,
+                                          title: 'Sent Successfully',
+                                          autoHide: const Duration(seconds: 3),
+                                          btnOkColor: Colors.green,
+                                          btnOkText: 'Done',
+                                          btnOkOnPress: () {
+                                            return;
+                                          },
+                                        ).show();
+
+                                        formKey.currentState?.reset();
+                                      },
+                                    ).show();
                                   }
                                 },
                           backgroundColor: backgroundColor,

@@ -128,7 +128,7 @@ class _AddBalancePageState extends State<AddBalancePage> {
                                   children: <TextSpan>[
                                     TextSpan(
                                       text:
-                                          num.parse(balance!).currencyFormat(),
+                                          '${num.parse(balance!).currencyFormat()} IQD',
                                       style: TextStyle(
                                           color: backgroundColor,
                                           fontWeight: FontWeight

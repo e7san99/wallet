@@ -45,55 +45,52 @@ class TransactionAvatars extends StatelessWidget {
               ),
             );
           } else {
-            return Expanded(
-              child: ListView.builder(
-                  padding: const EdgeInsets.all(30),
-                  itemCount: list.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    var balance = list[index].balance;
-                    // final usCurrency = NumberFormat('#,##0', 'en_US');
-                    bool sentToCurrentDevice = list[index].secondUid ==
-                        FirebaseAuth.instance.currentUser?.uid;
-                    Color balanceColor =
-                        sentToCurrentDevice ? backgroundColor : Colors.red;
-                    // Check if the transaction is sent
+            return ListView.builder(
+                padding: const EdgeInsets.all(10),
+                itemCount: list.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  var balance = list[index].balance;
 
-                    return Container(
-                      margin: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        color: Colors.blue[100]?.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(8),
+                  bool sentToCurrentDevice = list[index].secondUid ==
+                      FirebaseAuth.instance.currentUser?.uid;
+                  Color balanceColor =
+                      sentToCurrentDevice ? backgroundColor : Colors.red;
+
+                  return Container(
+                    margin: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.blue[100]?.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: ListTile(
+                      leading: Icon(
+                        sentToCurrentDevice
+                            ? Icons.arrow_upward_rounded
+                            : Icons.arrow_downward_rounded,
+                        color: balanceColor,
                       ),
-                      child: ListTile(
-                        leading: Icon(
-                          sentToCurrentDevice
-                              ? Icons.arrow_upward_rounded
-                              : Icons.arrow_downward_rounded,
-                          color: balanceColor,
-                        ),
-                        title: Text(
-                          '${list[index].secondUsername}',
-                          style: TextStyle(color: balanceColor),
-                        ),
-                        trailing: Text.rich(
-                          TextSpan(
-                            text:
-                                '${sentToCurrentDevice ? '+' : '-'} ${balance.currencyFormat()}',
-                            style: TextStyle(color: balanceColor, fontSize: 15),
-                            children: const <TextSpan>[
-                              TextSpan(
-                                text: ' IQD',
-                                style: TextStyle(
-                                    color: Colors.black, fontSize: 12),
-                              ),
-                            ],
-                          ),
+                      title: Text(
+                        '${list[index].secondUsername}',
+                        style: TextStyle(color: balanceColor),
+                      ),
+                      trailing: Text.rich(
+                        TextSpan(
+                          text:
+                              '${sentToCurrentDevice ? '+' : '-'} ${balance.currencyFormat()}',
+                          style: TextStyle(color: balanceColor, fontSize: 15),
+                          children: const <TextSpan>[
+                            TextSpan(
+                              text: ' IQD',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 12),
+                            ),
+                          ],
                         ),
                       ),
-                    );
-                  }),
-            );
+                    ),
+                  );
+                });
             // ListView.separated(
             //   shrinkWrap: true,
             //   scrollDirection: Axis.horizontal,

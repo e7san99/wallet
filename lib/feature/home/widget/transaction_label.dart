@@ -9,14 +9,14 @@ class TransactionLabels extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0, top: 30),
+      padding: const EdgeInsets.only(bottom: 8.0, top: 30, left: 10, right: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            'Transactions',
+            'Last Transactions',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 19,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),

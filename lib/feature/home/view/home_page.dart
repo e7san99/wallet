@@ -167,14 +167,6 @@ class _HomePageState extends State<HomePage> {
                   onTap: onTap,
                 ),
                  const TransactionLabels(),
-                //  BlocSelector<WalletCubit, WalletState, List<TransactionModel>?>(
-                //   selector: (state) {
-                //     return state.transactionModel?.;
-                //   },
-                //   builder: (context, state) {
-                //     return Text(state??'current');
-                //   },
-                // ),
                 TransactionAvatars(avatars: avatars, iconAvatars: iconAvatars),
               ],
             ),

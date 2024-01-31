@@ -140,6 +140,32 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                   formKey.currentState!.save();
 
                                   if (!formKey.currentState!.validate()) return;
+
+                                  if (phone ==
+                                      context
+                                          .read<UserCubit>()
+                                          .state
+                                          .myUser
+                                          ?.phone) {
+                                    AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.error,
+                                      animType: AnimType.scale,
+                                      title:
+                                          'You can\'t send balance to yourself',
+                                      headerAnimationLoop: false,
+
+                                      // title: 'Balance sent successfully',
+                                      // autoHide: const Duration(seconds: 3),
+                                      btnOkColor:
+                                          const Color.fromRGBO(217, 62, 71, 1),
+                                      btnOkText: 'Done',
+                                      btnOkOnPress: () {
+                                        return;
+                                      },
+                                    ).show();
+                                    return;
+                                  }
                                   // Show the loading dialog only if the login is successful
                                   showDialog(
                                     context: context,

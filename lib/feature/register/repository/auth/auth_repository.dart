@@ -5,6 +5,7 @@ abstract class AuthRepository {
     MyUser myUser,
     String password,
   );
+  Future<bool> checkAlreadyEmail(String email);
 
   Future<MyUser?> signin(
     String email,

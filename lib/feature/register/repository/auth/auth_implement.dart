@@ -27,6 +27,24 @@ class AuthImplement extends AuthRepository {
     return null;
   }
 
+    @override
+  Future<bool> checkAlreadyEmail(String email) async {
+    try {
+      final query = await _db
+          .collection('Userr')
+          .where('email', isEqualTo: email)
+          .get();
+      if (query.docs.isNotEmpty) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      print('Error checking Email: $e');
+      return false;
+    }
+  }
+
   @override
   Future<MyUser?> signin(String email, String password) async {
     try {

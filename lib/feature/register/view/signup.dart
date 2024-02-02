@@ -236,6 +236,27 @@ class _SignupPageState extends State<SignupPage> {
                                                 );
                                                 return;
                                               }
+                                              ////////////////////
+                                              
+                                              // Check if the Email is unique before proceeding
+                                              bool isUniqueEmail = await context
+                                                  .read<WalletCubit>()
+                                                  .checkPhoneNumber(phone!);
+                                              if (!mounted) {
+                                                return;
+                                              }
+                                              if (!isUniqueEmail) {
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(
+                                                  const SnackBar(
+                                                    content: Text(
+                                                        'Email is already in use.'),
+                                                  ),
+                                                );
+                                                return;
+                                              }
+                                              ////////////////////
+                                              
 
                                               // Show the loading dialog only if the login is successful
                                               // Show the loading dialog only if the login is successful

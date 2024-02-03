@@ -269,11 +269,11 @@ class _SigninPageState extends State<SigninPage> {
                                                   .read<UserCubit>()
                                                   .signin(email!, password!);
 
-                                              // Close the loading dialog
+                                              
                                               if (!mounted) {
                                                 return;
                                               }
-                                              Navigator.pop(context);
+                                              Navigator.pop(context);// Close the loading dialog
 
                                               HapticFeedback.heavyImpact();
 

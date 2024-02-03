@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/register/view/view.dart';
 
@@ -227,36 +229,36 @@ class _SignupPageState extends State<SignupPage> {
                                                 return;
                                               }
                                               if (isUnique) {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  const SnackBar(
-                                                    content: Text(
-                                                        'Phone number is already in use.'),
+                                                showTopSnackBar(
+                                                  Overlay.of(context),
+                                                  const CustomSnackBar.error(
+                                                    message:
+                                                        'The phone number is already registered',
                                                   ),
                                                 );
                                                 return;
                                               }
                                               ////////////////////
-                                              
+
                                               // Check if the Email is unique before proceeding
                                               bool isUniqueEmail = await context
-                                                  .read<WalletCubit>()
-                                                  .checkPhoneNumber(phone!);
+                                                  .read<UserCubit>()
+                                                  .checkAlreadyEmail(email!);
                                               if (!mounted) {
                                                 return;
                                               }
-                                              if (!isUniqueEmail) {
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(
-                                                  const SnackBar(
-                                                    content: Text(
-                                                        'Email is already in use.'),
+                                              if (isUniqueEmail) {
+                                                showTopSnackBar(
+                                                  Overlay.of(context),
+                                                  const CustomSnackBar.error(
+                                                    message:
+                                                        'The email is already registered',
                                                   ),
                                                 );
+
                                                 return;
                                               }
                                               ////////////////////
-                                              
 
                                               // Show the loading dialog only if the login is successful
                                               // Show the loading dialog only if the login is successful

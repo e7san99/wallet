@@ -26,10 +26,10 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
-    Future<bool> checkAlreadyEmail(String phone) async {
+    Future<bool> checkAlreadyEmail(String email) async {
     emit(state.copyWith(isLoading: true));
     try {
-      final success = await authRepository.checkAlreadyEmail(phone);
+      final success = await authRepository.checkAlreadyEmail(email);
       if (success) {
         emit(state.copyWith(isLoading: false));
         return true; // Phone number found

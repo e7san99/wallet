@@ -12,6 +12,7 @@ class AuthImplement extends AuthRepository {
       UserCredential userCredential =
           await firebaseAuth.createUserWithEmailAndPassword(
               email: myUser.email!, password: password);
+
       myUser = myUser.copyWith(uid: userCredential.user!.uid);
 
       await _db.collection('Userr').add(myUser.toMap());
@@ -22,18 +23,22 @@ class AuthImplement extends AuthRepository {
 
       return myUser;
     } catch (e) {
-      print(' ==== something is wrong in create User: $e ===');
+      if (e is FirebaseAuthException && e.code == 'email-already-in-use') {
+        // Handle email already in use error
+        print('Email is already in use. Please use a different email.');
+      } else {
+        // Handle other errors
+        print('Something went wrong in createUser: $e');
+      }
     }
     return null;
   }
 
-    @override
+  @override
   Future<bool> checkAlreadyEmail(String email) async {
     try {
-      final query = await _db
-          .collection('Userr')
-          .where('email', isEqualTo: email)
-          .get();
+      final query =
+          await _db.collection('Userr').where('email', isEqualTo: email).get();
       if (query.docs.isNotEmpty) {
         return true;
       } else {

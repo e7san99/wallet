@@ -43,14 +43,14 @@ class _StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: backgroundColor,
+      backgroundColor: foregroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             LoadingAnimationWidget.dotsTriangle(
-              color: foregroundColor, 
+              color: backgroundColor, 
               size: 50,
             ),
             const SizedBox(
@@ -59,7 +59,7 @@ class _StartPageState extends State<StartPage> {
             AnimatedTextKit(
               animatedTexts: [
                 TypewriterAnimatedText(
-                  textStyle:  TextStyle(color: foregroundColor, fontSize: 16),
+                  textStyle:  TextStyle(color: backgroundColor, fontSize: 16),
                   'Loading...',
                 ),
               ],

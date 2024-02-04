@@ -77,7 +77,7 @@ class WalletImplement extends WalletRepository {
         'currentUsername': cuurentUsername,
         'secondUsername': user.username,
         'balance': balance,
-        // 'dateTime': DateTime.now(),
+        'dateTime': DateTime.now(),
       });
       //////////////////
 

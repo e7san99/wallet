@@ -44,6 +44,7 @@ class TransactionAvatars extends StatelessWidget {
               ),
             );
           } else {
+            //list.sort((a, b) => b.balance!.compareTo(a.balance!));
             return ListView.builder(
                 padding: const EdgeInsets.all(10),
                 itemCount: list.length,

@@ -9,13 +9,14 @@ class TransactionModel {
   String? currentUsername;
   String? secondUsername;
   num? balance;
-//  DateTime? dateTime;
+ DateTime? dateTime;
   TransactionModel({
     this.currentUid,
     this.secondUid,
     this.currentUsername,
     this.secondUsername,
     this.balance,
+    this.dateTime,
   });
 
   TransactionModel copyWith({
@@ -24,6 +25,7 @@ class TransactionModel {
     String? currentUsername,
     String? secondUsername,
     num? balance,
+    DateTime? dateTime,
   }) {
     return TransactionModel(
       currentUid: currentUid ?? this.currentUid,
@@ -31,6 +33,7 @@ class TransactionModel {
       currentUsername: currentUsername ?? this.currentUsername,
       secondUsername: secondUsername ?? this.secondUsername,
       balance: balance ?? this.balance,
+      dateTime: dateTime ?? this.dateTime,
     );
   }
 
@@ -41,6 +44,7 @@ class TransactionModel {
       'currentUsername': currentUsername,
       'secondUsername': secondUsername,
       'balance': balance,
+      'dateTime': dateTime?.millisecondsSinceEpoch,
     };
   }
 
@@ -51,6 +55,7 @@ class TransactionModel {
       currentUsername: map['currentUsername'] != null ? map['currentUsername'] as String : null,
       secondUsername: map['secondUsername'] != null ? map['secondUsername'] as String : null,
       balance: map['balance'] != null ? map['balance'] as num : null,
+      dateTime: map['dateTime'] != null ? DateTime.fromMillisecondsSinceEpoch(map['dateTime'] as int) : null,
     );
   }
 
@@ -61,7 +66,7 @@ class TransactionModel {
 
   @override
   String toString() {
-    return 'TransactionModel(currentUid: $currentUid, secondUid: $secondUid, currentUsername: $currentUsername, secondUsername: $secondUsername, balance: $balance)';
+    return 'TransactionModel(currentUid: $currentUid, secondUid: $secondUid, currentUsername: $currentUsername, secondUsername: $secondUsername, balance: $balance, dateTime: $dateTime)';
   }
 
   @override
@@ -73,7 +78,8 @@ class TransactionModel {
       other.secondUid == secondUid &&
       other.currentUsername == currentUsername &&
       other.secondUsername == secondUsername &&
-      other.balance == balance;
+      other.balance == balance &&
+      other.dateTime == dateTime;
   }
 
   @override
@@ -82,7 +88,8 @@ class TransactionModel {
       secondUid.hashCode ^
       currentUsername.hashCode ^
       secondUsername.hashCode ^
-      balance.hashCode;
+      balance.hashCode ^
+      dateTime.hashCode;
   }
 
   factory TransactionModel.fromSnapshot(
@@ -94,7 +101,7 @@ class TransactionModel {
       currentUsername: data['currentUsername'],
       secondUsername: data['secondUsername'],
       balance: data['balance'] as num,
-      // dateTime: data['dateTime'],
+      dateTime: data['dateTime'] != null ? (data['dateTime'] as Timestamp).toDate() : null,
     );
   }
   

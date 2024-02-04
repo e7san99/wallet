@@ -1,29 +1,4 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter/material.dart';
-// import 'package:wallet/feature/home/view/home_page.dart';
-// import 'package:wallet/feature/register/view/signin.dart';
-// import 'package:wallet/feature/register/view/signup.dart';
-
-// class AuthPage extends StatelessWidget {
-//   const AuthPage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: StreamBuilder(
-//         stream: FirebaseAuth.instance.authStateChanges(),
-//         builder: (context, snapshot) {
-//           if (snapshot.hasData) {
-//             return const HomePage();
-//           } else {
-//             return const SignupPage();
-//           }
-//         },
-//       ),
-//     );
-//   }
-// }
-
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:wallet/feature/register/view/view.dart';
 
@@ -62,36 +37,36 @@ class _StartPageState extends State<StartPage> {
       );
     }
 
-    // if (user != null) {
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => const HomePage(),
-    //     ),
-    //   );
-    // }
-    // {
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => const SigninPage(),
-    //     ),
-    //   );
-    // }
+
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: backgroundColor,
-      child: LoadingAnimationWidget.dotsTriangle(
-        color: Colors.red,
-        size: 50,
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          // crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            LoadingAnimationWidget.dotsTriangle(
+              color: foregroundColor, 
+              size: 50,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            AnimatedTextKit(
+              animatedTexts: [
+                TypewriterAnimatedText(
+                  textStyle:  TextStyle(color: foregroundColor, fontSize: 16),
+                  'Loading...',
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
-      // child: const Center(
-      //   child: CircularProgressIndicator(
-      //     color: Colors.red,
-      //   ),
     );
   }
 }

@@ -44,10 +44,10 @@ class TransactionAvatars extends StatelessWidget {
               ),
             );
           } else {
-            //list.sort((a, b) => b.balance!.compareTo(a.balance!));
+          list.sort((a, b) => b.dateTime!.compareTo(a.dateTime!));
             return ListView.builder(
                 padding: const EdgeInsets.all(10),
-                itemCount: list.length,
+                itemCount: list.length > 2 ? 2 : list.length,
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   var balance = list[index].balance;
@@ -56,6 +56,9 @@ class TransactionAvatars extends StatelessWidget {
                       FirebaseAuth.instance.currentUser?.uid;
                   Color balanceColor =
                       sentToCurrentDevice ? backgroundColor : Colors.red;
+
+                  var dateFromTimeStamp = DateTime.fromMillisecondsSinceEpoch(
+                      list[index].dateTime!.millisecondsSinceEpoch);
 
                   return Container(
                     margin: const EdgeInsets.all(8.0),
@@ -71,8 +74,11 @@ class TransactionAvatars extends StatelessWidget {
                         color: balanceColor,
                       ),
                       title: Text(
-                        '${sentToCurrentDevice ? list[index].currentUsername :list[index].secondUsername}',
+                        '${sentToCurrentDevice ? list[index].currentUsername : list[index].secondUsername}',
                         style: TextStyle(color: balanceColor),
+                      ),
+                      subtitle: Text(
+                        dateFromTimeStamp.dateFormatExtention(),
                       ),
                       trailing: Text.rich(
                         TextSpan(

@@ -14,7 +14,7 @@ class TransactionLabels extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Text(
-            'Last Transactions',
+            'Last Two Transactions',
             style: TextStyle(
               fontSize: 19,
               fontWeight: FontWeight.bold,

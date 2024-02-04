@@ -7,6 +7,7 @@ import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/util/extention.dart';
 import 'package:wallet/feature/home/view/view.dart';
 import 'package:wallet/feature/register/cubit/cubit.dart';
+import 'package:pattern_formatter/pattern_formatter.dart';
 
 class SendBalancePage extends StatefulWidget {
   const SendBalancePage({super.key});
@@ -76,19 +77,21 @@ class _SendBalancePageState extends State<SendBalancePage> {
                 OwnTextFormField(
                   label: 'balance',
                   keyboardType: TextInputType.phone,
-                  isNumber: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly,
-                  ],
+                  isNumber: <TextInputFormatter>[ThousandsFormatter()],
                   icon: Icons.attach_money,
                   onSaved: (value) {
                     balance = value;
                   },
                   validator: (value) {
-                    if (value!.isEmpty) {
+                   if (value!.isEmpty) {
                       return 'Enter a balance';
                     }
-                    if (double.parse(value) <= 0) {
-                      return 'Enter a balance greater than 0';
+                    // Remove commas before parsing
+                    value = value.replaceAll(',', '');
+
+                    if (double.tryParse(value) == null ||
+                        double.parse(value) <= 0) {
+                      return 'Enter a valid balance greater than 0';
                     }
                     return null;
                   },
@@ -140,6 +143,9 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                   formKey.currentState!.save();
 
                                   if (!formKey.currentState!.validate()) return;
+
+                                  // Remove commas before parsing
+                                  balance = balance!.replaceAll(',', '');
 
                                   if (phone ==
                                       context

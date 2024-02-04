@@ -4,6 +4,7 @@ import 'package:wallet/feature/home/home.dart';
 import 'package:wallet/feature/home/util/extention.dart';
 import 'package:wallet/feature/register/view/view.dart';
 import 'package:wallet/main/main_export.dart';
+import 'package:pattern_formatter/pattern_formatter.dart';
 
 class AddBalancePage extends StatefulWidget {
   const AddBalancePage({super.key});
@@ -72,9 +73,7 @@ class _AddBalancePageState extends State<AddBalancePage> {
                 child: OwnTextFormField(
                   label: 'balance',
                   keyboardType: TextInputType.phone,
-                  isNumber: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly,
-                  ],
+                  isNumber: <TextInputFormatter>[ThousandsFormatter()],
                   icon: Icons.attach_money,
                   onSaved: (value) {
                     balance = value;
@@ -83,8 +82,12 @@ class _AddBalancePageState extends State<AddBalancePage> {
                     if (value!.isEmpty) {
                       return 'Enter a balance';
                     }
-                    if (double.parse(value) <= 0) {
-                      return 'Enter a balance greater than 0';
+                    // Remove commas before parsing
+                    value = value.replaceAll(',', '');
+
+                    if (double.tryParse(value) == null ||
+                        double.parse(value) <= 0) {
+                      return 'Enter a valid balance greater than 0';
                     }
                     return null;
                   },
@@ -113,6 +116,8 @@ class _AddBalancePageState extends State<AddBalancePage> {
                         : () {
                             if (!formKey.currentState!.validate()) return;
                             formKey.currentState!.save();
+                            // Remove commas before parsing
+                            balance = balance!.replaceAll(',', '');
                             AwesomeDialog(
                               context: context,
                               dialogType: DialogType.question,

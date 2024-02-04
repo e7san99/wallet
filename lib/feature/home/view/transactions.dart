@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:slide_switcher/slide_switcher.dart';
 import 'package:wallet/components/components.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
@@ -122,6 +123,10 @@ class _TransactionsViewState extends State<TransactionsView> {
                             FirebaseAuth.instance.currentUser?.uid;
                         Color balanceColor =
                             sentToCurrentDevice ? backgroundColor : Colors.red;
+                        var dateFromTimeStamp =
+                            DateTime.fromMillisecondsSinceEpoch(
+                                list[index].dateTime!.millisecondsSinceEpoch);
+
                         // Check if the transaction is sent
                         if (!sentToCurrentDevice && switcherIndex != 2) {
                           return Container(
@@ -139,9 +144,9 @@ class _TransactionsViewState extends State<TransactionsView> {
                                 '${list[index].secondUsername}',
                                 style: TextStyle(color: balanceColor),
                               ),
-                              // subtitle: Text(
-                              //   '${context.read<UserCubit>().state.listOfmyUser![index]?.phone}',
-                              // ),
+                              subtitle: Text(
+                                dateFromTimeStamp.dateFormatExtention(),
+                              ),
                               trailing: Text.rich(
                                 TextSpan(
                                   text: '- ${balance.currencyFormat()}',
@@ -174,6 +179,9 @@ class _TransactionsViewState extends State<TransactionsView> {
                               title: Text(
                                 '${list[index].currentUsername}',
                                 style: TextStyle(color: balanceColor),
+                              ),
+                              subtitle: Text(
+                                dateFromTimeStamp.dateFormatExtention(),
                               ),
                               trailing: Text.rich(
                                 TextSpan(

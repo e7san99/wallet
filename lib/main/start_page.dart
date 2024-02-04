@@ -24,6 +24,7 @@
 //   }
 // }
 
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:wallet/feature/register/view/view.dart';
 
 class StartPage extends StatefulWidget {
@@ -45,22 +46,21 @@ class _StartPageState extends State<StartPage> {
     await Future.delayed(const Duration(seconds: 2));
     if (!mounted) return;
     final user = firebaseAuth.currentUser;
-  if (user == null) {
-    Navigator.push(
+    if (user == null) {
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => const SigninPage(),
         ),
       );
-  } else {
-   Navigator.push(
+    } else {
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => const HomePage(),
         ),
       );
-  }
-
+    }
 
     // if (user != null) {
     //   Navigator.push(
@@ -82,10 +82,16 @@ class _StartPageState extends State<StartPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: CircularProgressIndicator(
+    return Container(
+      color: backgroundColor,
+      child: LoadingAnimationWidget.dotsTriangle(
         color: Colors.red,
+        size: 50,
       ),
+      // child: const Center(
+      //   child: CircularProgressIndicator(
+      //     color: Colors.red,
+      //   ),
     );
   }
 }

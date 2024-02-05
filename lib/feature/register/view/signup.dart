@@ -123,6 +123,7 @@ class _SignupPageState extends State<SignupPage> {
                                   }
                                   return null;
                                 },
+                                maxLength: 25,
                               ),
                               OwnTextFormField(
                                 label: 'Phone',
@@ -137,11 +138,13 @@ class _SignupPageState extends State<SignupPage> {
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Enter a phone';
-                                  } else if (!value.startsWith('077')) {
-                                    return 'Enter valid number 077...';
+                                  } else if (!value.startsWith('07') ||
+                                      value.length < 13) {
+                                    return 'Enter valid number';
                                   }
                                   return null;
                                 },
+                                // maxLength: 11,
                               ),
                               OwnTextFormField(
                                 label: 'Email',

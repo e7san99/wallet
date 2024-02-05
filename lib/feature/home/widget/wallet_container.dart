@@ -1,6 +1,6 @@
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/util/extention.dart';
-import 'package:wallet/feature/home/util/widget/shimmer_username.dart';
+import 'package:wallet/feature/home/util/widget/shimmer_short_text.dart';
 import 'package:wallet/feature/home/widget/widget.dart';
 
 class WalletContainer extends StatefulWidget {
@@ -51,7 +51,7 @@ class _WalletContainerState extends State<WalletContainer> {
                       },
                       builder: (context, username) {
                         if (username == null) {
-                          return const ShimmerUsername();
+                          return const ShimmerShortText();
                         } else {
                           return Text(
                             username,
@@ -82,25 +82,28 @@ class _WalletContainerState extends State<WalletContainer> {
                       selector: (state) {
                         return state.wallet?.balance;
                       },
-                      
                       builder: (context, balance) {
-                        return RichText(
-                          text: TextSpan(
-                            text:balance?.currencyFormat(),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 25,
-                              fontWeight: FontWeight.w600,
-                              height: 0.9,
+                        if (balance == null) {
+                          return const ShimmerShortText();
+                        } else {
+                          return RichText(
+                            text: TextSpan(
+                              text: balance.currencyFormat(),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.w600,
+                                height: 0.9,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: ' IQD',
+                                    style: TextStyle(
+                                        fontSize: 10, color: foregroundColor)),
+                              ],
                             ),
-                            children: <TextSpan>[
-                              TextSpan(
-                                  text: ' IQD',
-                                  style: TextStyle(
-                                      fontSize: 10, color: foregroundColor)),
-                            ],
-                          ),
-                        );
+                          );
+                        }
                       },
                     ),
                   ],

@@ -1,7 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:slide_switcher/slide_switcher.dart';
 import 'package:wallet/components/components.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';

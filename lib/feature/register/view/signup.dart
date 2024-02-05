@@ -120,10 +120,11 @@ class _SignupPageState extends State<SignupPage> {
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Enter a name';
+                                  }else if(value.length>25){
+                                    return 'The number of characters must be less than 25 words';
                                   }
                                   return null;
                                 },
-                                maxLength: 25,
                               ),
                               OwnTextFormField(
                                 label: 'Phone',

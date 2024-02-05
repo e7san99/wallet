@@ -122,7 +122,7 @@ class _SendBalancePageState extends State<SendBalancePage> {
                 ),
                 BlocSelector<WalletCubit, WalletState, bool>(
                   selector: (state) {
-                    return state.isLoading;
+                    return state.isLoading; 
                   },
                   builder: (context, isLoading) {
                     return BlocSelector<UserCubit, UserState, String?>(

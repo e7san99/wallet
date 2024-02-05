@@ -121,7 +121,7 @@ class _SignupPageState extends State<SignupPage> {
                                   if (value!.isEmpty) {
                                     return 'Enter a name';
                                   }else if(value.length>25){
-                                    return 'The number of characters must be less than 25 words';
+                                    return 'The username must be less than 25 letters.';
                                   }
                                   return null;
                                 },

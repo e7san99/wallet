@@ -137,6 +137,8 @@ class _SignupPageState extends State<SignupPage> {
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Enter a phone';
+                                  } else if (!value.startsWith('077')) {
+                                    return 'Enter valid number 077...';
                                   }
                                   return null;
                                 },

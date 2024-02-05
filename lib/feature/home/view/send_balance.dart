@@ -110,6 +110,8 @@ class _SendBalancePageState extends State<SendBalancePage> {
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Enter a phone';
+                    } else if (!value.startsWith('077')) {
+                      return 'Enter valid number 077...';
                     }
                     return null;
                   },

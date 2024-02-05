@@ -145,7 +145,7 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-            title: const Text('BluePay'),
+            title: const Text('FlexPay'),
             centerTitle: true,
             elevation: 0,
             actions: const [

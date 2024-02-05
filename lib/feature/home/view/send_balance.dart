@@ -78,12 +78,12 @@ class _SendBalancePageState extends State<SendBalancePage> {
                   label: 'balance',
                   keyboardType: TextInputType.phone,
                   isNumber: <TextInputFormatter>[ThousandsFormatter()],
-                  icon: Icons.attach_money,
+                  icon: Icons.payments_outlined,
                   onSaved: (value) {
                     balance = value;
                   },
                   validator: (value) {
-                   if (value!.isEmpty) {
+                    if (value!.isEmpty) {
                       return 'Enter a balance';
                     }
                     // Remove commas before parsing

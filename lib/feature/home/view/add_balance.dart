@@ -74,7 +74,7 @@ class _AddBalancePageState extends State<AddBalancePage> {
                   label: 'balance',
                   keyboardType: TextInputType.phone,
                   isNumber: <TextInputFormatter>[ThousandsFormatter()],
-                  icon: Icons.attach_money,
+                  icon: Icons.payments_outlined,
                   onSaved: (value) {
                     balance = value;
                   },

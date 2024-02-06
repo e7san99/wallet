@@ -9,8 +9,19 @@ extension CurrencyFormatExtention on num? {
   }
 }
 
-extension DateFormatExtension on DateTime {
-  String dateFormatExtention() {
+extension DateAndTimeFormatExtension on DateTime {
+  String dateAndTimeFormatExtension() {
     return DateFormat('dd/MM/yyyy - hh:mm a').format(this);
+  }
+}
+
+extension DateFormatExtension on DateTime {
+  String dateFormatExtension() {
+    return DateFormat('dd/MM/yyyy').format(this);
+  }
+}
+extension TimeFormatExtension on DateTime {
+  String timeFormatExtension() {
+    return DateFormat('hh:mm a').format(this);
   }
 }

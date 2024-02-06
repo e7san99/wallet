@@ -142,7 +142,7 @@ class _TransactionsViewState extends State<TransactionsView> {
                                 style: TextStyle(color: balanceColor),
                               ),
                               subtitle: Text(
-                                dateFromTimeStamp.dateFormatExtention(),
+                                dateFromTimeStamp.dateAndTimeFormatExtension(),
                               ),
                               trailing: Text.rich(
                                 TextSpan(
@@ -178,7 +178,7 @@ class _TransactionsViewState extends State<TransactionsView> {
                                 style: TextStyle(color: balanceColor),
                               ),
                               subtitle: Text(
-                                dateFromTimeStamp.dateFormatExtention(),
+                                dateFromTimeStamp.dateAndTimeFormatExtension(),
                               ),
                               trailing: Text.rich(
                                 TextSpan(

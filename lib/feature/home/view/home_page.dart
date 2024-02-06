@@ -167,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                   onTap: onTap,
                 ),
                 const TransactionLabels(),
-                TransactionAvatars(avatars: avatars, iconAvatars: iconAvatars),
+                const TransactionAvatars(),
               ],
             ),
           ),

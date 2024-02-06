@@ -6,17 +6,12 @@ import 'package:wallet/feature/register/cubit/cubit.dart';
 class TransactionAvatars extends StatelessWidget {
   const TransactionAvatars({
     super.key,
-    required this.avatars,
-    required this.iconAvatars,
   });
-
-  final List<String> avatars;
-  final List<Icon> iconAvatars;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 120,
+      height: 180,
       child: BlocBuilder<WalletCubit, WalletState>(
         builder: (context, state) {
           final list = state.transactionModel;
@@ -44,7 +39,7 @@ class TransactionAvatars extends StatelessWidget {
               ),
             );
           } else {
-          list.sort((a, b) => b.dateTime!.compareTo(a.dateTime!));
+            list.sort((a, b) => b.dateTime!.compareTo(a.dateTime!));
             return ListView.builder(
                 padding: const EdgeInsets.all(10),
                 itemCount: list.length > 2 ? 2 : list.length,
@@ -97,43 +92,6 @@ class TransactionAvatars extends StatelessWidget {
                     ),
                   );
                 });
-            // ListView.separated(
-            //   shrinkWrap: true,
-            //   scrollDirection: Axis.horizontal,
-            //   itemBuilder: (context, index) {
-            //     bool sentToCurrentDevice = list[index].secondUid ==
-            //         FirebaseAuth.instance.currentUser?.uid;
-            //     Color balanceColor =
-            //         sentToCurrentDevice ? Colors.green : Colors.red;
-
-            //     return GestureDetector(
-            //       onTap: () {
-            //         print(list[index].secondUsername ?? 'default username');
-            //       },
-            //       child: Column(
-            //         children: [
-            //           Padding(
-            //             padding: const EdgeInsets.all(8.0),
-            //             child: CircleAvatar(
-            //               radius: 30,
-            //               backgroundColor: balanceColor,
-            //               child: Text(list[index].balance.toString()),
-            //             ),
-            //           ),
-            //           Text(
-            //             '${sentToCurrentDevice ? list[index].currentUsername : list[index].secondUsername}',
-            //             style: const TextStyle(
-            //               color: Colors.black,
-            //               fontWeight: FontWeight.w600,
-            //             ),
-            //           ),
-            //         ],
-            //       ),
-            //     );
-            //   },
-            //   separatorBuilder: (context, index) => const Divider(),
-            //   itemCount: list.length,
-            // );
           }
         },
       ),

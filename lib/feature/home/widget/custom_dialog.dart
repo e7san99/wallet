@@ -1,4 +1,5 @@
 import 'package:wallet/feature/home/home.dart';
+import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
 // class CustomDialog extends StatefulWidget {
 //   const CustomDialog({super.key});
@@ -41,24 +42,21 @@ class CustomeDialogWidget extends StatelessWidget {
             const CardDialog(),
             Positioned(
               top: 0,
-              right: 0,
+              right: -15,
               height: 28,
-              width: 28,
+              width: 60,
               child: OutlinedButton(
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.all(8),
                   shape: const CircleBorder(),
                   backgroundColor: const Color(0xffEC5B5B),
-                  side: const BorderSide(
-                    color: Color(0xffEC5B5B),
-                  ),
                 ),
                 onPressed: () {
                   Navigator.pop(context);
                 },
                 child: Image.asset(
-                  'assets/img/empty.png',
-                  width: 16,
+                  'assets/img/dialog/close.png',
+                  // width: 72,
                 ),
               ),
             )
@@ -89,9 +87,16 @@ class CardDialog extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.asset(
-            'assets/img/empty.png',
-            width: 72,
+          WidgetAnimator(
+            incomingEffect: WidgetTransitionEffects.incomingScaleUp(
+              // rotation: 50,
+              delay: const Duration(milliseconds: 250),
+              // curve: const ElasticInOutCurve(),
+            ),
+            child: Image.asset(
+              'assets/img/dialog/info.png',
+              width: 72,
+            ),
           ),
           const SizedBox(
             height: 24,
@@ -108,9 +113,9 @@ class CardDialog extends StatelessWidget {
             height: 4,
           ),
           const Text(
-            'more text you write in here okay',
+            'more text you write in here okay\nyou can say what happened !',
             style: TextStyle(
-              color: Colors.white,
+              color: Colors.blue,
             ),
           ),
           const SizedBox(

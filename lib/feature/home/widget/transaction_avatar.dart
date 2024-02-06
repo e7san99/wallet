@@ -73,7 +73,7 @@ class TransactionAvatars extends StatelessWidget {
                         style: TextStyle(color: balanceColor),
                       ),
                       subtitle: Text(
-                        dateFromTimeStamp.dateFormatExtension(),
+                        dateFromTimeStamp.weekFormatExtension(),
                       ),
                       trailing: Text.rich(
                         TextSpan(

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:wallet/feature/home/home.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
@@ -30,6 +32,9 @@ class CustomeDialogWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Timer(const Duration(seconds: 3), () {
+      Navigator.pop(context);
+    });
     return Dialog(
       backgroundColor: Colors.transparent,
       child: DecoratedBox(
@@ -122,6 +127,7 @@ class CardDialog extends StatelessWidget {
             height: 32,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               OutlinedButton(
                 style: OutlinedButton.styleFrom(

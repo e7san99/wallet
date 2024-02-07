@@ -30,7 +30,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomeDialogWidget extends StatelessWidget {
   final String? title, image, content1, content2, content3;
-  final TextStyle? titleStyle, content2Style;
+  final TextStyle? titleStyle, content2Style,content3Style;
   final void Function()? noButton, yesButton;
   const CustomeDialogWidget({
     super.key,
@@ -38,6 +38,7 @@ class CustomeDialogWidget extends StatelessWidget {
     required this.image,
     required this.titleStyle,
     this.content2Style,
+    this.content3Style,
     required this.content1,
     this.content2,
     this.content3,
@@ -63,6 +64,7 @@ class CustomeDialogWidget extends StatelessWidget {
               title: title,
               image: image,
               content2Style: content2Style,
+              content3Style: content3Style,
               content1: content1,
               content2: content2,
               content3: content3,
@@ -108,13 +110,14 @@ class CustomeDialogWidget extends StatelessWidget {
 
 class CardDialog extends StatelessWidget {
   final String? title, image, content1, content2, content3;
-  final TextStyle? content2Style;
+  final TextStyle? content2Style,content3Style;
   final void Function()? noButton, yesButton;
   const CardDialog({
     super.key,
     required this.title,
     required this.image,
     this.content2Style,
+    this.content3Style,
     required this.content1,
     this.content2,
     this.content3,
@@ -177,10 +180,7 @@ class CardDialog extends StatelessWidget {
                 ),
                 TextSpan(
                   text: content3, //'Are you sure to Add ',
-                  style: GoogleFonts.poppins(
-                    color: Colors.black,
-                    fontWeight: FontWeight.w300,
-                  ),
+                  style:content3Style
                 ),
               ],
             ),

@@ -134,6 +134,10 @@ class _DepositPageState extends State<DepositPage> {
                                   fontWeight: FontWeight.bold,
                                 ),
                                 content3: ' to your Balance ?',
+                                content3Style:  GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w300,
+                  ),
                                 image: 'deposit',
                                 titleStyle: GoogleFonts.montserrat(
                                   fontSize: 18,

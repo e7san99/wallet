@@ -54,6 +54,7 @@ dependencies:
   liquid_pull_to_refresh: ^3.0.1
   pattern_formatter: ^2.0.0
   widget_and_text_animator: ^1.1.5
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:

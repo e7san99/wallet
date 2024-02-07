@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:wallet/feature/home/home.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // class CustomDialog extends StatefulWidget {
 //   const CustomDialog({super.key});
@@ -28,7 +29,9 @@ import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 // }
 
 class CustomeDialogWidget extends StatelessWidget {
-  const CustomeDialogWidget({super.key});
+    final String title, content, image;
+  final TextStyle titleStyle, contentStyle;
+  const CustomeDialogWidget({super.key, required this.title, required this.content, required this.image, required this.titleStyle, required this.contentStyle});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +47,7 @@ class CustomeDialogWidget extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            const CardDialog(),
+           CardDialog(title: title, content: content, image: image, titleStyle: titleStyle, contentStyle: contentStyle),
             Positioned(
               top: 0,
               right: -15,
@@ -73,8 +76,13 @@ class CustomeDialogWidget extends StatelessWidget {
 }
 
 class CardDialog extends StatelessWidget {
+  final String title, content, image;
+  final TextStyle titleStyle, contentStyle;
   const CardDialog({
     super.key,
+    required this.title,
+    required this.content,
+    required this.image, required this.titleStyle, required this.contentStyle,
   });
 
   @override
@@ -99,29 +107,33 @@ class CardDialog extends StatelessWidget {
               // curve: const ElasticInOutCurve(),
             ),
             child: Image.asset(
-              'assets/img/dialog/info.png',
+              'assets/img/dialog/$image.png',
               width: 72,
             ),
           ),
           const SizedBox(
             height: 24,
           ),
-          const Text(
-            'Alter',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.red,
-            ),
-          ),
+          Text(
+            title,
+            style:titleStyle,
+          //    GoogleFonts.montserrat(
+          //     fontSize: 24,
+          //     color: const Color(0xffEC5B5B),
+          //     fontWeight: FontWeight.bold,
+          //   ),
+           ),
           const SizedBox(
             height: 4,
           ),
-          const Text(
-            'more text you write in here okay\nyou can say what happened !',
-            style: TextStyle(
-              color: Colors.blue,
-            ),
+          Text(
+            content, 
+            style: contentStyle,
+            //'more text you write in here okay\nyou can say what happened !',
+            // style: GoogleFonts.poppins(
+            //   color: Colors.red,
+            //   fontWeight: FontWeight.w300,
+            // ),
           ),
           const SizedBox(
             height: 32,

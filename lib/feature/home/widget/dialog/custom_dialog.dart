@@ -29,18 +29,18 @@ import 'package:google_fonts/google_fonts.dart';
 // }
 
 class CustomeDialogWidget extends StatelessWidget {
-  final String title, image, content1, content2, content3;
-  final TextStyle titleStyle, content2Style;
+  final String? title, image, content1, content2, content3;
+  final TextStyle? titleStyle, content2Style;
   final void Function()? noButton, yesButton;
   const CustomeDialogWidget({
     super.key,
     required this.title,
     required this.image,
     required this.titleStyle,
-    required this.content2Style,
+    this.content2Style,
     required this.content1,
-    required this.content2,
-    required this.content3,
+    this.content2,
+    this.content3,
     required this.noButton,
     required this.yesButton,
   });
@@ -75,7 +75,7 @@ class CustomeDialogWidget extends StatelessWidget {
               height: 30,
               width: 100,
               child: Text(
-                title,
+                title!,
                 style: titleStyle,
               ),
             ),
@@ -107,17 +107,17 @@ class CustomeDialogWidget extends StatelessWidget {
 }
 
 class CardDialog extends StatelessWidget {
-  final String title, image, content1, content2, content3;
-  final TextStyle content2Style;
+  final String? title, image, content1, content2, content3;
+  final TextStyle? content2Style;
   final void Function()? noButton, yesButton;
   const CardDialog({
     super.key,
     required this.title,
     required this.image,
-    required this.content2Style,
+    this.content2Style,
     required this.content1,
-    required this.content2,
-    required this.content3,
+    this.content2,
+    this.content3,
     required this.noButton,
     required this.yesButton,
   });
@@ -172,7 +172,7 @@ class CardDialog extends StatelessWidget {
               ),
               children: <TextSpan>[
                 TextSpan(
-                  text: '$content2 IQD',
+                  text: content2,
                   style: content2Style,
                 ),
                 TextSpan(

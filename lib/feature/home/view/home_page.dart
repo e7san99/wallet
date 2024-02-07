@@ -1,5 +1,7 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/home.dart';
+import 'package:wallet/feature/home/widget/dialog/custom_dialog.dart';
 import 'package:wallet/feature/register/register.dart';
 
 class HomePage extends StatefulWidget {
@@ -136,7 +138,27 @@ class _HomePageState extends State<HomePage> {
                   onPressed: state
                       ? null
                       : () async {
-                          await context.read<UserCubit>().logout();
+                          showDialog(
+                            context: context,
+                            builder: (customDialogcontext) =>
+                                CustomeDialogWidget(
+                              title: 'LOGOUT',
+                              content1: 'Are you sure you want to Logout ? ',
+                              image: 'question',
+                              titleStyle: GoogleFonts.montserrat(
+                                fontSize: 20,
+                                color:
+                                    backgroundColor, //const Color(0xffEC5B5B),
+                                fontWeight: FontWeight.bold,
+                              ),
+                              noButton: () {
+                                Navigator.pop(customDialogcontext);
+                              },
+                              yesButton: () async {
+                                await context.read<UserCubit>().logout();
+                              },
+                            ),
+                          );
                         },
                   icon: Icon(
                     Icons.power_settings_new,

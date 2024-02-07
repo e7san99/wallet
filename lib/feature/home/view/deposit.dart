@@ -127,7 +127,7 @@ class _DepositPageState extends State<DepositPage> {
                                   CustomeDialogWidget(
                                 title: 'Deposit',
                                 content1: 'Are you sure to Add ',
-                                content2: num.parse(balance!).currencyFormat(),
+                                content2: '${num.parse(balance!).currencyFormat()} IQD',
                                 content2Style: TextStyle(
                                   color: backgroundColor,
                                   fontWeight: FontWeight.bold,

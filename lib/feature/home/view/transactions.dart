@@ -108,9 +108,10 @@ class _TransactionsViewState extends State<TransactionsView> {
                     ),
                   );
                 } else {
+                  list.sort((a, b) => b.dateTime!.compareTo(a.dateTime!));
                   return Expanded(
                     child: ListView.builder(
-                      padding: const EdgeInsets.all(30),
+                      padding: const EdgeInsets.all(10),
                       itemCount: list.length,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
@@ -142,7 +143,7 @@ class _TransactionsViewState extends State<TransactionsView> {
                                 style: TextStyle(color: balanceColor),
                               ),
                               subtitle: Text(
-                                dateFromTimeStamp.dateAndTimeFormatExtension(),
+                                dateFromTimeStamp.weekFormatExtension(),
                               ),
                               trailing: Text.rich(
                                 TextSpan(
@@ -178,7 +179,7 @@ class _TransactionsViewState extends State<TransactionsView> {
                                 style: TextStyle(color: balanceColor),
                               ),
                               subtitle: Text(
-                                dateFromTimeStamp.dateAndTimeFormatExtension(),
+                                dateFromTimeStamp.weekFormatExtension(),
                               ),
                               trailing: Text.rich(
                                 TextSpan(

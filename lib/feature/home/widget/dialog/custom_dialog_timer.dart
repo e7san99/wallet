@@ -5,16 +5,18 @@ import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomDialogTimer extends StatefulWidget {
-  final String title, image, content;
-  final TextStyle titleStyle;
+    final int seconds;
+  final String? image, content1,content2,content3;
   final void Function()? okButton;
+
   const CustomDialogTimer({
     super.key,
-    required this.title,
     required this.image,
-    required this.titleStyle,
-    required this.content,
+    required this.content1,
+     this.content2,
+     this.content3,
     required this.okButton,
+    required this.seconds,
   });
 
   @override
@@ -40,7 +42,7 @@ class _CustomDialogTimerState extends State<CustomDialogTimer> {
 
   void _startTimer() {
     // Start a 3-second timer
-    _timer = Timer(const Duration(seconds: 3), () {
+    _timer = Timer(Duration(seconds: widget.seconds), () {
       Navigator.pop(context);
     });
   }
@@ -60,21 +62,13 @@ class _CustomDialogTimerState extends State<CustomDialogTimer> {
         child: Stack(
           children: [
             CardDialog(
-              title: widget.title,
               image: widget.image,
-              content: widget.content,
+              content1: widget.content1,
+              content2: widget.content2,
+              content3: widget.content3,
               okButton: widget.okButton,
             ),
-            Positioned(
-              top: 5,
-              left: 5,
-              height: 30,
-              width: 100,
-              child: Text(
-                widget.title,
-                style: widget.titleStyle,
-              ),
-            ),
+            
             Positioned(
               top: 0,
               right: -15,
@@ -103,13 +97,14 @@ class _CustomDialogTimerState extends State<CustomDialogTimer> {
 }
 
 class CardDialog extends StatelessWidget {
-  final String title, image, content;
+  final String? image, content1,content2,content3;
   final void Function()? okButton;
   const CardDialog({
     super.key,
-    required this.title,
     required this.image,
-    required this.content,
+    required this.content1,
+     this.content2,
+     this.content3,
     required this.okButton,
   });
 
@@ -154,11 +149,29 @@ class CardDialog extends StatelessWidget {
           const SizedBox(
             height: 4,
           ),
-          Text(
-            content, //'Are you sure to Add ',
-            style: GoogleFonts.poppins(
-              color: Colors.black,
-              fontWeight: FontWeight.w300,
+          Text.rich(
+            TextSpan(
+              text: content1, //'Are you sure to Add ',
+              style: GoogleFonts.poppins(
+                color: Colors.black,
+                fontWeight: FontWeight.w300,
+              ),
+              children: <TextSpan>[
+                TextSpan(
+                  text: content2,
+                  style:GoogleFonts.poppins(
+                                                  color: Colors.red,
+                                                  fontWeight: FontWeight
+                                                      .bold),
+                ),
+                TextSpan(
+                  text: content3, //'Are you sure to Add ',
+                  style:GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                ),
+              ],
             ),
           ),
 

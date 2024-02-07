@@ -159,23 +159,21 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                           .state
                                           .myUser
                                           ?.phone) {
-                                    AwesomeDialog(
+                                    showDialog(
                                       context: context,
-                                      dialogType: DialogType.error,
-                                      animType: AnimType.scale,
-                                      title:
-                                          'You can\'t send balance to yourself',
-                                      headerAnimationLoop: false,
+                                      builder: (customDialogTimercontext) =>
+                                          CustomDialogTimer(
+                                        seconds: 7,
+                                        image: 'info',
+                                        content1:
+                                            'You can\'t send a balance to yourself',
+                                        okButton: () {
+                                          Navigator.pop(
+                                              customDialogTimercontext);
+                                        },
+                                      ),
+                                    );
 
-                                      // title: 'Balance sent successfully',
-                                      // autoHide: const Duration(seconds: 3),
-                                      btnOkColor:
-                                          const Color.fromRGBO(217, 62, 71, 1),
-                                      btnOkText: 'Done',
-                                      btnOkOnPress: () {
-                                        return;
-                                      },
-                                    ).show();
                                     return;
                                   }
                                   // Show the loading dialog only if the login is successful
@@ -241,58 +239,41 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                           .wallet!
                                           .balance! <
                                       num.parse(balance!)) {
-                                    AwesomeDialog(
+                                    showDialog(
                                       context: context,
-                                      dialogType: DialogType.error,
-                                      animType: AnimType.scale,
-                                      title: 'You don\'t have enough balance',
-                                      headerAnimationLoop: false,
-
-                                      // title: 'Balance sent successfully',
-                                      // autoHide: const Duration(seconds: 3),
-                                      btnOkColor:
-                                          const Color.fromRGBO(217, 62, 71, 1),
-                                      btnOkText: 'Done',
-                                      btnOkOnPress: () {
-                                        return;
-                                      },
-                                    ).show();
-
+                                      builder: (customDialogTimercontext) =>
+                                          CustomDialogTimer(
+                                        seconds: 7,
+                                        image: 'error',
+                                        content1:
+                                            'You don\'t have enough balance',
+                                        okButton: () {
+                                          Navigator.pop(
+                                              customDialogTimercontext);
+                                        },
+                                      ),
+                                    );
                                     return;
                                   }
 
                                   if (!success) {
-                                    AwesomeDialog(
+                                    showDialog(
                                       context: context,
-                                      dialogType: DialogType.warning,
-                                      animType: AnimType.scale,
-                                      body: Text.rich(
-                                        TextSpan(
-                                          text: 'This phone number ',
-                                          style: DefaultTextStyle.of(context)
-                                              .style,
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text: '$phone',
-                                              style: const TextStyle(
-                                                  color: Colors.red,
-                                                  fontWeight: FontWeight
-                                                      .bold), // Change color as needed
-                                            ),
-                                            const TextSpan(
-                                                text: ' is not exist'),
-                                          ],
-                                        ),
+                                      builder: (customDialogTimercontext) =>
+                                          CustomDialogTimer(
+                                        seconds: 7,
+                                        image: 'warning',
+                                        content1:
+                                            'This phone number ',
+                                            content2: '$phone',
+                                            content3: ' is not exist',
+                                        okButton: () {
+                                          Navigator.pop(
+                                              customDialogTimercontext);
+                                        },
                                       ),
-                                      // title: 'Balance sent successfully',
-                                      autoHide: const Duration(seconds: 3),
-                                      btnOkColor:
-                                          const Color.fromRGBO(254, 184, 0, 1),
-                                      btnOkText: 'Done',
-                                      btnOkOnPress: () {
-                                        return;
-                                      },
-                                    ).show();
+                                    );
+
                                   } else {
                                     showDialog(
                                       context: context,
@@ -337,17 +318,9 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                               builder:
                                                   (customDialogTimercontext) =>
                                                       CustomDialogTimer(
-                                                        title: '',
+                                                        seconds: 3,
                                                         image: 'tick',
-                                                        titleStyle: GoogleFonts
-                                                            .montserrat(
-                                                          fontSize: 20,
-                                                          color:
-                                                              backgroundColor, //const Color(0xffEC5B5B),
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                        ),
-                                                        content:
+                                                        content1:
                                                             'Balance sent successfully',
                                                         okButton: () {
                                                           Navigator.pop(

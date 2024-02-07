@@ -156,15 +156,10 @@ class _DepositPageState extends State<DepositPage> {
                                       context: context,
                                       builder: (customDialogTimercontext) =>
                                           CustomDialogTimer(
-                                            title: '',
+                                            
+                                            seconds: 3,
                                             image: 'tick',
-                                            titleStyle: GoogleFonts.montserrat(
-                                              fontSize: 20,
-                                              color:
-                                                  backgroundColor, //const Color(0xffEC5B5B),
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                            content: 'Successfully added',
+                                            content1: 'Successfully added',
                                             okButton: () {
                                               Navigator.pop(
                                                   customDialogTimercontext);

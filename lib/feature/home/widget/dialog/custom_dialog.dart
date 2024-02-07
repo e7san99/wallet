@@ -29,9 +29,8 @@ import 'package:google_fonts/google_fonts.dart';
 // }
 
 class CustomeDialogWidget extends StatelessWidget {
-  
   final String title, image, content1, content2, content3;
-  final TextStyle titleStyle,content2Style;
+  final TextStyle titleStyle, content2Style;
   final void Function()? noButton, yesButton;
   const CustomeDialogWidget({
     super.key,

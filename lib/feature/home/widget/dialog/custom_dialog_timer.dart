@@ -4,7 +4,7 @@ import 'package:wallet/feature/home/home.dart';
 import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomDialogTimer extends StatelessWidget {
+class CustomDialogTimer extends StatefulWidget {
   final String title, image, content;
   final TextStyle titleStyle;
   final void Function()? okButton;
@@ -18,10 +18,38 @@ class CustomDialogTimer extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    Timer(const Duration(seconds: 3), () {
+  State<CustomDialogTimer> createState() => _CustomDialogTimerState();
+}
+
+class _CustomDialogTimerState extends State<CustomDialogTimer> {
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    // Start the timer
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    // Dispose of the timer when the widget is disposed
+    _timer.cancel();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    // Start a 3-second timer
+    _timer = Timer(const Duration(seconds: 3), () {
       Navigator.pop(context);
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Timer(const Duration(seconds: 3), () {
+    //   Navigator.pop(context);
+    // });
     return Dialog(
       backgroundColor: Colors.transparent,
       child: DecoratedBox(
@@ -32,10 +60,10 @@ class CustomDialogTimer extends StatelessWidget {
         child: Stack(
           children: [
             CardDialog(
-              title: title,
-              image: image,
-              content: content,
-              okButton: okButton,
+              title: widget.title,
+              image: widget.image,
+              content: widget.content,
+              okButton: widget.okButton,
             ),
             Positioned(
               top: 5,
@@ -43,8 +71,8 @@ class CustomDialogTimer extends StatelessWidget {
               height: 30,
               width: 100,
               child: Text(
-                title,
-                style: titleStyle,
+                widget.title,
+                style: widget.titleStyle,
               ),
             ),
             Positioned(

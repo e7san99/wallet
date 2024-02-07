@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   final formKey = GlobalKey<FormState>();
   List<String> titles = [
-    'ADD BALANCE',
+    'DEPOSIT',
     'SEND',
     'WITHDRAW',
     'PAYMENT',
@@ -71,7 +71,7 @@ class _HomePageState extends State<HomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const AddBalancePage(),
+            builder: (context) => const DepositPage(),
           ),
         );
       },

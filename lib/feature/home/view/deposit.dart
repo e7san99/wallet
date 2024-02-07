@@ -9,14 +9,14 @@ import 'package:wallet/feature/register/view/view.dart';
 import 'package:wallet/main/main_export.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 
-class AddBalancePage extends StatefulWidget {
-  const AddBalancePage({super.key});
+class DepositPage extends StatefulWidget {
+  const DepositPage({super.key});
 
   @override
-  State<AddBalancePage> createState() => _AddBalancePageState();
+  State<DepositPage> createState() => _DepositPageState();
 }
 
-class _AddBalancePageState extends State<AddBalancePage> {
+class _DepositPageState extends State<DepositPage> {
   final formKey = GlobalKey<FormState>();
   String? balance;
   @override
@@ -27,7 +27,7 @@ class _AddBalancePageState extends State<AddBalancePage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Add Balance'),
+          title: const Text('Deposit'),
           centerTitle: true,
           backgroundColor: backgroundColor,
         ),
@@ -150,7 +150,7 @@ class _AddBalancePageState extends State<AddBalancePage> {
                                   Navigator.pop(context);
                                   formKey.currentState?.reset();
                                   print("balance: ${num.parse(balance!)}");
-                                  Future.delayed(Duration.zero, () {
+                                  // Future.delayed(Duration.zero, () {
                                     showDialog(
                                         context: context,
                                         builder: (customDialogTimercontext) =>
@@ -170,7 +170,7 @@ class _AddBalancePageState extends State<AddBalancePage> {
                                                     customDialogTimercontext);
                                               },
                                             ));
-                                  });
+                                  // });
                                 },
                               ),
                             );

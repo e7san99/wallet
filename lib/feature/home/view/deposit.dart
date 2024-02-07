@@ -127,7 +127,8 @@ class _DepositPageState extends State<DepositPage> {
                                   CustomeDialogWidget(
                                 title: 'Deposit',
                                 content1: 'Are you sure to Add ',
-                                content2: '${num.parse(balance!).currencyFormat()} IQD',
+                                content2:
+                                    '${num.parse(balance!).currencyFormat()} IQD',
                                 content2Style: TextStyle(
                                   color: backgroundColor,
                                   fontWeight: FontWeight.bold,
@@ -135,7 +136,7 @@ class _DepositPageState extends State<DepositPage> {
                                 content3: ' to your Balance ?',
                                 image: 'deposit',
                                 titleStyle: GoogleFonts.montserrat(
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   color:
                                       backgroundColor, //const Color(0xffEC5B5B),
                                   fontWeight: FontWeight.bold,
@@ -151,25 +152,24 @@ class _DepositPageState extends State<DepositPage> {
                                   formKey.currentState?.reset();
                                   print("balance: ${num.parse(balance!)}");
                                   // Future.delayed(Duration.zero, () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (customDialogTimercontext) =>
-                                            CustomDialogTimer(
-                                              title: '',
-                                              image: 'tick',
-                                              titleStyle:
-                                                  GoogleFonts.montserrat(
-                                                fontSize: 20,
-                                                color:
-                                                    backgroundColor, //const Color(0xffEC5B5B),
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                              content: 'Successfully added',
-                                              okButton: () {
-                                                Navigator.pop(
-                                                    customDialogTimercontext);
-                                              },
-                                            ));
+                                  showDialog(
+                                      context: context,
+                                      builder: (customDialogTimercontext) =>
+                                          CustomDialogTimer(
+                                            title: '',
+                                            image: 'tick',
+                                            titleStyle: GoogleFonts.montserrat(
+                                              fontSize: 20,
+                                              color:
+                                                  backgroundColor, //const Color(0xffEC5B5B),
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            content: 'Successfully added',
+                                            okButton: () {
+                                              Navigator.pop(
+                                                  customDialogTimercontext);
+                                            },
+                                          ));
                                   // });
                                 },
                               ),

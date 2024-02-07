@@ -142,11 +142,11 @@ class _HomePageState extends State<HomePage> {
                             context: context,
                             builder: (customDialogcontext) =>
                                 CustomeDialogWidget(
-                              title: 'LOGOUT',
-                              content1: 'Are you sure you want to Logout ? ',
+                              title: 'LOG OUT',
+                              content1: 'Are you sure you want to Log out ? ',
                               image: 'question',
                               titleStyle: GoogleFonts.montserrat(
-                                fontSize: 20,
+                                fontSize: 18,
                                 color:
                                     backgroundColor, //const Color(0xffEC5B5B),
                                 fontWeight: FontWeight.bold,

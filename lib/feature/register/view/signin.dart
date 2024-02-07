@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
-import 'package:wallet/feature/home/widget/custom_dialog.dart';
+import 'package:wallet/feature/home/widget/dialog/custom_dialog.dart';
 
 import 'package:wallet/feature/register/view/view.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';

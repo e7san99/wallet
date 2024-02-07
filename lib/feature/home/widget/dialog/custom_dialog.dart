@@ -29,15 +29,28 @@ import 'package:google_fonts/google_fonts.dart';
 // }
 
 class CustomeDialogWidget extends StatelessWidget {
-    final String title, content, image;
-  final TextStyle titleStyle, contentStyle;
-  const CustomeDialogWidget({super.key, required this.title, required this.content, required this.image, required this.titleStyle, required this.contentStyle});
+  
+  final String title, image, content1, content2, content3;
+  final TextStyle titleStyle,content2Style;
+  final void Function()? noButton, yesButton;
+  const CustomeDialogWidget({
+    super.key,
+    required this.title,
+    required this.image,
+    required this.titleStyle,
+    required this.content2Style,
+    required this.content1,
+    required this.content2,
+    required this.content3,
+    required this.noButton,
+    required this.yesButton,
+  });
 
   @override
   Widget build(BuildContext context) {
-    Timer(const Duration(seconds: 3), () {
-      Navigator.pop(context);
-    });
+    // Timer(const Duration(seconds: 3), () {
+    //   Navigator.pop(context);
+    // });
     return Dialog(
       backgroundColor: Colors.transparent,
       child: DecoratedBox(
@@ -47,27 +60,46 @@ class CustomeDialogWidget extends StatelessWidget {
         ),
         child: Stack(
           children: [
-           CardDialog(title: title, content: content, image: image, titleStyle: titleStyle, contentStyle: contentStyle),
+            CardDialog(
+              title: title,
+              image: image,
+              content2Style: content2Style,
+              content1: content1,
+              content2: content2,
+              content3: content3,
+              noButton: noButton,
+              yesButton: yesButton,
+            ),
             Positioned(
-              top: 0,
-              right: -15,
-              height: 28,
-              width: 60,
-              child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.all(8),
-                  shape: const CircleBorder(),
-                  backgroundColor: const Color(0xffEC5B5B),
-                ),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Image.asset(
-                  'assets/img/dialog/close.png',
-                  // width: 72,
-                ),
+              top: 5,
+              left: 5,
+              height: 30,
+              width: 100,
+              child: Text(
+                title,
+                style: titleStyle,
               ),
-            )
+            ),
+            // Positioned(
+            //   top: 0,
+            //   right: -15,
+            //   height: 28,
+            //   width: 60,
+            //   child: OutlinedButton(
+            //     style: OutlinedButton.styleFrom(
+            //       padding: const EdgeInsets.all(8),
+            //       shape: const CircleBorder(),
+            //       backgroundColor: const Color(0xffEC5B5B),
+            //     ),
+            //     onPressed: () {
+            //       Navigator.pop(context);
+            //     },
+            //     child: Image.asset(
+            //       'assets/img/dialog/close.png',
+            //       // width: 72,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
@@ -76,13 +108,19 @@ class CustomeDialogWidget extends StatelessWidget {
 }
 
 class CardDialog extends StatelessWidget {
-  final String title, content, image;
-  final TextStyle titleStyle, contentStyle;
+  final String title, image, content1, content2, content3;
+  final TextStyle content2Style;
+  final void Function()? noButton, yesButton;
   const CardDialog({
     super.key,
     required this.title,
-    required this.content,
-    required this.image, required this.titleStyle, required this.contentStyle,
+    required this.image,
+    required this.content2Style,
+    required this.content1,
+    required this.content2,
+    required this.content3,
+    required this.noButton,
+    required this.yesButton,
   });
 
   @override
@@ -114,27 +152,47 @@ class CardDialog extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          Text(
-            title,
-            style:titleStyle,
-          //    GoogleFonts.montserrat(
-          //     fontSize: 24,
-          //     color: const Color(0xffEC5B5B),
-          //     fontWeight: FontWeight.bold,
-          //   ),
-           ),
+          // Text(
+          //   title,
+          //   style: titleStyle,
+          //   //  GoogleFonts.montserrat(
+          //   //   fontSize: 24,
+          //   //   color: const Color(0xffEC5B5B),
+          //   //   fontWeight: FontWeight.bold,
+          //   // ),
+          // ),
           const SizedBox(
             height: 4,
           ),
-          Text(
-            content, 
-            style: contentStyle,
-            //'more text you write in here okay\nyou can say what happened !',
-            // style: GoogleFonts.poppins(
-            //   color: Colors.red,
-            //   fontWeight: FontWeight.w300,
-            // ),
+          Text.rich(
+            TextSpan(
+              text: content1, //'Are you sure to Add ',
+              style: GoogleFonts.poppins(
+                color: Colors.black,
+                fontWeight: FontWeight.w300,
+              ),
+              children: <TextSpan>[
+                TextSpan(
+                  text: '$content2 IQD',
+                  style: content2Style,
+                ),
+                TextSpan(
+                  text: content3, //'Are you sure to Add ',
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+              ],
+            ),
           ),
+          // Text(
+          //   'more text you write in here okay\nyou can say what happened !',
+          // style: GoogleFonts.poppins(
+          //   color: Colors.red,
+          //   fontWeight: FontWeight.w300,
+          // ),
+          // ),
           const SizedBox(
             height: 32,
           ),
@@ -145,15 +203,15 @@ class CardDialog extends StatelessWidget {
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
                     vertical: 8,
-                    horizontal: 20,
+                    horizontal: 30,
                   ),
                   foregroundColor: const Color(0xffEC5B5B),
                   side: const BorderSide(
                     color: Color(0xffEC5B5B),
                   ),
                 ),
-                onPressed: () {},
-                child: const Text('Cancel'),
+                onPressed: noButton,
+                child: const Text('No'),
               ),
               const SizedBox(
                 width: 15,
@@ -169,7 +227,7 @@ class CardDialog extends StatelessWidget {
                     color: backgroundColor,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: yesButton,
                 child: const Text('Yes'),
               ),
             ],

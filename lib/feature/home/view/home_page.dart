@@ -170,12 +170,12 @@ class _HomePageState extends State<HomePage> {
             title: const Text('BluePay'),
             centerTitle: true,
             elevation: 0,
-            actions: const [
-              Padding(
-                padding: EdgeInsets.only(right: 10.0),
-                child: Icon(Icons.wallet),
-              )
-            ],
+            // actions: const [
+            //   Padding(
+            //     padding: EdgeInsets.only(right: 10.0),
+            //     child: Icon(Icons.wallet),
+            //   )
+            // ],
           ),
           body: SingleChildScrollView(
             child: Column(

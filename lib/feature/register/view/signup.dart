@@ -353,13 +353,12 @@ class _SignupPageState extends State<SignupPage> {
                                 title: 'Already have an account? ',
                                 buttonTitle: 'Sign in',
                                 onTap: () {
-                                  Navigator.pushAndRemoveUntil(
+                                  Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
                                             const SigninPage(),
-                                      ),
-                                      (route) => false);
+                                      ));
                                 },
                               )
                             ],

@@ -307,6 +307,7 @@ class _SigninPageState extends State<SigninPage> {
                                 title: 'Don\'t have an account? ',
                                 buttonTitle: 'Sign up',
                                 onTap: () {
+                                  
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(

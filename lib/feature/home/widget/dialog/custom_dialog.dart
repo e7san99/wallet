@@ -29,8 +29,8 @@ import 'package:google_fonts/google_fonts.dart';
 // }
 
 class CustomeDialogWidget extends StatelessWidget {
-  final String? title, image, content1, content2, content3;
-  final TextStyle? titleStyle, content2Style,content3Style;
+  final String? title, image, content1, content2, content3,content4,content5;
+  final TextStyle? titleStyle, content2Style;
   final void Function()? noButton, yesButton;
   const CustomeDialogWidget({
     super.key,
@@ -38,10 +38,11 @@ class CustomeDialogWidget extends StatelessWidget {
     required this.image,
     required this.titleStyle,
     this.content2Style,
-    this.content3Style,
     required this.content1,
     this.content2,
     this.content3,
+    this.content4,
+    this.content5,
     required this.noButton,
     required this.yesButton,
   });
@@ -64,10 +65,11 @@ class CustomeDialogWidget extends StatelessWidget {
               title: title,
               image: image,
               content2Style: content2Style,
-              content3Style: content3Style,
               content1: content1,
               content2: content2,
               content3: content3,
+              content4: content4,
+              content5: content5,
               noButton: noButton,
               yesButton: yesButton,
             ),
@@ -109,18 +111,19 @@ class CustomeDialogWidget extends StatelessWidget {
 }
 
 class CardDialog extends StatelessWidget {
-  final String? title, image, content1, content2, content3;
-  final TextStyle? content2Style,content3Style;
+  final String? title, image, content1, content2, content3,content4,content5;
+  final TextStyle? content2Style;
   final void Function()? noButton, yesButton;
   const CardDialog({
     super.key,
     required this.title,
     required this.image,
     this.content2Style,
-    this.content3Style,
     required this.content1,
     this.content2,
     this.content3,
+    this.content4,
+    this.content5,
     required this.noButton,
     required this.yesButton,
   });
@@ -180,7 +183,24 @@ class CardDialog extends StatelessWidget {
                 ),
                 TextSpan(
                   text: content3, //'Are you sure to Add ',
-                  style:content3Style
+                  style:GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                ),
+                TextSpan(
+                  text: content4, //'Are you sure to Add ',
+                  style:GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                ),
+                TextSpan(
+                  text: content5, //'Are you sure to Add ',
+                  style:GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w300,
+                                        ),
                 ),
               ],
             ),

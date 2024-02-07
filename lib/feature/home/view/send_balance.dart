@@ -2,10 +2,13 @@ import 'dart:ui';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/util/extention.dart';
 import 'package:wallet/feature/home/view/view.dart';
+import 'package:wallet/feature/home/widget/dialog/custom_dialog.dart';
+import 'package:wallet/feature/home/widget/dialog/custom_dialog_timer.dart';
 import 'package:wallet/feature/register/cubit/cubit.dart';
 import 'package:pattern_formatter/pattern_formatter.dart';
 
@@ -122,7 +125,7 @@ class _SendBalancePageState extends State<SendBalancePage> {
                 ),
                 BlocSelector<WalletCubit, WalletState, bool>(
                   selector: (state) {
-                    return state.isLoading; 
+                    return state.isLoading;
                   },
                   builder: (context, isLoading) {
                     return BlocSelector<UserCubit, UserState, String?>(
@@ -291,76 +294,69 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                       },
                                     ).show();
                                   } else {
-                                    AwesomeDialog(
+                                    showDialog(
                                       context: context,
-                                      dialogType: DialogType.question,
-                                      animType: AnimType.leftSlide,
-                                      headerAnimationLoop: false,
-                                      showCloseIcon: true,
-                                      transitionAnimationDuration:
-                                          const Duration(milliseconds: 100),
-                                      // descTextStyle: GoogleFonts.outfit(),
-                                      title: 'Add Balance',
-                                      body: Text.rich(
-                                        TextSpan(
-                                          text: 'Are you sure to Send ',
-                                          style: DefaultTextStyle.of(context)
-                                              .style,
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                              text:
-                                                  '${num.parse(balance!).currencyFormat()} IQD',
-                                              style: const TextStyle(
-                                                  color: Colors.red,
-                                                  fontWeight: FontWeight
-                                                      .bold), // Change color as needed
-                                            ),
-                                            const TextSpan(
-                                                text:
-                                                    ' \nfor this phone number'),
-                                            TextSpan(
-                                              text: ' $phone ',
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            const TextSpan(text: '?'),
-                                          ],
+                                      builder: (customDialogcontext) =>
+                                          CustomeDialogWidget(
+                                        title: 'Send Balance',
+                                        content1: 'Are you sure to Send ',
+                                        content2:
+                                            '${num.parse(balance!).currencyFormat()} IQD',
+                                        content2Style: const TextStyle(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold),
+                                        content3: ' \nfor this phone number',
+                                        content4: ' $phone ',
+                                        content5: '?',
+                                        image: 'question',
+                                        titleStyle: GoogleFonts.montserrat(
+                                          fontSize: 13,
+                                          color:
+                                              backgroundColor, //const Color(0xffEC5B5B),
+                                          fontWeight: FontWeight.bold,
                                         ),
+                                        noButton: () {
+                                          Navigator.pop(customDialogcontext);
+                                        },
+                                        yesButton: () async {
+                                          context
+                                              .read<WalletCubit>()
+                                              .sendBalance(
+                                                state ?? 'currentUsername',
+                                                num.parse(balance!),
+                                                phone ?? '000',
+                                              );
+                                          Navigator.pop(context);
+                                          formKey.currentState?.reset();
+                                          print(
+                                            "balance: ${num.parse(balance!)}",
+                                          );
+
+                                          showDialog(
+                                              context: context,
+                                              builder:
+                                                  (customDialogTimercontext) =>
+                                                      CustomDialogTimer(
+                                                        title: '',
+                                                        image: 'tick',
+                                                        titleStyle: GoogleFonts
+                                                            .montserrat(
+                                                          fontSize: 20,
+                                                          color:
+                                                              backgroundColor, //const Color(0xffEC5B5B),
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                        ),
+                                                        content:
+                                                            'Balance sent successfully',
+                                                        okButton: () {
+                                                          Navigator.pop(
+                                                              customDialogTimercontext);
+                                                        },
+                                                      ));
+                                        },
                                       ),
-                                      btnCancelText: 'No',
-                                      btnOkText: 'Yes',
-                                      btnCancelColor: Colors.red[700],
-                                      btnOkColor: Colors.green[700],
-
-                                      btnCancelOnPress: () {
-                                        return;
-                                      },
-                                      btnOkOnPress: () async {
-                                        context.read<WalletCubit>().sendBalance(
-                                              state ?? 'currentUsername',
-                                              num.parse(balance!),
-                                              phone ?? '000',
-                                            );
-                                        print(
-                                          "balance: ${num.parse(balance!)}",
-                                        );
-
-                                        AwesomeDialog(
-                                          context: context,
-                                          dialogType: DialogType.success,
-                                          animType: AnimType.scale,
-                                          title: 'Balance sent successfully',
-                                          autoHide: const Duration(seconds: 3),
-                                          btnOkColor: Colors.green,
-                                          btnOkText: 'Done',
-                                          btnOkOnPress: () {
-                                            return;
-                                          },
-                                        ).show();
-
-                                        formKey.currentState?.reset();
-                                      },
-                                    ).show();
+                                    );
                                   }
                                 },
                           backgroundColor: backgroundColor,

@@ -146,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                               content1: 'Are you sure you want to Log out ? ',
                               image: 'question',
                               titleStyle: GoogleFonts.montserrat(
-                                fontSize: 18,
+                                fontSize: 13,
                                 color:
                                     backgroundColor, //const Color(0xffEC5B5B),
                                 fontWeight: FontWeight.bold,

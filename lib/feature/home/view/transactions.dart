@@ -4,6 +4,7 @@ import 'package:wallet/components/components.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/util/extention.dart';
 import 'package:wallet/feature/register/cubit/cubit.dart';
+import 'package:transformable_list_view/transformable_list_view.dart';
 
 class TransactionsView extends StatefulWidget {
   const TransactionsView({super.key});
@@ -108,9 +109,36 @@ class _TransactionsViewState extends State<TransactionsView> {
                     ),
                   );
                 } else {
+                  Matrix4 getTransformMatrix(TransformableListItem item) {
+                    /// final scale of child when the animation is completed
+                    const endScaleBound = 0.5;
+
+                    /// 0 when animation completed and [scale] == [endScaleBound]
+                    /// 1 when animation starts and [scale] == 1
+                    final animationProgress =
+                        item.visibleExtent / item.size.height;
+
+                    /// result matrix
+                    final paintTransform = Matrix4.identity();
+
+                    /// animate only if item is on edge
+                    if (item.position != TransformableListItemPosition.middle) {
+                      final scale = endScaleBound +
+                          ((1 - endScaleBound) * animationProgress);
+
+                      paintTransform
+                        ..translate(item.size.width / 2)
+                        ..scale(scale)
+                        ..translate(-item.size.width / 2);
+                    }
+
+                    return paintTransform;
+                  }
+
                   list.sort((a, b) => b.dateTime!.compareTo(a.dateTime!));
                   return Expanded(
-                    child: ListView.builder(
+                    child: TransformableListView.builder(
+                      getTransformMatrix: getTransformMatrix,
                       padding: const EdgeInsets.all(10),
                       itemCount: list.length,
                       shrinkWrap: true,

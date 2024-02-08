@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/util/extention.dart';
 import 'package:wallet/feature/home/util/widget/shimmer_short_text.dart';
@@ -53,14 +54,31 @@ class _WalletContainerState extends State<WalletContainer> {
                         if (username == null) {
                           return const ShimmerShortText();
                         } else {
-                          return Text(
-                            username,
-                            style: TextStyle(
-                              fontSize: 20,
-                              letterSpacing: 1.3,
-                              fontWeight: FontWeight.w600,
-                              color: foregroundColor,
-                            ),
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                username,
+                                style: GoogleFonts.lato(
+                                  fontSize: 20,
+                                  letterSpacing: 1.3,
+                                  fontWeight: FontWeight.w600,
+                                  color: foregroundColor,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                context.read<UserCubit>().state.myUser!.phone!,
+                                style: GoogleFonts.lato(
+                                  fontSize: 15,
+                                  letterSpacing: 1.3,
+                                  fontWeight: FontWeight.w600,
+                                  color: foregroundColor,
+                                ),
+                              ),
+                            ],
                           );
                         }
                       },
@@ -71,9 +89,9 @@ class _WalletContainerState extends State<WalletContainer> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Balance: ',
-                      style: TextStyle(
+                      style: GoogleFonts.lato(
                         color: Colors.white70,
                         fontSize: 16,
                       ),
@@ -89,7 +107,7 @@ class _WalletContainerState extends State<WalletContainer> {
                           return RichText(
                             text: TextSpan(
                               text: balance.currencyFormat(),
-                              style: const TextStyle(
+                              style: GoogleFonts.lato(
                                 color: Colors.white,
                                 fontSize: 25,
                                 fontWeight: FontWeight.w600,
@@ -98,7 +116,7 @@ class _WalletContainerState extends State<WalletContainer> {
                               children: <TextSpan>[
                                 TextSpan(
                                     text: ' IQD',
-                                    style: TextStyle(
+                                    style: GoogleFonts.lato(
                                         fontSize: 10, color: foregroundColor)),
                               ],
                             ),

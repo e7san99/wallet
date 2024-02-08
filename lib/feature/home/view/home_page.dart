@@ -177,20 +177,32 @@ class _HomePageState extends State<HomePage> {
             //   )
             // ],
           ),
-          body: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const WalletContainer(),
-                CustomeGridview(
-                  titles: titles,
-                  iconImages: iconImages,
-                  onTap: onTap,
-                ),
-                const TransactionLabels(),
-                const TransactionAvatars(),
-              ],
+          body: RefreshIndicator(
+            onRefresh: () async {
+              await Future.wait([
+                context.read<UserCubit>().getUserData(),
+                context.read<UserCubit>().getListOfUserData(),
+                context.read<WalletCubit>().getWallet(),
+                context.read<WalletCubit>().getTransaction(),
+              ]);
+            },
+            child: SingleChildScrollView(
+              physics:
+                  const AlwaysScrollableScrollPhysics(), // Ensure that the SingleChildScrollView is always scrollable
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const WalletContainer(),
+                  CustomeGridview(
+                    titles: titles,
+                    iconImages: iconImages,
+                    onTap: onTap,
+                  ),
+                  const TransactionLabels(),
+                  const TransactionAvatars(),
+                ],
+              ),
             ),
           ),
         ),

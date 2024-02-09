@@ -1,6 +1,7 @@
 // import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:ui';
 
+import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -70,9 +71,8 @@ class _SigninPageState extends State<SigninPage> {
                 Center(
                   child: Text(
                     'BluePay',
-                    style: TextStyle(
+                    style: GoogleFonts.openSans(
                       color: foregroundColor,
-                      fontFamily: 'title',
                       fontSize: 28,
                     ),
                   ),
@@ -99,9 +99,8 @@ class _SigninPageState extends State<SigninPage> {
                             children: [
                               Text(
                                 'Welcome Back !',
-                                style: TextStyle(
+                                style: GoogleFonts.openSans(
                                   color: backgroundColor.withOpacity(0.6),
-                                  fontFamily: 'lato',
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -175,11 +174,10 @@ class _SigninPageState extends State<SigninPage> {
                                       ),
                                     );
                                   },
-                                  child: const Text(
+                                  child: Text(
                                     'Forgot password?',
-                                    style: TextStyle(
+                                    style: GoogleFonts.openSans(
                                       color: Colors.red,
-                                      fontFamily: 'lato',
                                     ),
                                   ),
                                 ),
@@ -192,10 +190,9 @@ class _SigninPageState extends State<SigninPage> {
                                   return OwnButton(
                                     textButton: Text(
                                       'SIGN IN',
-                                      style: TextStyle(
+                                      style: GoogleFonts.openSans(
                                         color: foregroundColor,
                                         fontSize: 20,
-                                        fontFamily: 'lato',
                                         letterSpacing: 1.2,
                                       ),
                                     ),
@@ -247,10 +244,9 @@ class _SigninPageState extends State<SigninPage> {
                                                             const SizedBox(
                                                                 width: 20),
                                                             DefaultTextStyle(
-                                                              style: TextStyle(
+                                                              style: GoogleFonts
+                                                                  .openSans(
                                                                 fontSize: 18.0,
-                                                                fontFamily:
-                                                                    'Agne',
                                                                 color:
                                                                     backgroundColor,
                                                               ),
@@ -307,7 +303,6 @@ class _SigninPageState extends State<SigninPage> {
                                 title: 'Don\'t have an account? ',
                                 buttonTitle: 'Sign up',
                                 onTap: () {
-                                  
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(

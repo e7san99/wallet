@@ -33,7 +33,14 @@ class _SendBalancePageState extends State<SendBalancePage> {
         },
         child: Scaffold(
           appBar: AppBar(
-            title: const Text('Send Balance'),
+            title: Text(
+              'Send Balance',
+              style: GoogleFonts.openSans(
+                color: foregroundColor,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 0.2,
+              ),
+            ),
             centerTitle: true,
             backgroundColor: backgroundColor,
           ),
@@ -49,7 +56,7 @@ class _SendBalancePageState extends State<SendBalancePage> {
                     return RichText(
                       text: TextSpan(
                         text: balance?.currencyFormat(),
-                        style: TextStyle(
+                        style: GoogleFonts.openSans(
                           color: backgroundColor,
                           fontSize: 43,
                           fontWeight: FontWeight.w600,
@@ -58,7 +65,7 @@ class _SendBalancePageState extends State<SendBalancePage> {
                         children: <TextSpan>[
                           TextSpan(
                               text: ' IQD',
-                              style: TextStyle(
+                              style: GoogleFonts.openSans(
                                   fontSize: 20, color: backgroundColor)),
                         ],
                       ),
@@ -70,7 +77,7 @@ class _SendBalancePageState extends State<SendBalancePage> {
                 ),
                 Text(
                   'Total Amount',
-                  style: TextStyle(
+                  style: GoogleFonts.openSans(
                     color: backgroundColor.withOpacity(0.8),
                     fontSize: 20,
                     fontWeight: FontWeight.w500,
@@ -136,10 +143,9 @@ class _SendBalancePageState extends State<SendBalancePage> {
                         return OwnButton(
                           textButton: Text(
                             'SEND',
-                            style: TextStyle(
+                            style: GoogleFonts.openSans(
                               color: foregroundColor,
                               fontSize: 20,
-                              fontFamily: 'lato',
                               letterSpacing: 1.2,
                             ),
                           ),
@@ -201,9 +207,8 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                                 ),
                                                 const SizedBox(width: 20),
                                                 DefaultTextStyle(
-                                                  style: TextStyle(
+                                                  style: GoogleFonts.openSans(
                                                     fontSize: 18.0,
-                                                    fontFamily: 'Agne',
                                                     color: backgroundColor,
                                                   ),
                                                   child: AnimatedTextKit(
@@ -263,17 +268,15 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                           CustomDialogTimer(
                                         seconds: 7,
                                         image: 'warning',
-                                        content1:
-                                            'This phone number ',
-                                            content2: '$phone',
-                                            content3: ' is not exist',
+                                        content1: 'This phone number ',
+                                        content2: '$phone',
+                                        content3: ' is not exist',
                                         okButton: () {
                                           Navigator.pop(
                                               customDialogTimercontext);
                                         },
                                       ),
                                     );
-
                                   } else {
                                     showDialog(
                                       context: context,
@@ -283,7 +286,7 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                         content1: 'Are you sure to Send ',
                                         content2:
                                             '${num.parse(balance!).currencyFormat()} IQD',
-                                        content2Style: const TextStyle(
+                                        content2Style: GoogleFonts.openSans(
                                             color: Colors.red,
                                             fontWeight: FontWeight.bold),
                                         content3: ' \nfor this phone number',

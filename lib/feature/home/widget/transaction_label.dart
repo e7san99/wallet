@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:wallet/feature/home/view/transactions.dart';
 import 'package:wallet/feature/home/view/view.dart';
 
@@ -13,12 +14,12 @@ class TransactionLabels extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Text(
+          Text(
             'Last Two Transactions',
-            style: TextStyle(
-              fontSize: 19,
+            style: GoogleFonts.roboto(
+              fontSize: 18.0,
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: const Color.fromARGB(255, 0, 85, 150),
             ),
           ),
           GestureDetector(
@@ -36,7 +37,7 @@ class TransactionLabels extends StatelessWidget {
                 children: [
                   Text(
                     'VIEW ALL',
-                    style: TextStyle(
+                    style: GoogleFonts.roboto(
                       fontSize: 14,
                       color: backgroundColor,
                       fontWeight: FontWeight.bold,

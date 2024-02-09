@@ -29,7 +29,7 @@ import 'package:google_fonts/google_fonts.dart';
 // }
 
 class CustomeDialogWidget extends StatelessWidget {
-  final String? title, image, content1, content2, content3,content4,content5;
+  final String? title, image, content1, content2, content3, content4, content5;
   final TextStyle? titleStyle, content2Style;
   final void Function()? noButton, yesButton;
   const CustomeDialogWidget({
@@ -78,31 +78,17 @@ class CustomeDialogWidget extends StatelessWidget {
               left: 5,
               height: 30,
               width: 100,
-              child: Text(
+              child: TextAnimator(
                 title!,
-                style: titleStyle,
+                incomingEffect: WidgetTransitionEffects.incomingScaleUp(),
+                atRestEffect: WidgetRestingEffects.none(),
+                style: titleStyle!,
               ),
+              //         Text(
+              //   title!,
+              //   style: titleStyle,
+              // ),
             ),
-            // Positioned(
-            //   top: 0,
-            //   right: -15,
-            //   height: 28,
-            //   width: 60,
-            //   child: OutlinedButton(
-            //     style: OutlinedButton.styleFrom(
-            //       padding: const EdgeInsets.all(8),
-            //       shape: const CircleBorder(),
-            //       backgroundColor: const Color(0xffEC5B5B),
-            //     ),
-            //     onPressed: () {
-            //       Navigator.pop(context);
-            //     },
-            //     child: Image.asset(
-            //       'assets/img/dialog/close.png',
-            //       // width: 72,
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),
@@ -111,7 +97,7 @@ class CustomeDialogWidget extends StatelessWidget {
 }
 
 class CardDialog extends StatelessWidget {
-  final String? title, image, content1, content2, content3,content4,content5;
+  final String? title, image, content1, content2, content3, content4, content5;
   final TextStyle? content2Style;
   final void Function()? noButton, yesButton;
   const CardDialog({
@@ -183,24 +169,24 @@ class CardDialog extends StatelessWidget {
                 ),
                 TextSpan(
                   text: content3, //'Are you sure to Add ',
-                  style:GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w300,
-                                        ),
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
                 TextSpan(
                   text: content4, //'Are you sure to Add ',
-                  style:GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 TextSpan(
                   text: content5, //'Are you sure to Add ',
-                  style:GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w300,
-                                        ),
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
               ],
             ),

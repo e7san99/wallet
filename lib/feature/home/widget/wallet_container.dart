@@ -3,6 +3,7 @@ import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/util/extention.dart';
 import 'package:wallet/feature/home/util/widget/shimmer_short_text.dart';
 import 'package:wallet/feature/home/widget/widget.dart';
+import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 
 class WalletContainer extends StatefulWidget {
   const WalletContainer({
@@ -57,8 +58,11 @@ class _WalletContainerState extends State<WalletContainer> {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              TextAnimator(
                                 username,
+                                incomingEffect:
+                                    WidgetTransitionEffects.incomingScaleDown(),
+                                atRestEffect: WidgetRestingEffects.none(),
                                 style: GoogleFonts.lato(
                                   fontSize: 20,
                                   letterSpacing: 1.3,
@@ -66,11 +70,23 @@ class _WalletContainerState extends State<WalletContainer> {
                                   color: foregroundColor,
                                 ),
                               ),
+                              // Text(
+                              //   username,
+                              //   style: GoogleFonts.lato(
+                              //     fontSize: 20,
+                              //     letterSpacing: 1.3,
+                              //     fontWeight: FontWeight.w600,
+                              //     color: foregroundColor,
+                              //   ),
+                              // ),
                               const SizedBox(
                                 height: 5,
                               ),
-                              Text(
+                              TextAnimator(
                                 context.read<UserCubit>().state.myUser!.phone!,
+                                incomingEffect:
+                                    WidgetTransitionEffects.incomingScaleDown(),
+                                atRestEffect: WidgetRestingEffects.none(),
                                 style: GoogleFonts.lato(
                                   fontSize: 15,
                                   letterSpacing: 1.3,
@@ -78,6 +94,15 @@ class _WalletContainerState extends State<WalletContainer> {
                                   color: foregroundColor,
                                 ),
                               ),
+                              // Text(
+                              //   context.read<UserCubit>().state.myUser!.phone!,
+                              //   style: GoogleFonts.lato(
+                              //     fontSize: 15,
+                              //     letterSpacing: 1.3,
+                              //     fontWeight: FontWeight.w600,
+                              //     color: foregroundColor,
+                              //   ),
+                              // ),
                             ],
                           );
                         }
@@ -104,25 +129,25 @@ class _WalletContainerState extends State<WalletContainer> {
                         if (balance == null) {
                           return const ShimmerShortText();
                         } else {
-                          return RichText(
-                            text: TextSpan(
-                              text: balance.currencyFormat(),
-                              style: GoogleFonts.lato(
-                                color: Colors.white,
-                                fontSize: 25,
-                                fontWeight: FontWeight.w600,
-                                height: 0.9,
-                              ),
-                              children: <TextSpan>[
-                                TextSpan(
-                                    text: ' IQD',
-                                    style: GoogleFonts.lato(
-                                        fontSize: 10, color: foregroundColor)),
-                              ],
+                          return TextAnimator(
+                            balance.currencyFormat(),
+                            incomingEffect:
+                                WidgetTransitionEffects.incomingScaleDown(),
+                            atRestEffect: WidgetRestingEffects.none(),
+                            style: GoogleFonts.lato(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w600,
+                              height: 0.9,
                             ),
                           );
                         }
                       },
+                    ),
+                    Text(
+                      ' IQD',
+                      style: GoogleFonts.lato(
+                          fontSize: 10, color: foregroundColor),
                     ),
                   ],
                 ),

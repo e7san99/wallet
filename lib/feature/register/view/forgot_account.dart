@@ -1,7 +1,10 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:google_fonts/google_fonts.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
+import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
+import 'package:wallet/feature/home/widget/dialog/custom_dialog_timer.dart';
 import 'package:wallet/feature/register/view/view.dart';
 
 class ForgotAccount extends StatefulWidget {
@@ -46,9 +49,8 @@ class _ForgotAccountState extends State<ForgotAccount> {
             Center(
               child: Text(
                 'BluePay',
-                style: TextStyle(
+                style: GoogleFonts.openSans(
                   color: foregroundColor,
-                  fontFamily: 'title',
                   fontSize: 28,
                 ),
               ),
@@ -75,9 +77,8 @@ class _ForgotAccountState extends State<ForgotAccount> {
                         children: [
                           Text(
                             'Recovery Page',
-                            style: TextStyle(
+                            style: GoogleFonts.openSans(
                               color: backgroundColor.withOpacity(0.6),
-                              fontFamily: 'lato',
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
@@ -113,10 +114,9 @@ class _ForgotAccountState extends State<ForgotAccount> {
                               return OwnButton(
                                 textButton: Text(
                                   'SEND',
-                                  style: TextStyle(
+                                  style: GoogleFonts.openSans(
                                     color: foregroundColor,
                                     fontSize: 20,
-                                    fontFamily: 'lato',
                                     letterSpacing: 1.2,
                                   ),
                                 ),
@@ -127,26 +127,62 @@ class _ForgotAccountState extends State<ForgotAccount> {
                                             formKey.currentState!.validate();
                                         if (valid) {
                                           formKey.currentState!.save();
-                                          try {
+                                          //try {
+
+                                          bool isUniqueEmail = await context
+                                              .read<UserCubit>()
+                                              .checkAlreadyEmail(email!);
+
+                                          if (!isUniqueEmail) {
+                                            showTopSnackBar(
+                                              Overlay.of(context),
+                                              const CustomSnackBar.error(
+                                                message:
+                                                    'This email is not registered',
+                                              ),
+                                            );
+
+                                            return;
+                                          } else {
                                             await context
                                                 .read<ForgotCubit>()
                                                 .forgotAccount(email!);
 
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              const SnackBar(
-                                                content:
-                                                    Text('check your email'),
-                                              ),
-                                            );
-                                          } catch (e) {
-                                            ScaffoldMessenger.of(context)
-                                                .showSnackBar(
-                                              const SnackBar(
-                                                content: Text('maynera bra'),
-                                              ),
-                                            );
+                                            showDialog(
+                                                context: context,
+                                                builder:
+                                                    (customDialogTimercontext) =>
+                                                        CustomDialogTimer(
+                                                          seconds: 10,
+                                                          image: 'tick',
+                                                          content1:
+                                                              'Check your email inbox\nto reset your password',
+                                                          okButton: () {
+                                                            Navigator.pop(
+                                                                customDialogTimercontext);
+                                                          },
+                                                        ));
                                           }
+
+                                          // await context
+                                          //     .read<ForgotCubit>()
+                                          //     .forgotAccount(email!);
+
+                                          // ScaffoldMessenger.of(context)
+                                          //     .showSnackBar(
+                                          //   const SnackBar(
+                                          //     content:
+                                          //         Text('check your email'),
+                                          //   ),
+                                          // );
+                                          // } catch (e) {
+                                          // ScaffoldMessenger.of(context)
+                                          //     .showSnackBar(
+                                          //   const SnackBar(
+                                          //     content: Text('maynera bra'),
+                                          //   ),
+                                          // );
+                                          // }
 
 //                                             showTopSnackBar(
 //                                                 Overlay.of(context),

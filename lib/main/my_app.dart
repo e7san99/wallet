@@ -10,9 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(
-          create: (context) => InternetBloc(),
-        ),
+        
         BlocProvider(
           create: (context) => UserCubit(AuthImplement()),
         ),
@@ -22,6 +20,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => WalletCubit(WalletImplement(), AuthImplement()),
+        ),
+        BlocProvider(
+          create: (context) => InternetBloc(),
         ),
       ],
       child: MaterialApp(

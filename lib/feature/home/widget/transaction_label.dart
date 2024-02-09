@@ -16,7 +16,7 @@ class TransactionLabels extends StatelessWidget {
         children: [
           Text(
             'Last Two Transactions',
-            style: GoogleFonts.roboto(
+            style: GoogleFonts.inter(
               fontSize: 18.0,
               fontWeight: FontWeight.bold,
               color: const Color.fromARGB(255, 0, 85, 150),
@@ -37,7 +37,7 @@ class TransactionLabels extends StatelessWidget {
                 children: [
                   Text(
                     'VIEW ALL',
-                    style: GoogleFonts.roboto(
+                    style: GoogleFonts.inter(
                       fontSize: 14,
                       color: backgroundColor,
                       fontWeight: FontWeight.bold,

@@ -22,125 +22,119 @@ class _WalletContainerState extends State<WalletContainer> {
       builder: (context, state) {
         if (state.isLoading) {
           return const ShimmerContainer();
-        }else{
-return Padding(
-          padding: const EdgeInsets.fromLTRB(10, 20, 10, 30),
-          child: Container(
-            padding: const EdgeInsets.all(10),
-            height: 150,
-            decoration: BoxDecoration(
-              color: backgroundColor,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      // mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        CircleAvatar(
-                          backgroundColor: foregroundColor,
-                          radius: 25,
-                          child: const Icon(
-                            Icons.person_outline_outlined,
-                            size: 50,
+        } else {
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(10, 20, 10, 30),
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              height: 150,
+              decoration: BoxDecoration(
+                color: backgroundColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        // mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          CircleAvatar(
+                            backgroundColor: foregroundColor,
+                            radius: 25,
+                            child: const Icon(
+                              Icons.person_outline_outlined,
+                              size: 50,
+                            ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  TextAnimator(
-                                    state.myUser!.username!,
-                                    incomingEffect: WidgetTransitionEffects
-                                        .incomingScaleDown(),
-                                    atRestEffect: WidgetRestingEffects.none(),
-                                    style: GoogleFonts.lato(
-                                      fontSize: 20,
-                                      letterSpacing: 1.3,
-                                      fontWeight: FontWeight.w600,
-                                      color: foregroundColor,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  TextAnimator(
-                                    context
-                                        .read<UserCubit>()
-                                        .state
-                                        .myUser!
-                                        .phone!,
-                                    incomingEffect: WidgetTransitionEffects
-                                        .incomingScaleDown(),
-                                    atRestEffect: WidgetRestingEffects.none(),
-                                    style: GoogleFonts.lato(
-                                      fontSize: 15,
-                                      letterSpacing: 1.3,
-                                      fontWeight: FontWeight.w600,
-                                      color: foregroundColor,
-                                    ),
-                                  ),
-                                ],
-                        ),
-                            
-                      ],
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Balance: ',
-                          style: GoogleFonts.lato(
-                            color: Colors.white70,
-                            fontSize: 16,
+                          const SizedBox(
+                            width: 10,
                           ),
-                        ),
-                        BlocSelector<WalletCubit, WalletState, num?>(
-                          selector: (state) {
-                            return state.wallet?.balance;
-                          },
-                          builder: (context, balance) {
-                            if (balance == null) {
-                              return const ShimmerShortText();
-                            } else {
-                              return TextAnimator(
-                                balance.currencyFormat(),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              TextAnimator(
+                                state.myUser!.username!,
                                 incomingEffect:
                                     WidgetTransitionEffects.incomingScaleDown(),
                                 atRestEffect: WidgetRestingEffects.none(),
-                                style: GoogleFonts.lato(
-                                  color: Colors.white,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w600,
-                                  height: 0.9,
+                                style: GoogleFonts.inter(
+                                  fontSize: 20,
+                                  letterSpacing: 0.6,
+                                  fontWeight: FontWeight.w400,
+                                  color: foregroundColor,
                                 ),
-                              );
-                            }
-                          },
-                        ),
-                        Text(
-                          ' IQD',
-                          style: GoogleFonts.lato(
-                              fontSize: 10, color: foregroundColor),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              TextAnimator(
+                                context.read<UserCubit>().state.myUser!.phone!,
+                                incomingEffect:
+                                    WidgetTransitionEffects.incomingScaleDown(),
+                                atRestEffect: WidgetRestingEffects.none(),
+                                style: GoogleFonts.inter(
+                                  fontSize: 15,
+                                  letterSpacing: 1.3,
+                                  fontWeight: FontWeight.w600,
+                                  color: foregroundColor,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Balance: ',
+                            style: GoogleFonts.inter(
+                              color: Colors.white70,
+                              fontSize: 16,
+                            ),
+                          ),
+                          BlocSelector<WalletCubit, WalletState, num?>(
+                            selector: (state) {
+                              return state.wallet?.balance;
+                            },
+                            builder: (context, balance) {
+                              if (balance == null) {
+                                return const ShimmerShortText();
+                              } else {
+                                return TextAnimator(
+                                  balance.currencyFormat(),
+                                  incomingEffect: WidgetTransitionEffects
+                                      .incomingScaleDown(),
+                                  atRestEffect: WidgetRestingEffects.none(),
+                                  style: GoogleFonts.inter(
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w600,
+                                    height: 0.9,
+                                  ),
+                                );
+                              }
+                            },
+                          ),
+                          Text(
+                            ' IQD',
+                            style: GoogleFonts.inter(
+                                fontSize: 10, color: foregroundColor),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
+          );
         }
-        
       },
     );
   }

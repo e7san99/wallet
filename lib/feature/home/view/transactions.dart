@@ -3,6 +3,7 @@ import 'package:slide_switcher/slide_switcher.dart';
 import 'package:wallet/components/components.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/util/extention.dart';
+import 'package:wallet/feature/home/util/widget/shimmer_avatar_transaction.dart';
 import 'package:wallet/feature/register/cubit/cubit.dart';
 import 'package:transformable_list_view/transformable_list_view.dart';
 

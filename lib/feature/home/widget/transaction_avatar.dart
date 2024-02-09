@@ -1,6 +1,7 @@
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/home.dart';
 import 'package:wallet/feature/home/util/extention.dart';
+import 'package:wallet/feature/home/util/widget/shimmer_avatar_transaction.dart';
 import 'package:wallet/feature/register/cubit/cubit.dart';
 
 class TransactionAvatars extends StatelessWidget {
@@ -16,16 +17,14 @@ class TransactionAvatars extends StatelessWidget {
         builder: (context, state) {
           final list = state.transactionModel;
           if (state.isLoading) {
-            return SizedBox(
-              height: 100,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
+            return ListView.separated(
+                scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
                   return const ShimmerWidget();
                 },
-                separatorBuilder: (context, index) => const Divider(),
-                itemCount: 5,
-              ),
+                separatorBuilder: (context, index) => const SizedBox(),
+                itemCount: 2,
+              
             );
           } else if (state.transactionModel.isEmpty) {
             return Center(

@@ -20,7 +20,7 @@ class _WalletContainerState extends State<WalletContainer> {
   Widget build(BuildContext context) {
     return BlocBuilder<UserCubit, UserState>(
       builder: (context, state) {
-        if (state.isLoading) {
+        if (state.myUser == null) {
           return const ShimmerContainer();
         } else {
           return Padding(
@@ -61,10 +61,10 @@ class _WalletContainerState extends State<WalletContainer> {
                                 incomingEffect:
                                     WidgetTransitionEffects.incomingScaleDown(),
                                 atRestEffect: WidgetRestingEffects.none(),
-                                style: GoogleFonts.inter(
+                                style: GoogleFonts.lato(
                                   fontSize: 20,
-                                  letterSpacing: 0.6,
-                                  fontWeight: FontWeight.w400,
+                                  letterSpacing: 1.3,
+                                  fontWeight: FontWeight.w600,
                                   color: foregroundColor,
                                 ),
                               ),
@@ -76,7 +76,7 @@ class _WalletContainerState extends State<WalletContainer> {
                                 incomingEffect:
                                     WidgetTransitionEffects.incomingScaleDown(),
                                 atRestEffect: WidgetRestingEffects.none(),
-                                style: GoogleFonts.inter(
+                                style: GoogleFonts.lato(
                                   fontSize: 15,
                                   letterSpacing: 1.3,
                                   fontWeight: FontWeight.w600,
@@ -93,7 +93,7 @@ class _WalletContainerState extends State<WalletContainer> {
                         children: [
                           Text(
                             'Balance: ',
-                            style: GoogleFonts.inter(
+                            style: GoogleFonts.lato(
                               color: Colors.white70,
                               fontSize: 16,
                             ),
@@ -104,14 +104,14 @@ class _WalletContainerState extends State<WalletContainer> {
                             },
                             builder: (context, balance) {
                               if (balance == null) {
-                                return const ShimmerShortText();
+                                return const Text('');
                               } else {
                                 return TextAnimator(
                                   balance.currencyFormat(),
                                   incomingEffect: WidgetTransitionEffects
                                       .incomingScaleDown(),
                                   atRestEffect: WidgetRestingEffects.none(),
-                                  style: GoogleFonts.inter(
+                                  style: GoogleFonts.lato(
                                     color: Colors.white,
                                     fontSize: 25,
                                     fontWeight: FontWeight.w600,
@@ -123,7 +123,7 @@ class _WalletContainerState extends State<WalletContainer> {
                           ),
                           Text(
                             ' IQD',
-                            style: GoogleFonts.inter(
+                            style: GoogleFonts.lato(
                                 fontSize: 10, color: foregroundColor),
                           ),
                         ],

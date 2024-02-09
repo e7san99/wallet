@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:slide_switcher/slide_switcher.dart';
 import 'package:wallet/components/components.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
@@ -38,7 +39,7 @@ class _TransactionsViewState extends State<TransactionsView> {
               children: [
                 Text(
                   'All',
-                  style: TextStyle(
+                  style: GoogleFonts.openSans(
                     fontWeight:
                         switcherIndex == 0 ? FontWeight.w500 : FontWeight.w400,
                     color: switcherIndex == 0 ? backgroundColor : Colors.white,
@@ -46,7 +47,7 @@ class _TransactionsViewState extends State<TransactionsView> {
                 ),
                 Text(
                   'Sent',
-                  style: TextStyle(
+                  style: GoogleFonts.openSans(
                     fontWeight:
                         switcherIndex == 1 ? FontWeight.w500 : FontWeight.w400,
                     color: switcherIndex == 1 ? backgroundColor : Colors.white,
@@ -54,7 +55,7 @@ class _TransactionsViewState extends State<TransactionsView> {
                 ),
                 Text(
                   'Received',
-                  style: TextStyle(
+                  style: GoogleFonts.openSans(
                     fontWeight:
                         switcherIndex == 2 ? FontWeight.w500 : FontWeight.w400,
                     color: switcherIndex == 2 ? backgroundColor : Colors.white,
@@ -92,8 +93,7 @@ class _TransactionsViewState extends State<TransactionsView> {
                         ),
                         Text(
                           'You don\'t have any transactions',
-                          style: TextStyle(
-                              fontFamily: 'handlee',
+                          style: GoogleFonts.openSans(
                               color: backgroundColor,
                               fontWeight: FontWeight.w500,
                               fontSize: 18),
@@ -110,8 +110,6 @@ class _TransactionsViewState extends State<TransactionsView> {
                     ),
                   );
                 } else {
-                  
-
                   list.sort((a, b) => b.dateTime!.compareTo(a.dateTime!));
                   return Expanded(
                     child: TransformableListView.builder(
@@ -145,7 +143,8 @@ class _TransactionsViewState extends State<TransactionsView> {
                               ),
                               title: Text(
                                 '${list[index].secondUsername}',
-                                style: TextStyle(color: balanceColor),
+                                style:
+                                    GoogleFonts.openSans(color: balanceColor),
                               ),
                               subtitle: Text(
                                 dateFromTimeStamp.weekFormatExtension(),
@@ -153,12 +152,12 @@ class _TransactionsViewState extends State<TransactionsView> {
                               trailing: Text.rich(
                                 TextSpan(
                                   text: '- ${balance.currencyFormat()}',
-                                  style: TextStyle(
+                                  style: GoogleFonts.openSans(
                                       color: balanceColor, fontSize: 15),
-                                  children: const <TextSpan>[
+                                  children: <TextSpan>[
                                     TextSpan(
                                       text: ' IQD',
-                                      style: TextStyle(
+                                      style: GoogleFonts.openSans(
                                           color: Colors.black, fontSize: 12),
                                     ),
                                   ],
@@ -181,7 +180,8 @@ class _TransactionsViewState extends State<TransactionsView> {
                               ),
                               title: Text(
                                 '${list[index].currentUsername}',
-                                style: TextStyle(color: balanceColor),
+                                style:
+                                    GoogleFonts.openSans(color: balanceColor),
                               ),
                               subtitle: Text(
                                 dateFromTimeStamp.weekFormatExtension(),
@@ -189,12 +189,12 @@ class _TransactionsViewState extends State<TransactionsView> {
                               trailing: Text.rich(
                                 TextSpan(
                                   text: '+ ${balance.currencyFormat()}',
-                                  style: TextStyle(
+                                  style: GoogleFonts.openSans(
                                       color: balanceColor, fontSize: 15),
-                                  children: const <TextSpan>[
+                                  children: <TextSpan>[
                                     TextSpan(
                                       text: ' IQD',
-                                      style: TextStyle(
+                                      style: GoogleFonts.openSans(
                                           color: Colors.black, fontSize: 12),
                                     ),
                                   ],
@@ -217,27 +217,28 @@ class _TransactionsViewState extends State<TransactionsView> {
       ),
     );
   }
+
   Matrix4 getTransformMatrix(TransformableListItem item) {
-  /// final scale of child when the animation is completed
-  const endScaleBound = 0.3;
+    /// final scale of child when the animation is completed
+    const endScaleBound = 0.3;
 
-  /// 0 when animation completed and [scale] == [endScaleBound]
-  /// 1 when animation starts and [scale] == 1
-  final animationProgress = item.visibleExtent / item.size.height;
+    /// 0 when animation completed and [scale] == [endScaleBound]
+    /// 1 when animation starts and [scale] == 1
+    final animationProgress = item.visibleExtent / item.size.height;
 
-  /// result matrix
-  final paintTransform = Matrix4.identity();
+    /// result matrix
+    final paintTransform = Matrix4.identity();
 
-  /// animate only if item is on edge
-  if (item.position != TransformableListItemPosition.middle) {
-    final scale = endScaleBound + ((1 - endScaleBound) * animationProgress);
+    /// animate only if item is on edge
+    if (item.position != TransformableListItemPosition.middle) {
+      final scale = endScaleBound + ((1 - endScaleBound) * animationProgress);
 
-    paintTransform
-      ..translate(item.size.width / 2)
-      ..scale(scale)
-      ..translate(-item.size.width / 2);
+      paintTransform
+        ..translate(item.size.width / 2)
+        ..scale(scale)
+        ..translate(-item.size.width / 2);
+    }
+
+    return paintTransform;
   }
-
-  return paintTransform;
-}
 }

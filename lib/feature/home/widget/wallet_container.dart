@@ -129,7 +129,7 @@ class _WalletContainerState extends State<WalletContainer> {
                             child: Text(
                               ' IQD',
                               style: GoogleFonts.openSans(
-                                  fontSize: 10, color: foregroundColor),
+                                  fontSize: 12, color: foregroundColor),
                             ),
                           ),
                         ],

@@ -27,7 +27,14 @@ class _DepositPageState extends State<DepositPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Deposit'),
+          title: Text(
+            'Deposit',
+            style: GoogleFonts.openSans(
+              color: foregroundColor,
+              fontWeight: FontWeight.w500,
+              letterSpacing: 0.2,
+            ),
+          ),
           centerTitle: true,
           backgroundColor: backgroundColor,
         ),
@@ -43,7 +50,7 @@ class _DepositPageState extends State<DepositPage> {
                   return RichText(
                     text: TextSpan(
                       text: balance?.currencyFormat(),
-                      style: TextStyle(
+                      style: GoogleFonts.openSans(
                         color: backgroundColor,
                         fontSize: 43,
                         fontWeight: FontWeight.w600,
@@ -52,7 +59,7 @@ class _DepositPageState extends State<DepositPage> {
                       children: <TextSpan>[
                         TextSpan(
                             text: ' IQD',
-                            style: TextStyle(
+                            style: GoogleFonts.openSans(
                                 fontSize: 20, color: backgroundColor)),
                       ],
                     ),
@@ -64,7 +71,7 @@ class _DepositPageState extends State<DepositPage> {
               ),
               Text(
                 'Total Amount',
-                style: TextStyle(
+                style: GoogleFonts.openSans(
                   color: backgroundColor.withOpacity(0.8),
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
@@ -107,10 +114,9 @@ class _DepositPageState extends State<DepositPage> {
                   return OwnButton(
                     textButton: Text(
                       'ADD',
-                      style: TextStyle(
+                      style: GoogleFonts.openSans(
                         color: foregroundColor,
                         fontSize: 20,
-                        fontFamily: 'lato',
                         letterSpacing: 1.2,
                       ),
                     ),
@@ -129,7 +135,7 @@ class _DepositPageState extends State<DepositPage> {
                                 content1: 'Are you sure to Add ',
                                 content2:
                                     '${num.parse(balance!).currencyFormat()} IQD',
-                                content2Style: TextStyle(
+                                content2Style: GoogleFonts.openSans(
                                   color: backgroundColor,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -156,7 +162,6 @@ class _DepositPageState extends State<DepositPage> {
                                       context: context,
                                       builder: (customDialogTimercontext) =>
                                           CustomDialogTimer(
-                                            
                                             seconds: 3,
                                             image: 'tick',
                                             content1: 'Successfully added',

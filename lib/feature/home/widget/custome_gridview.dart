@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:wallet/feature/home/widget/widget.dart';
 
 class CustomeGridview extends StatelessWidget {
@@ -38,7 +39,7 @@ class CustomeGridview extends StatelessWidget {
               children: [
                 Text(
                   titles[index],
-                  style: TextStyle(
+                  style: GoogleFonts.openSans(
                     color: foregroundColor,
                     fontWeight: FontWeight.w500,
                   ),

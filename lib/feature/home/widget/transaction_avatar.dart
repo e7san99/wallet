@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/home.dart';
 import 'package:wallet/feature/home/util/extention.dart';
@@ -18,20 +19,18 @@ class TransactionAvatars extends StatelessWidget {
           final list = state.transactionModel;
           if (state.isLoading) {
             return ListView.separated(
-                scrollDirection: Axis.vertical,
-                itemBuilder: (context, index) {
-                  return const ShimmerWidget();
-                },
-                separatorBuilder: (context, index) => const SizedBox(),
-                itemCount: 2,
-              
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                return const ShimmerWidget();
+              },
+              separatorBuilder: (context, index) => const SizedBox(),
+              itemCount: 2,
             );
           } else if (state.transactionModel.isEmpty) {
             return Center(
               child: Text(
                 'You don\'t have any transactions',
-                style: TextStyle(
-                    fontFamily: 'handlee',
+                style: GoogleFonts.openSans(
                     color: backgroundColor,
                     fontWeight: FontWeight.w500,
                     fontSize: 18),
@@ -69,7 +68,7 @@ class TransactionAvatars extends StatelessWidget {
                       ),
                       title: Text(
                         '${sentToCurrentDevice ? list[index].currentUsername : list[index].secondUsername}',
-                        style: TextStyle(color: balanceColor),
+                        style: GoogleFonts.openSans(color: balanceColor),
                       ),
                       subtitle: Text(
                         dateFromTimeStamp.weekFormatExtension(),
@@ -78,12 +77,13 @@ class TransactionAvatars extends StatelessWidget {
                         TextSpan(
                           text:
                               '${sentToCurrentDevice ? '+' : '-'} ${balance.currencyFormat()}',
-                          style: TextStyle(color: balanceColor, fontSize: 15),
-                          children: const <TextSpan>[
+                          style: GoogleFonts.openSans(
+                              color: balanceColor, fontSize: 15),
+                          children: <TextSpan>[
                             TextSpan(
                               text: ' IQD',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 12),
+                              style: GoogleFonts.openSans(
+                                  color: Colors.black, fontSize: 12),
                             ),
                           ],
                         ),

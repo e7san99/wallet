@@ -167,7 +167,14 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-            title: const Text('BluePay'),
+            title: Text(
+              'BluePay',
+              style: GoogleFonts.openSans(
+                color: foregroundColor,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 0.2,
+              ),
+            ),
             centerTitle: true,
             elevation: 0,
             // actions: const [

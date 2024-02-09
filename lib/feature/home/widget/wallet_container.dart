@@ -61,9 +61,9 @@ class _WalletContainerState extends State<WalletContainer> {
                                 incomingEffect:
                                     WidgetTransitionEffects.incomingScaleDown(),
                                 atRestEffect: WidgetRestingEffects.none(),
-                                style: GoogleFonts.lato(
+                                style: GoogleFonts.openSans(
                                   fontSize: 20,
-                                  letterSpacing: 1.3,
+                                  letterSpacing: 0.2,
                                   fontWeight: FontWeight.w600,
                                   color: foregroundColor,
                                 ),
@@ -76,7 +76,7 @@ class _WalletContainerState extends State<WalletContainer> {
                                 incomingEffect:
                                     WidgetTransitionEffects.incomingScaleDown(),
                                 atRestEffect: WidgetRestingEffects.none(),
-                                style: GoogleFonts.lato(
+                                style: GoogleFonts.openSans(
                                   fontSize: 15,
                                   letterSpacing: 1.3,
                                   fontWeight: FontWeight.w600,
@@ -91,11 +91,14 @@ class _WalletContainerState extends State<WalletContainer> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Text(
-                            'Balance: ',
-                            style: GoogleFonts.lato(
-                              color: Colors.white70,
-                              fontSize: 16,
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8.0),
+                            child: Text(
+                              'Balance: ',
+                              style: GoogleFonts.openSans(
+                                color: Colors.white70,
+                                fontSize: 16,
+                              ),
                             ),
                           ),
                           BlocSelector<WalletCubit, WalletState, num?>(
@@ -111,20 +114,23 @@ class _WalletContainerState extends State<WalletContainer> {
                                   incomingEffect: WidgetTransitionEffects
                                       .incomingScaleDown(),
                                   atRestEffect: WidgetRestingEffects.none(),
-                                  style: GoogleFonts.lato(
+                                  style: GoogleFonts.openSans(
                                     color: Colors.white,
                                     fontSize: 25,
-                                    fontWeight: FontWeight.w600,
+                                    fontWeight: FontWeight.w500,
                                     height: 0.9,
                                   ),
                                 );
                               }
                             },
                           ),
-                          Text(
-                            ' IQD',
-                            style: GoogleFonts.lato(
-                                fontSize: 10, color: foregroundColor),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 12.0),
+                            child: Text(
+                              ' IQD',
+                              style: GoogleFonts.openSans(
+                                  fontSize: 10, color: foregroundColor),
+                            ),
                           ),
                         ],
                       ),

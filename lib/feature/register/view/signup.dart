@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
@@ -70,9 +71,8 @@ class _SignupPageState extends State<SignupPage> {
                 Center(
                   child: Text(
                     'BluePay',
-                    style: TextStyle(
+                    style: GoogleFonts.openSans(
                       color: foregroundColor,
-                      fontFamily: 'title',
                       fontSize: 28,
                     ),
                   ),
@@ -99,9 +99,8 @@ class _SignupPageState extends State<SignupPage> {
                             children: [
                               Text(
                                 'Create an account',
-                                style: TextStyle(
+                                style: GoogleFonts.openSans(
                                   color: backgroundColor.withOpacity(0.6),
-                                  fontFamily: 'lato',
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -120,7 +119,7 @@ class _SignupPageState extends State<SignupPage> {
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Enter a name';
-                                  }else if(value.length>25){
+                                  } else if (value.length > 25) {
                                     return 'The username must be less than 25 letters.';
                                   }
                                   return null;
@@ -212,11 +211,10 @@ class _SignupPageState extends State<SignupPage> {
                                   return OwnButton(
                                     textButton: Text(
                                       'SIGN UP',
-                                      style: TextStyle(
+                                      style: GoogleFonts.openSans(
                                         color: foregroundColor,
                                         fontSize: 20,
-                                        fontFamily: 'lato',
-                                        letterSpacing: 1.2,
+                                        letterSpacing: 0.3,
                                       ),
                                     ),
                                     onPressed: state
@@ -302,10 +300,9 @@ class _SignupPageState extends State<SignupPage> {
                                                             const SizedBox(
                                                                 width: 20),
                                                             DefaultTextStyle(
-                                                              style: TextStyle(
+                                                              style: GoogleFonts
+                                                                  .openSans(
                                                                 fontSize: 18.0,
-                                                                fontFamily:
-                                                                    'Agne',
                                                                 color:
                                                                     backgroundColor,
                                                               ),

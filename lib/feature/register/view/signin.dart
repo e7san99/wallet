@@ -193,7 +193,7 @@ class _SigninPageState extends State<SigninPage> {
                                       style: GoogleFonts.openSans(
                                         color: foregroundColor,
                                         fontSize: 20,
-                                        letterSpacing: 1.2,
+                                        letterSpacing: 0.3,
                                       ),
                                     ),
                                     onPressed: state

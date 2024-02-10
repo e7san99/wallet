@@ -76,6 +76,7 @@ class WalletImplement extends WalletRepository {
         'secondUid': user.uid,
         'currentUsername': cuurentUsername,
         'secondUsername': user.username,
+        'secondphoneNumber': user.phone,
         'balance': balance,
         'dateTime': DateTime.now(),
       });

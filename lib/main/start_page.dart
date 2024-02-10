@@ -28,14 +28,14 @@ class _StartPageState extends State<StartPage> {
           builder: (context) => const SigninPage(),
         ),
       );
-    } else {
+          } else {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => const HomePage(),
         ),
       );
-    }
+          }
 
 
   }
@@ -50,7 +50,7 @@ class _StartPageState extends State<StartPage> {
           // crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             LoadingAnimationWidget.dotsTriangle(
-              color: backgroundColor, 
+              color: backgroundColor,
               size: 50,
             ),
             const SizedBox(

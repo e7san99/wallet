@@ -8,13 +8,15 @@ class TransactionModel {
   String? secondUid;
   String? currentUsername;
   String? secondUsername;
+  String? secondphoneNumber;
   num? balance;
- DateTime? dateTime;
+  DateTime? dateTime;
   TransactionModel({
     this.currentUid,
     this.secondUid,
     this.currentUsername,
     this.secondUsername,
+    this.secondphoneNumber,
     this.balance,
     this.dateTime,
   });
@@ -24,6 +26,7 @@ class TransactionModel {
     String? secondUid,
     String? currentUsername,
     String? secondUsername,
+    String? secondphoneNumber,
     num? balance,
     DateTime? dateTime,
   }) {
@@ -32,6 +35,7 @@ class TransactionModel {
       secondUid: secondUid ?? this.secondUid,
       currentUsername: currentUsername ?? this.currentUsername,
       secondUsername: secondUsername ?? this.secondUsername,
+      secondphoneNumber: secondphoneNumber ?? this.secondphoneNumber,
       balance: balance ?? this.balance,
       dateTime: dateTime ?? this.dateTime,
     );
@@ -43,6 +47,7 @@ class TransactionModel {
       'secondUid': secondUid,
       'currentUsername': currentUsername,
       'secondUsername': secondUsername,
+      'secondphoneNumber': secondphoneNumber,
       'balance': balance,
       'dateTime': dateTime?.millisecondsSinceEpoch,
     };
@@ -50,12 +55,22 @@ class TransactionModel {
 
   factory TransactionModel.fromMap(Map<String, dynamic> map) {
     return TransactionModel(
-      currentUid: map['currentUid'] != null ? map['currentUid'] as String : null,
+      currentUid:
+          map['currentUid'] != null ? map['currentUid'] as String : null,
       secondUid: map['secondUid'] != null ? map['secondUid'] as String : null,
-      currentUsername: map['currentUsername'] != null ? map['currentUsername'] as String : null,
-      secondUsername: map['secondUsername'] != null ? map['secondUsername'] as String : null,
+      currentUsername: map['currentUsername'] != null
+          ? map['currentUsername'] as String
+          : null,
+      secondUsername: map['secondUsername'] != null
+          ? map['secondUsername'] as String
+          : null,
+      secondphoneNumber: map['secondphoneNumber'] != null
+          ? map['secondphoneNumber'] as String
+          : null,
       balance: map['balance'] != null ? map['balance'] as num : null,
-      dateTime: map['dateTime'] != null ? DateTime.fromMillisecondsSinceEpoch(map['dateTime'] as int) : null,
+      dateTime: map['dateTime'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['dateTime'] as int)
+          : null,
     );
   }
 
@@ -66,30 +81,31 @@ class TransactionModel {
 
   @override
   String toString() {
-    return 'TransactionModel(currentUid: $currentUid, secondUid: $secondUid, currentUsername: $currentUsername, secondUsername: $secondUsername, balance: $balance, dateTime: $dateTime)';
+    return 'TransactionModel(currentUid: $currentUid, secondUid: $secondUid, currentUsername: $currentUsername, secondUsername: $secondUsername, secondphoneNumber: $secondphoneNumber, balance: $balance, dateTime: $dateTime)';
   }
 
   @override
   bool operator ==(covariant TransactionModel other) {
     if (identical(this, other)) return true;
-  
-    return 
-      other.currentUid == currentUid &&
-      other.secondUid == secondUid &&
-      other.currentUsername == currentUsername &&
-      other.secondUsername == secondUsername &&
-      other.balance == balance &&
-      other.dateTime == dateTime;
+
+    return other.currentUid == currentUid &&
+        other.secondUid == secondUid &&
+        other.currentUsername == currentUsername &&
+        other.secondUsername == secondUsername &&
+        other.secondphoneNumber == secondphoneNumber &&
+        other.balance == balance &&
+        other.dateTime == dateTime;
   }
 
   @override
   int get hashCode {
     return currentUid.hashCode ^
-      secondUid.hashCode ^
-      currentUsername.hashCode ^
-      secondUsername.hashCode ^
-      balance.hashCode ^
-      dateTime.hashCode;
+        secondUid.hashCode ^
+        currentUsername.hashCode ^
+        secondUsername.hashCode ^
+        secondphoneNumber.hashCode ^
+        balance.hashCode ^
+        dateTime.hashCode;
   }
 
   factory TransactionModel.fromSnapshot(
@@ -100,9 +116,11 @@ class TransactionModel {
       secondUid: data['secondUid'],
       currentUsername: data['currentUsername'],
       secondUsername: data['secondUsername'],
+      secondphoneNumber: data['secondphoneNumber'],
       balance: data['balance'] as num,
-      dateTime: data['dateTime'] != null ? (data['dateTime'] as Timestamp).toDate() : null,
+      dateTime: data['dateTime'] != null
+          ? (data['dateTime'] as Timestamp).toDate()
+          : null,
     );
   }
-  
 }

@@ -172,7 +172,7 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                         seconds: 7,
                                         image: 'info',
                                         content1:
-                                            'You can\'t send a balance to yourself',
+                                            'You can\'t send balance to yourself',
                                         okButton: () {
                                           Navigator.pop(
                                               customDialogTimercontext);

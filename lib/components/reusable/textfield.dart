@@ -10,8 +10,10 @@ class OwnTextFormField extends StatelessWidget {
   final IconData icon;
   final void Function(String?)? onSaved;
   final String? Function(String?)? validator;
+  final int? maxLength;
   const OwnTextFormField({
     super.key,
+    this.maxLength,
     required this.label,
     required this.keyboardType,
     required this.isNumber,
@@ -25,6 +27,7 @@ class OwnTextFormField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40.0),
       child: TextFormField(
+        maxLength: maxLength,
         autocorrect: true,
         autovalidateMode: AutovalidateMode.onUserInteraction,
         style: TextStyle(

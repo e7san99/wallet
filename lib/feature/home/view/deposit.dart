@@ -81,6 +81,7 @@ class _DepositPageState extends State<DepositPage> {
               Form(
                 key: formKey,
                 child: OwnTextFormField(
+                  maxLength: 9,
                   label: 'balance',
                   keyboardType: TextInputType.phone,
                   isNumber: <TextInputFormatter>[ThousandsFormatter()],
@@ -94,6 +95,14 @@ class _DepositPageState extends State<DepositPage> {
                     }
                     // Remove commas before parsing
                     value = value.replaceAll(',', '');
+                    // if (double.tryParse(value) == null ||
+                    //     double.parse(value) < 1000) {
+                    //   return 'The minimum balance is 1,000';
+                    // }
+                    if (double.tryParse(value) == null ||
+                        double.parse(value) > 1000000) {
+                      return 'The maximum balance is 1,000,000';
+                    }
 
                     if (double.tryParse(value) == null ||
                         double.parse(value) <= 0) {
@@ -174,62 +183,6 @@ class _DepositPageState extends State<DepositPage> {
                                 },
                               ),
                             );
-                            // AwesomeDialog(
-                            //   context: context,
-                            //   dialogType: DialogType.question,
-                            //   animType: AnimType.leftSlide,
-                            //   headerAnimationLoop: false,
-                            //   showCloseIcon: true,
-                            //   transitionAnimationDuration:
-                            //       const Duration(milliseconds: 100),
-                            //   // descTextStyle: GoogleFonts.outfit(),
-                            //   title: 'Add Balance',
-                            //   body: Text.rich(
-                            //     TextSpan(
-                            //       text: 'Are you sure to Add ',
-                            //       style: DefaultTextStyle.of(context).style,
-                            //       children: <TextSpan>[
-                            //         TextSpan(
-                            //           text:
-                            //               '${num.parse(balance!).currencyFormat()} IQD',
-                            //           style: TextStyle(
-                            //               color: backgroundColor,
-                            //               fontWeight: FontWeight
-                            //                   .bold), // Change color as needed
-                            //         ),
-                            //         const TextSpan(text: ' to your Balance ?'),
-                            //       ],
-                            //     ),
-                            //   ),
-                            //   btnCancelText: 'No',
-                            //   btnOkText: 'Yes',
-                            //   btnCancelColor: Colors.red[700],
-                            //   btnOkColor: Colors.green[700],
-
-                            //   btnCancelOnPress: () {
-                            //     return;
-                            //   },
-                            //   btnOkOnPress: () async {
-                            //     context
-                            //         .read<WalletCubit>()
-                            //         .updateBalance(num.parse(balance!));
-                            //     print("balance: ${num.parse(balance!)}");
-                            //     AwesomeDialog(
-                            //       context: context,
-                            //       dialogType: DialogType.success,
-                            //       animType: AnimType.scale,
-                            //       title: 'Successfully added',
-                            //       autoHide: const Duration(seconds: 3),
-                            //       btnOkColor: Colors.green,
-                            //       btnOkText: 'Done',
-                            //       btnOkOnPress: () {
-                            //         return;
-                            //       },
-                            //     ).show();
-
-                            //     formKey.currentState?.reset();
-                            //   },
-                            // ).show();
                           },
                     backgroundColor: backgroundColor,
                     foregroundColor: foregroundColor,

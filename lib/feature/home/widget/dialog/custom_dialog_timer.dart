@@ -5,16 +5,18 @@ import 'package:widget_and_text_animator/widget_and_text_animator.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomDialogTimer extends StatefulWidget {
-    final int seconds;
-  final String? image, content1,content2,content3;
+  final int seconds;
+  final String? image, content1, content2, content3;
+    final Color? content2Color;
   final void Function()? okButton;
 
   const CustomDialogTimer({
     super.key,
     required this.image,
     required this.content1,
-     this.content2,
-     this.content3,
+    this.content2,
+    this.content3,
+    this.content2Color,
     required this.okButton,
     required this.seconds,
   });
@@ -66,9 +68,9 @@ class _CustomDialogTimerState extends State<CustomDialogTimer> {
               content1: widget.content1,
               content2: widget.content2,
               content3: widget.content3,
+              content2Color: widget.content2Color,
               okButton: widget.okButton,
             ),
-            
             Positioned(
               top: 0,
               right: -15,
@@ -97,14 +99,16 @@ class _CustomDialogTimerState extends State<CustomDialogTimer> {
 }
 
 class CardDialog extends StatelessWidget {
-  final String? image, content1,content2,content3;
+  final String? image, content1, content2, content3;
+  final Color? content2Color;
   final void Function()? okButton;
   const CardDialog({
     super.key,
     required this.image,
     required this.content1,
-     this.content2,
-     this.content3,
+    this.content2,
+    this.content3,
+    this.content2Color,
     required this.okButton,
   });
 
@@ -159,17 +163,15 @@ class CardDialog extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   text: content2,
-                  style:GoogleFonts.poppins(
-                                                  color: Colors.red,
-                                                  fontWeight: FontWeight
-                                                      .bold),
+                  style: GoogleFonts.poppins(
+                      color: content2Color, fontWeight: FontWeight.bold),
                 ),
                 TextSpan(
                   text: content3, //'Are you sure to Add ',
-                  style:GoogleFonts.poppins(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w300,
-                                        ),
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                    fontWeight: FontWeight.w300,
+                  ),
                 ),
               ],
             ),

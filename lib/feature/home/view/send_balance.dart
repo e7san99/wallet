@@ -85,6 +85,7 @@ class _SendBalancePageState extends State<SendBalancePage> {
                   ),
                 ),
                 OwnTextFormField(
+                  maxLength: 10,
                   label: 'balance',
                   keyboardType: TextInputType.phone,
                   isNumber: <TextInputFormatter>[ThousandsFormatter()],
@@ -98,6 +99,14 @@ class _SendBalancePageState extends State<SendBalancePage> {
                     }
                     // Remove commas before parsing
                     value = value.replaceAll(',', '');
+                    if (double.tryParse(value) == null ||
+                        double.parse(value) < 1000) {
+                      return 'The minimum balance is 1,000';
+                    }
+                    if (double.tryParse(value) == null ||
+                        double.parse(value) > 10000000) {
+                      return 'The maximum balance is 10,000,000';
+                    }
 
                     if (double.tryParse(value) == null ||
                         double.parse(value) <= 0) {
@@ -270,6 +279,7 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                         image: 'warning',
                                         content1: 'This phone number ',
                                         content2: '$phone',
+                                        content2Color: Colors.red,
                                         content3: ' is not exist',
                                         okButton: () {
                                           Navigator.pop(

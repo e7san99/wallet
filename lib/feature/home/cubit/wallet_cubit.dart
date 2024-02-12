@@ -111,4 +111,9 @@ Future<void> getTransaction() async {
       );
     });
   }
+
+    Future<void> clearWallet() async {
+    // Clear wallet and transaction data
+    emit(const WalletState()); // Reset the state to its initial state
+  }
 }

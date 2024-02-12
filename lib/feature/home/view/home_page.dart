@@ -156,6 +156,9 @@ class _HomePageState extends State<HomePage> {
                               },
                               yesButton: () async {
                                 await context.read<UserCubit>().logout();
+
+                                if (!mounted) return;
+                                context.read<WalletCubit>().clearWallet();
                               },
                             ),
                           );

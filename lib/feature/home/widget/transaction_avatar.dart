@@ -3,6 +3,7 @@ import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/home.dart';
 import 'package:wallet/feature/home/util/extention.dart';
 import 'package:wallet/feature/home/util/widget/shimmer_avatar_transaction.dart';
+import 'package:wallet/feature/home/widget/modal_sheet.dart';
 import 'package:wallet/feature/register/cubit/cubit.dart';
 
 class TransactionAvatars extends StatelessWidget {
@@ -88,6 +89,23 @@ class TransactionAvatars extends StatelessWidget {
                           ],
                         ),
                       ),
+                      onTap: () {
+                        showModalBottomSheet(
+                          // isScrollControlled: true, //barzayykayzor abe
+                          enableDrag: true,
+                          showDragHandle: true,
+                          isDismissible: true,
+                          useRootNavigator: true,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(20))),
+                          useSafeArea: true,
+                          context: context,
+                          builder: (context) {
+                            return const ModalSheet();
+                          },
+                        );
+                      },
                     ),
                   );
                 });

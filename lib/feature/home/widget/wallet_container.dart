@@ -92,7 +92,7 @@ class _WalletContainerState extends State<WalletContainer> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 8.0),
+                            padding: const EdgeInsets.only(top: 5.0),
                             child: Text(
                               'Balance: ',
                               style: GoogleFonts.openSans(
@@ -125,7 +125,7 @@ class _WalletContainerState extends State<WalletContainer> {
                             },
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 12.0),
+                            padding: const EdgeInsets.only(top: 10.0),
                             child: Text(
                               ' IQD',
                               style: GoogleFonts.openSans(

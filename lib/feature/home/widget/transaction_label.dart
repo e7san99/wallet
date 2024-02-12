@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wallet/feature/home/view/transactions.dart';
 import 'package:wallet/feature/home/view/view.dart';
@@ -24,12 +25,7 @@ class TransactionLabels extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const TransactionsView(),
-                ),
-              );
+              context.push('/transaction');
             },
             child: Padding(
               padding: const EdgeInsets.only(top: 5.0),

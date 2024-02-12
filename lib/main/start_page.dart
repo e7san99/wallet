@@ -1,4 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:go_router/go_router.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:wallet/feature/register/view/view.dart';
 
@@ -22,22 +23,10 @@ class _StartPageState extends State<StartPage> {
     if (!mounted) return;
     final user = firebaseAuth.currentUser;
     if (user == null) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const SigninPage(),
-        ),
-      );
-          } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomePage(),
-        ),
-      );
-          }
-
-
+      context.go('/signin');
+    } else {
+      context.go('/');
+    }
   }
 
   @override
@@ -59,7 +48,7 @@ class _StartPageState extends State<StartPage> {
             AnimatedTextKit(
               animatedTexts: [
                 TypewriterAnimatedText(
-                  textStyle:  TextStyle(color: backgroundColor, fontSize: 16),
+                  textStyle: TextStyle(color: backgroundColor, fontSize: 16),
                   'Loading...',
                 ),
               ],

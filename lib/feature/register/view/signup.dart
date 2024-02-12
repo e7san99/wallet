@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -35,11 +36,12 @@ class _SignupPageState extends State<SignupPage> {
           //     content: Text('Success'),
           //   ),
           // );
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomePage(),
-              ));
+          context.go('/');
+          // Navigator.pushReplacement(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => const HomePage(),
+          //     ));
         }
       },
       child: Form(
@@ -350,12 +352,7 @@ class _SignupPageState extends State<SignupPage> {
                                 title: 'Already have an account? ',
                                 buttonTitle: 'Sign in',
                                 onTap: () {
-                                  Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const SigninPage(),
-                                      ));
+                                  context.go('/signin');
                                 },
                               )
                             ],

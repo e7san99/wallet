@@ -1,6 +1,7 @@
 // import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:ui';
 
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -30,17 +31,7 @@ class _SigninPageState extends State<SigninPage> {
       },
       listener: (context, state) {
         if (state.myUser != null) {
-          // ScaffoldMessenger.of(context).showSnackBar(
-          //   const SnackBar(
-          //     content: Text('Login'),
-          //   ),
-          // );
-
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const HomePage(),
-              ));
+          context.go('/');
         }
       },
       child: Form(
@@ -166,13 +157,7 @@ class _SigninPageState extends State<SigninPage> {
                                 alignment: Alignment.topRight * 0.7,
                                 child: TextButton(
                                   onPressed: () {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const ForgotAccount(),
-                                      ),
-                                    );
+                                    context.go('/forgot');
                                   },
                                   child: Text(
                                     'Forgot password?',
@@ -303,12 +288,7 @@ class _SigninPageState extends State<SigninPage> {
                                 title: 'Don\'t have an account? ',
                                 buttonTitle: 'Sign up',
                                 onTap: () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const SignupPage(),
-                                    ),
-                                  );
+                                  context.push('/signup');
                                 },
                               ),
                             ],

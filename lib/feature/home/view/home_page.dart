@@ -1,3 +1,4 @@
+import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/home.dart';
@@ -70,20 +71,10 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     List<void Function()?> onTap = [
       () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const DepositPage(),
-          ),
-        );
+         context.push('/deposit');
       },
       () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const SendBalancePage(),
-          ),
-        );
+         context.push('/sendBalance');
       },
       () {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -117,12 +108,7 @@ class _HomePageState extends State<HomePage> {
       listenWhen: (previous, current) => previous.myUser != current.myUser,
       listener: (context, state) {
         if (state.myUser == null) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const SigninPage(),
-            ),
-          );
+          context.go('/signin');
         }
       },
       child: Form(

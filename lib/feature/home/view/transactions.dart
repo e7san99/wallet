@@ -8,14 +8,14 @@ import 'package:wallet/feature/home/util/widget/shimmer_avatar_transaction.dart'
 import 'package:wallet/feature/register/cubit/cubit.dart';
 import 'package:transformable_list_view/transformable_list_view.dart';
 
-class TransactionsView extends StatefulWidget {
-  const TransactionsView({super.key});
+class TransactionsPage extends StatefulWidget {
+  const TransactionsPage({super.key});
 
   @override
-  State<TransactionsView> createState() => _TransactionsViewState();
+  State<TransactionsPage> createState() => _TransactionsPageState();
 }
 
-class _TransactionsViewState extends State<TransactionsView> {
+class _TransactionsPageState extends State<TransactionsPage> {
   int switcherIndex = 0;
 
   @override

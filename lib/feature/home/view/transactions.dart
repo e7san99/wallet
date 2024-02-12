@@ -113,130 +113,168 @@ class _TransactionsPageState extends State<TransactionsPage> {
                 } else {
                   list.sort((a, b) => b.dateTime!.compareTo(a.dateTime!));
                   return Expanded(
-                    child: TransformableListView.builder(
-                      getTransformMatrix: getTransformMatrix,
-                      padding: const EdgeInsets.all(10),
-                      itemCount: list.length,
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) {
-                        var balance = list[index].balance;
-                        // final usCurrency = NumberFormat('#,##0', 'en_US');
-                        bool sentToCurrentDevice = list[index].secondUid ==
-                            FirebaseAuth.instance.currentUser?.uid;
-                        Color balanceColor =
-                            sentToCurrentDevice ? backgroundColor : Colors.red;
-                        var dateFromTimeStamp =
-                            DateTime.fromMillisecondsSinceEpoch(
-                                list[index].dateTime!.millisecondsSinceEpoch);
+                    child: RefreshIndicator(
+                      onRefresh: () async {},
+                      child: TransformableListView.builder(
+                        getTransformMatrix: getTransformMatrix,
+                        padding: const EdgeInsets.all(10),
+                        itemCount: list.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          var balance = list[index].balance;
+                          // final usCurrency = NumberFormat('#,##0', 'en_US');
+                          bool sentToCurrentDevice = list[index].secondUid ==
+                              FirebaseAuth.instance.currentUser?.uid;
+                          Color balanceColor = sentToCurrentDevice
+                              ? backgroundColor
+                              : Colors.red;
+                          var dateFromTimeStamp =
+                              DateTime.fromMillisecondsSinceEpoch(
+                                  list[index].dateTime!.millisecondsSinceEpoch);
 
-                        // Check if the transaction is sent
-                        if (!sentToCurrentDevice && switcherIndex != 2) {
-                          return Container(
-                            margin: const EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              color: Colors.blue[100]?.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.arrow_downward_rounded,
-                                color: balanceColor,
+                          // Check if the transaction is sent
+                          if (!sentToCurrentDevice && switcherIndex != 2) {
+                            return Container(
+                              margin: const EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: Colors.blue[100]?.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              title: Text(
-                                '${list[index].secondUsername}',
-                                style:
-                                    GoogleFonts.openSans(color: balanceColor),
-                              ),
-                              subtitle: Text(
-                                dateFromTimeStamp.weekFormatExtension(),
-                              ),
-                              trailing: Text.rich(
-                                TextSpan(
-                                  text: '- ${balance.currencyFormat()}',
-                                  style: GoogleFonts.openSans(
-                                      color: balanceColor, fontSize: 15),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                      text: ' IQD',
-                                      style: GoogleFonts.openSans(
-                                          color: Colors.black, fontSize: 12),
-                                    ),
-                                  ],
+                              child: ListTile(
+                                leading: Icon(
+                                  Icons.arrow_downward_rounded,
+                                  color: balanceColor,
                                 ),
-                              ),
-                            ),
-                          );
-                        } else if (sentToCurrentDevice && switcherIndex != 1) {
-                          // Check if the transaction is received
-                          return Container(
-                            margin: const EdgeInsets.all(8.0),
-                            decoration: BoxDecoration(
-                              color: Colors.blue[100]?.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: ListTile(
-                              leading: Icon(
-                                Icons.arrow_upward_rounded,
-                                color: balanceColor,
-                              ),
-                              title: Text(
-                                '${list[index].currentUsername}',
-                                style:
-                                    GoogleFonts.openSans(color: balanceColor),
-                              ),
-                              subtitle: Text(
-                                dateFromTimeStamp.weekFormatExtension(),
-                              ),
-                              trailing: Text.rich(
-                                TextSpan(
-                                  text: '+ ${balance.currencyFormat()}',
-                                  style: GoogleFonts.openSans(
-                                      color: balanceColor, fontSize: 15),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                      text: ' IQD',
-                                      style: GoogleFonts.openSans(
-                                          color: Colors.black, fontSize: 12),
-                                    ),
-                                  ],
+                                title: Text(
+                                  '${list[index].secondUsername}',
+                                  style:
+                                      GoogleFonts.openSans(color: balanceColor),
                                 ),
+                                subtitle: Text(
+                                  dateFromTimeStamp.weekFormatExtension(),
+                                ),
+                                trailing: Text.rich(
+                                  TextSpan(
+                                    text: '- ${balance.currencyFormat()}',
+                                    style: GoogleFonts.openSans(
+                                        color: balanceColor, fontSize: 15),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: ' IQD',
+                                        style: GoogleFonts.openSans(
+                                            color: Colors.black, fontSize: 12),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    // isScrollControlled: true, //barzayykayzor abe
+                                    enableDrag: true,
+                                    showDragHandle: true,
+                                    isDismissible: true,
+                                    useRootNavigator: true,
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(20))),
+                                    useSafeArea: true,
+                                    context: context,
+                                    builder: (context) {
+                                      return ModalSheet(
+                                        username:
+                                            '${sentToCurrentDevice ? list[index].currentUsername : list[index].secondUsername}',
+                                        phone:
+                                            '${sentToCurrentDevice ? list[index].currentphoneNumber : list[index].secondphoneNumber}',
+                                        balance:
+                                            '${sentToCurrentDevice ? '+' : '-'} ${balance.currencyFormat()}',
+                                        color: balanceColor,
+                                        time: dateFromTimeStamp
+                                            .timeFormatExtension(),
+                                        date: dateFromTimeStamp
+                                            .dateFormatExtension(),
+                                        day: dateFromTimeStamp
+                                            .nameOfTheDayFormatExtension(),
+                                      );
+                                    },
+                                  );
+                                },
                               ),
-                              onTap: () {
-                                                        showModalBottomSheet(
-                          // isScrollControlled: true, //barzayykayzor abe
-                          enableDrag: true,
-                          showDragHandle: true,
-                          isDismissible: true,
-                          useRootNavigator: true,
-                          shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(20))),
-                          useSafeArea: true,
-                          context: context,
-                          builder: (context) {
-                            return ModalSheet(
-                              username:
-                                  '${sentToCurrentDevice ? list[index].currentUsername : list[index].secondUsername}',
-                              phone:
-                                  '${sentToCurrentDevice ? list[index].currentphoneNumber : list[index].secondphoneNumber}',
-                              balance:
-                                  '${sentToCurrentDevice ? '+' : '-'} ${balance.currencyFormat()}',
-                              color: balanceColor,
-                              time: dateFromTimeStamp.timeFormatExtension(),
-                              date: dateFromTimeStamp.dateFormatExtension(),
-                              day: dateFromTimeStamp
-                                  .nameOfTheDayFormatExtension(),
                             );
-                          },
-                        );
-                              },
-                            ),
-                          );
-                        } else {
-                          // Return an empty container for other cases
-                          return Container();
-                        }
-                      },
+                          } else if (sentToCurrentDevice &&
+                              switcherIndex != 1) {
+                            // Check if the transaction is received
+                            return Container(
+                              margin: const EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: Colors.blue[100]?.withOpacity(0.1),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: ListTile(
+                                leading: Icon(
+                                  Icons.arrow_upward_rounded,
+                                  color: balanceColor,
+                                ),
+                                title: Text(
+                                  '${list[index].currentUsername}',
+                                  style:
+                                      GoogleFonts.openSans(color: balanceColor),
+                                ),
+                                subtitle: Text(
+                                  dateFromTimeStamp.weekFormatExtension(),
+                                ),
+                                trailing: Text.rich(
+                                  TextSpan(
+                                    text: '+ ${balance.currencyFormat()}',
+                                    style: GoogleFonts.openSans(
+                                        color: balanceColor, fontSize: 15),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                        text: ' IQD',
+                                        style: GoogleFonts.openSans(
+                                            color: Colors.black, fontSize: 12),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    // isScrollControlled: true, //barzayykayzor abe
+                                    enableDrag: true,
+                                    showDragHandle: true,
+                                    isDismissible: true,
+                                    useRootNavigator: true,
+                                    shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.vertical(
+                                            top: Radius.circular(20))),
+                                    useSafeArea: true,
+                                    context: context,
+                                    builder: (context) {
+                                      return ModalSheet(
+                                        username:
+                                            '${sentToCurrentDevice ? list[index].currentUsername : list[index].secondUsername}',
+                                        phone:
+                                            '${sentToCurrentDevice ? list[index].currentphoneNumber : list[index].secondphoneNumber}',
+                                        balance:
+                                            '${sentToCurrentDevice ? '+' : '-'} ${balance.currencyFormat()}',
+                                        color: balanceColor,
+                                        time: dateFromTimeStamp
+                                            .timeFormatExtension(),
+                                        date: dateFromTimeStamp
+                                            .dateFormatExtension(),
+                                        day: dateFromTimeStamp
+                                            .nameOfTheDayFormatExtension(),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            );
+                          } else {
+                            // Return an empty container for other cases
+                            return Container();
+                          }
+                        },
+                      ),
                     ),
                   );
                 }

@@ -102,7 +102,19 @@ class TransactionAvatars extends StatelessWidget {
                           useSafeArea: true,
                           context: context,
                           builder: (context) {
-                            return const ModalSheet();
+                            return ModalSheet(
+                              username:
+                                  '${sentToCurrentDevice ? list[index].currentUsername : list[index].secondUsername}',
+                              phone:
+                                  '${sentToCurrentDevice ? list[index].currentphoneNumber : list[index].secondphoneNumber}',
+                              balance:
+                                  '${sentToCurrentDevice ? '+' : '-'} ${balance.currencyFormat()}',
+                              color: balanceColor,
+                              time: dateFromTimeStamp.timeFormatExtension(),
+                              date: dateFromTimeStamp.dateFormatExtension(),
+                              day: dateFromTimeStamp
+                                  .nameOfTheDayFormatExtension(),
+                            );
                           },
                         );
                       },

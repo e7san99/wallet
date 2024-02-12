@@ -50,3 +50,9 @@ extension WeekFormatExtension on DateTime {
         day == yesterday.day;
   }
 }
+
+extension NameOfTheDayFormatExtension on DateTime {
+  String nameOfTheDayFormatExtension() {
+    return DateFormat('EEEE').format(this);
+  }
+}

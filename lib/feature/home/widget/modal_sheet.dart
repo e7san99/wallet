@@ -4,8 +4,22 @@ import 'package:wallet/components/components.dart';
 import 'package:wallet/components/theme/theme_properties.dart';
 
 class ModalSheet extends StatelessWidget {
+  final String? username;
+  final String? balance;
+  final String? phone;
+  final String? time;
+  final String? date;
+  final String? day;
+  final Color? color;
   const ModalSheet({
     super.key,
+    required this.username,
+    required this.balance,
+    required this.phone,
+     required this.time,
+     required this.date,
+     required this.day,
+    required this.color,
   });
 
   @override
@@ -54,9 +68,9 @@ class ModalSheet extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      Text('Ehsan Ahmed',
+                      Text(username ?? '',
                           style: GoogleFonts.openSans(
-                              color: Colors.red, fontSize: 18)),
+                              color: color!, fontSize: 18)),
                     ],
                   ),
                   Column(
@@ -68,9 +82,21 @@ class ModalSheet extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      Text('- 10,000',
+                      Text.rich(
+                        TextSpan(
+                          text:
+                              balance,
                           style: GoogleFonts.openSans(
-                              color: Colors.red, fontSize: 18)),
+                              color: color, fontSize: 18),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: ' IQD',
+                              style: GoogleFonts.openSans(
+                                  color: Colors.black, fontSize: 12),
+                            ),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -99,7 +125,7 @@ class ModalSheet extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      Text('0770 123 4567',
+                      Text(phone??'',
                           style: GoogleFonts.openSans(
                               color: Colors.black,
                               fontWeight: FontWeight.w600,
@@ -115,7 +141,7 @@ class ModalSheet extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      Text('12:20 AM',
+                      Text(time??'',
                           style: GoogleFonts.openSans(
                               color: Colors.black,
                               fontWeight: FontWeight.w600,
@@ -148,7 +174,7 @@ class ModalSheet extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      Text('1/1/2024     ',
+                      Text('${date??''}     ',
                           style: GoogleFonts.openSans(
                               color: Colors.black,
                               fontWeight: FontWeight.w600,
@@ -164,7 +190,7 @@ class ModalSheet extends StatelessWidget {
                       const SizedBox(
                         height: 5,
                       ),
-                      Text('Monday',
+                      Text(day??'',
                           style: GoogleFonts.openSans(
                               color: Colors.black,
                               fontWeight: FontWeight.w600,

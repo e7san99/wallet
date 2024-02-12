@@ -46,7 +46,7 @@ class WalletImplement extends WalletRepository {
 
   @override
   Future<bool> sendBalance(
-      String phone, String cuurentUsername, num balance) async {
+      String phone,String phoneForReceiveBalance, String cuurentUsername, num balance) async {
     final currentUid = firebaseAuth.currentUser?.uid;
     try {
       ////////// current
@@ -76,6 +76,7 @@ class WalletImplement extends WalletRepository {
         'secondUid': user.uid,
         'currentUsername': cuurentUsername,
         'secondUsername': user.username,
+        'currentphoneNumber': phoneForReceiveBalance,
         'secondphoneNumber': user.phone,
         'balance': balance,
         'dateTime': DateTime.now(),

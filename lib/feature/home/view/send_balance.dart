@@ -357,6 +357,7 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                                 state ?? 'currentUsername',
                                                 num.parse(balance!),
                                                 phone ?? '000',
+                                                context.read<UserCubit>().state.myUser!.phone!,
                                               );
                                           Navigator.pop(context);
                                           formKey.currentState?.reset();

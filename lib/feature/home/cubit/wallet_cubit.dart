@@ -46,13 +46,13 @@ class WalletCubit extends Cubit<WalletState> {
   }
 
   Future<void> sendBalance(
-      String currentUsername, num balance, String phone) async {
+      String currentUsername, num balance, String phone,String phoneForReceiveBalance) async {
     emit(state.copyWith(isLoading: true));
     var sendBalance = state.wallet!.balance ?? 0;
     sendBalance = sendBalance - balance;
 
     final suc =
-        await walletRepository.sendBalance(phone, currentUsername, balance);
+        await walletRepository.sendBalance(phone, phoneForReceiveBalance ,currentUsername, balance);
 
     if (suc) {
       // No need to call getWallet() here, as the stream will automatically update the balance

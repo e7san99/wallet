@@ -5,6 +5,7 @@ import 'package:wallet/components/components.dart';
 import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/util/extention.dart';
 import 'package:wallet/feature/home/util/widget/shimmer_avatar_transaction.dart';
+import 'package:wallet/feature/home/widget/modal_sheet.dart';
 import 'package:wallet/feature/register/cubit/cubit.dart';
 import 'package:transformable_list_view/transformable_list_view.dart';
 
@@ -200,6 +201,35 @@ class _TransactionsPageState extends State<TransactionsPage> {
                                   ],
                                 ),
                               ),
+                              onTap: () {
+                                                        showModalBottomSheet(
+                          // isScrollControlled: true, //barzayykayzor abe
+                          enableDrag: true,
+                          showDragHandle: true,
+                          isDismissible: true,
+                          useRootNavigator: true,
+                          shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(20))),
+                          useSafeArea: true,
+                          context: context,
+                          builder: (context) {
+                            return ModalSheet(
+                              username:
+                                  '${sentToCurrentDevice ? list[index].currentUsername : list[index].secondUsername}',
+                              phone:
+                                  '${sentToCurrentDevice ? list[index].currentphoneNumber : list[index].secondphoneNumber}',
+                              balance:
+                                  '${sentToCurrentDevice ? '+' : '-'} ${balance.currencyFormat()}',
+                              color: balanceColor,
+                              time: dateFromTimeStamp.timeFormatExtension(),
+                              date: dateFromTimeStamp.dateFormatExtension(),
+                              day: dateFromTimeStamp
+                                  .nameOfTheDayFormatExtension(),
+                            );
+                          },
+                        );
+                              },
                             ),
                           );
                         } else {

@@ -99,10 +99,10 @@ class _DepositPageState extends State<DepositPage> {
                     //     double.parse(value) < 1000) {
                     //   return 'The minimum balance is 1,000';
                     // }
-                    if (double.tryParse(value) == null ||
-                        double.parse(value) > 1000000) {
-                      return 'The maximum balance is 1,000,000';
-                    }
+                    // if (double.tryParse(value) == null ||
+                    //     double.parse(value) > 1000000) {
+                    //   return 'The maximum balance is 1,000,000';
+                    // }
 
                     if (double.tryParse(value) == null ||
                         double.parse(value) <= 0) {
@@ -136,6 +136,24 @@ class _DepositPageState extends State<DepositPage> {
                             formKey.currentState!.save();
                             // Remove commas before parsing
                             balance = balance!.replaceAll(',', '');
+                            if (double.parse(balance!) > 1000000) {
+                              showDialog(
+                                  context: context,
+                                  builder: (customDialogTimercontext) =>
+                                      CustomDialogTimer(
+                                        seconds: 7,
+                                        image: 'info',
+                                        content1:
+                                            'maximum balance you want to add must be less than ',
+                                        content2: '1,000,000 IQD',
+                                        content2Color: Colors.green,
+                                        okButton: () {
+                                          Navigator.pop(
+                                              customDialogTimercontext);
+                                        },
+                                      ));
+                              return;
+                            }
                             showDialog(
                               context: context,
                               builder: (customDialogcontext) =>

@@ -99,14 +99,14 @@ class _SendBalancePageState extends State<SendBalancePage> {
                     }
                     // Remove commas before parsing
                     value = value.replaceAll(',', '');
-                    if (double.tryParse(value) == null ||
-                        double.parse(value) < 1000) {
-                      return 'The minimum balance is 1,000';
-                    }
-                    if (double.tryParse(value) == null ||
-                        double.parse(value) > 10000000) {
-                      return 'The maximum balance is 10,000,000';
-                    }
+                    // if (double.tryParse(value) == null ||
+                    //     double.parse(value) < 1000) {
+                    //   return 'The minimum balance is 1,000';
+                    // }
+                    // if (double.tryParse(value) == null ||
+                    //     double.parse(value) > 10000000) {
+                    //   return 'The maximum balance is 10,000,000';
+                    // }
 
                     if (double.tryParse(value) == null ||
                         double.parse(value) <= 0) {
@@ -267,6 +267,44 @@ class _SendBalancePageState extends State<SendBalancePage> {
                                         },
                                       ),
                                     );
+                                    return;
+                                  }
+
+                                  if (double.parse(balance!) > 10000000) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (customDialogTimercontext) =>
+                                            CustomDialogTimer(
+                                              seconds: 7,
+                                              image: 'info',
+                                              content1:
+                                                  'Maximum balance you want to send must be less than ',
+                                              content2: '10,000,000 IQD',
+                                              content2Color: Colors.red,
+                                              okButton: () {
+                                                Navigator.pop(
+                                                    customDialogTimercontext);
+                                              },
+                                            ));
+                                    return;
+                                  }
+
+                                  if (double.parse(balance!) < 1000) {
+                                    showDialog(
+                                        context: context,
+                                        builder: (customDialogTimercontext) =>
+                                            CustomDialogTimer(
+                                              seconds: 7,
+                                              image: 'info',
+                                              content1:
+                                                  'Minimum balance you want to send must be more than ',
+                                              content2: '1,000 IQD',
+                                              content2Color: Colors.red,
+                                              okButton: () {
+                                                Navigator.pop(
+                                                    customDialogTimercontext);
+                                              },
+                                            ));
                                     return;
                                   }
 

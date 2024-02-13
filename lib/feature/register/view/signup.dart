@@ -180,9 +180,9 @@ class _SignupPageState extends State<SignupPage> {
                                 builder: (context, isVisible) {
                                   return OwnPasswordFormField(
                                     icon: Icon(
-                                      !isVisible
-                                          ? Icons.visibility_off_outlined
-                                          : Icons.visibility,
+                                      isVisible
+                                          ? Icons.visibility
+                                          : Icons.visibility_off_outlined,
                                     ),
                                     onPressedIcon: () {
                                       context

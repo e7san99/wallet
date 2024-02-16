@@ -11,7 +11,7 @@ class _SSSSSSSState extends State<SSSSSSS> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(child: Text('SSSSSSSSSSS')),
+      body: Center(child: Text('No Internet')),
     );
   }
 }

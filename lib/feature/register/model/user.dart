@@ -1,3 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
 import 'model.dart';
 
 class MyUser {
@@ -5,11 +8,13 @@ class MyUser {
   String? username;
   String? phone;
   String? email;
+  String? role;
   MyUser({
     this.uid,
     this.username,
     this.phone,
     this.email,
+    this.role,
   });
 
   MyUser copyWith({
@@ -17,12 +22,14 @@ class MyUser {
     String? username,
     String? phone,
     String? email,
+    String? role,
   }) {
     return MyUser(
       uid: uid ?? this.uid,
       username: username ?? this.username,
       phone: phone ?? this.phone,
       email: email ?? this.email,
+      role: role ?? this.role,
     );
   }
 
@@ -32,6 +39,7 @@ class MyUser {
       'username': username,
       'phone': phone,
       'email': email,
+      'role': role,
     };
   }
 
@@ -41,6 +49,7 @@ class MyUser {
       username: map['username'] != null ? map['username'] as String : null,
       phone: map['phone'] != null ? map['phone'] as String : null,
       email: map['email'] != null ? map['email'] as String : null,
+      role: map['role'] != null ? map['role'] as String : null,
     );
   }
 
@@ -51,7 +60,7 @@ class MyUser {
 
   @override
   String toString() {
-    return 'MyUser(uid: $uid, username: $username, phone: $phone, email: $email)';
+    return 'MyUser(uid: $uid, username: $username, phone: $phone, email: $email, role: $role)';
   }
 
   @override
@@ -62,7 +71,8 @@ class MyUser {
       other.uid == uid &&
       other.username == username &&
       other.phone == phone &&
-      other.email == email;
+      other.email == email &&
+      other.role == role;
   }
 
   @override
@@ -70,7 +80,8 @@ class MyUser {
     return uid.hashCode ^
       username.hashCode ^
       phone.hashCode ^
-      email.hashCode ;
+      email.hashCode ^
+      role.hashCode;
   }
 
   factory MyUser.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
@@ -80,6 +91,7 @@ class MyUser {
       username: data['username'],
       phone: data['phone'],
       email: data['email'],
+      role: data['role']
     );
   }
 }

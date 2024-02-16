@@ -71,10 +71,26 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     List<void Function()?> onTap = [
       () {
-         context.push('/deposit');
+        // final role = context.read<UserCubit>().state.myUser!.role;
+        // if (role == 'admin') {
+        //   context.push('/deposit');
+        // } else {
+        //   ScaffoldMessenger.of(context).showSnackBar(
+        //     const SnackBar(
+        //       backgroundColor: Colors.amber,
+        //       content: Text(
+        //         'Not Available for customer',
+        //         style: TextStyle(
+        //           color: Colors.black,
+        //         ),
+        //       ),
+        //     ),
+        //   );
+        // }
+        context.push('/deposit');
       },
       () {
-         context.push('/sendBalance');
+        context.push('/sendBalance');
       },
       () {
         ScaffoldMessenger.of(context).showSnackBar(

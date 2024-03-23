@@ -46,7 +46,6 @@ dependencies:
   firebase_auth: ^4.15.3
   intl: ^0.17.0
   slide_switcher: ^1.1.2
-  # awesome_dialog: ^3.2.0
   loading_animation_widget: ^1.2.0+4
   animated_text_kit: ^4.2.2
   connectivity_plus: ^5.0.2

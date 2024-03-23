@@ -354,7 +354,13 @@ class _SignupPageState extends State<SignupPage> {
                                 onTap: () {
                                   context.go('/signin');
                                 },
-                              )
+                              ),
+                              /*
+                              TextButton(
+    onPressed: () => throw Exception(),
+    child: const Text("Throw Test Exception"),
+),
+                              */
                             ],
                           ),
                         ),

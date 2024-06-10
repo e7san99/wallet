@@ -1,4 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:go_router/go_router.dart';
 import 'package:wallet/feature/home/view/deposit.dart';
 import 'package:wallet/feature/home/view/send_balance.dart';
@@ -50,7 +49,7 @@ final GoRouter router = GoRouter(
     ),
     GoRoute(
       path: '/forgot',
-      builder: (context, state) => const SignupPage(),
+      builder: (context, state) => const ForgotScreen(),
     ),
     GoRoute(
       path: '/deposit',

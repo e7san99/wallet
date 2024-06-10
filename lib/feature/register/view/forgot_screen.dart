@@ -3,18 +3,17 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
-import 'package:wallet/feature/home/cubit/wallet_cubit.dart';
 import 'package:wallet/feature/home/widget/dialog/custom_dialog_timer.dart';
 import 'package:wallet/feature/register/view/view.dart';
 
-class ForgotAccount extends StatefulWidget {
-  const ForgotAccount({super.key});
+class ForgotScreen extends StatefulWidget {
+  const ForgotScreen({super.key});
 
   @override
-  State<ForgotAccount> createState() => _ForgotAccountState();
+  State<ForgotScreen> createState() => _ForgotScreenState();
 }
 
-class _ForgotAccountState extends State<ForgotAccount> {
+class _ForgotScreenState extends State<ForgotScreen> {
   final formKey = GlobalKey<FormState>();
   String? email;
 

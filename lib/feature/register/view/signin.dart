@@ -157,7 +157,7 @@ class _SigninPageState extends State<SigninPage> {
                                 alignment: Alignment.topRight * 0.7,
                                 child: TextButton(
                                   onPressed: () {
-                                    context.go('/forgot');
+                                    context.push('/forgot');
                                   },
                                   child: Text(
                                     'Forgot password?',

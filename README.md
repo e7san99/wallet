@@ -18,3 +18,5 @@ samples, guidance on mobile development, and a full API reference.
 ![image_alt](https://github.com/e7san99/wallet/blob/c080969d25a8f3c5013a4c909a303c3135c1927b/sc1.jpg)
 
 ![image_alt](https://github.com/e7san99/wallet/blob/77acdc245ffda7cc5de56633727cf0cf2fd18257/sc2.jpg)
+
+![image_alt](https://github.com/e7san99/wallet/blob/c4b821b28528dcdac49ee49944849e2f59d93d7c/sc3.jpg)
